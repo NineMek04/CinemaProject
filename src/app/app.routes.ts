@@ -22,7 +22,7 @@ export const routes: Routes = [
     {
         path: 'checkout',
         component: Payment
-    }
+    },
     {path: 'movies', component: MovieComponent},
     {path: 'mylist', component: MylistComponent},
     { path: '**', redirectTo: 'home' }
