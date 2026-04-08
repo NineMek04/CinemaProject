@@ -2,7 +2,8 @@
 :host {
     display: flex;
     flex-direction: column;
-    height: 95vh;
+    height: 100vh;
+    width: 100vw;
 }
 
 /* ให้ Drawer กินพื้นที่ส่วนที่เหลือทั้งหมด */
@@ -13,7 +14,7 @@ dx-drawer {
 .drawer-menu-container {
     width: 320px;
     height: 100%;
-    background-color: #111111;
+    background-color: #1a1a1a;
     color: #ADAAAA;
     display: flex;
     flex-direction: column;
@@ -21,9 +22,33 @@ dx-drawer {
     border-right: none;
 }
 
+/* Sidebar Header */
+.sidebar-header {
+    padding: 20px 0 0 20px;
+    
+    ::ng-deep .dx-button.back-btn {
+        color: #8E8E8E !important;
+        border-radius: 50% !important;
+        width: 45px !important;
+        height: 45px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #ffffff !important;
+        }
+
+        .dx-icon {
+            font-size: 24px !important;
+        }
+    }
+}
+
 /* Profile Section */
 .profile-header {
-    padding: 30px 20px 40px 30px;
+    padding: 10px 20px 40px 30px;
     display: flex;
     flex-direction: column;
     gap: 15px;

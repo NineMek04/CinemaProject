@@ -1,6 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // เพิ่ม CommonModule สำหรับคำสั่งพื้นฐาน เช่น NgIf, NgFor และ Property Binding
-import { DxToolbarModule, DxDrawerModule, DxListModule, DxDataGridModule, DxTemplateModule, DxButtonModule } from 'devextreme-angular';
+import { Router } from '@angular/router';
+import { 
+  DxToolbarModule, 
+  DxDrawerModule, 
+  DxListModule, 
+  DxDataGridModule, 
+  DxTemplateModule, 
+  DxButtonModule 
+} from 'devextreme-angular';
+import { Users } from '../users/users';
 
 @Component({
   selector: 'app-tebber-account',
@@ -12,14 +21,21 @@ import { DxToolbarModule, DxDrawerModule, DxListModule, DxDataGridModule, DxTemp
     DxListModule,
     DxDataGridModule,
     DxTemplateModule,
-    DxButtonModule
+    DxButtonModule,
+    Users
   ],
   templateUrl: './tebber-account.html',
   styleUrl: './tebber-account.scss',
 })
 export class TebberAccount {
+  private router = inject(Router);
   isDrawerOpen = true;
   selectedItemId: number = 1;
+
+  // ฟังก์ชันย้อนกลับไปยังหน้าหลัก
+  goBack() {
+    this.router.navigate(['/']);
+  }
 
   // ข้อมูลเมนูด้านซ้าย
   navigationItems = [
