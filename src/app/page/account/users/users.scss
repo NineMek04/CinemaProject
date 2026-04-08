@@ -1,0 +1,87 @@
+.account-settings-container {
+  font-family: 'Inter', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+
+  // Custom Colors
+  $primary-salmon: #e68a7a;
+  $bg-dark: #0a0a0a;
+  $card-bg: #121212;
+  $input-bg: #1a1a1a;
+  $border-color: #222;
+
+  // DevExtreme Overrides
+  ::ng-deep {
+    .dx-texteditor.dx-editor-filled {
+      background-color: $input-bg !important;
+      border: 1px solid $border-color !important;
+      border-radius: 12px !important;
+      overflow: hidden;
+      
+      .dx-texteditor-input {
+        color: white !important;
+        padding-left: 10px !important;
+      }
+
+      .dx-icon {
+        color: #555 !important;
+      }
+      
+      &.dx-state-focused {
+        border-color: $primary-salmon !important;
+      }
+    }
+
+    .dx-button-mode-contained {
+        &.change-photo-btn {
+            background-color: #2a2a2a !important;
+            color: white !important;
+            border-radius: 10px !important;
+        }
+
+        &.manage-plan-btn, &.save-changes-btn {
+            background-color: $primary-salmon !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            border-radius: 12px !important;
+            padding: 8px 16px !important;
+            
+            &:hover {
+                background-color: lighten($primary-salmon, 10%) !important;
+            }
+        }
+    }
+
+    .dx-button-mode-text.remove-photo-btn {
+        color: #666 !important;
+        &:hover {
+            color: white !important;
+        }
+    }
+
+    .dx-switch {
+        &.dx-switch-on-value {
+            .dx-switch-container {
+                background-color: $primary-salmon !important;
+            }
+        }
+        .dx-switch-container {
+            background-color: #333 !important;
+            border-radius: 20px !important;
+            border: none !important;
+        }
+        .dx-switch-handle {
+            background-color: #666 !important;
+        }
+    }
+  }
+
+  // Layout Styles
+  .profile-card, .subscription-card, .preference-item {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    
+    &:hover {
+      border-color: #333;
+    }
+  }
+}

@@ -1,0 +1,178 @@
+<div class="account-settings-container min-h-screen bg-black text-white p-8">
+    <!-- Header -->
+    <header class="mb-10">
+        <h1 class="text-4xl font-bold mb-2">Account Settings</h1>
+        <p class="text-gray-400">Manage your personal information and preferences.</p>
+    </header>
+
+    <!-- Profile Picture Section -->
+    <section class="mb-12">
+        <div class="profile-card flex items-center p-6 rounded-2xl bg-[#121212] border border-[#222]">
+            <div class="relative">
+                <img [src]="profileImage()" alt="Avatar" class="w-24 h-24 rounded-full object-cover border-2 border-[#333]">
+                <div class="absolute bottom-0 right-0 bg-[#e68a7a] p-1 rounded-full border-2 border-[#121212]">
+                    <i class="dx-icon-edit text-xs text-black"></i>
+                </div>
+            </div>
+            <div class="ml-6 flex-grow">
+                <h3 class="text-xl font-semibold mb-1">Your Profile Picture</h3>
+                <p class="text-gray-500 text-sm mb-4">A picture helps friends recognize you across Aura.</p>
+                <div class="flex gap-4">
+                    <dx-button 
+                        text="Change Photo" 
+                        stylingMode="contained" 
+                        class="change-photo-btn"
+                        (onClick)="changePhoto()">
+                    </dx-button>
+                    <dx-button 
+                        text="Remove" 
+                        stylingMode="text" 
+                        class="remove-photo-btn"
+                        (onClick)="profileImage.set('avatar.png')">
+                    </dx-button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Information Section -->
+    <section class="mb-12">
+        <div class="section-header flex items-center mb-6">
+            <div class="w-1 h-6 bg-[#e68a7a] mr-3"></div>
+            <h2 class="text-2xl font-bold">Personal Information</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="form-group">
+                <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Full Name</label>
+                <dx-text-box 
+                    [(value)]="fullName" 
+                    placeholder="Enter your name"
+                    stylingMode="filled"
+                    mode="text"
+                    [inputAttr]="{ class: 'custom-input' }">
+                    <dxi-button
+                        name="user"
+                        location="before"
+                        [options]="{ icon: 'user', stylingMode: 'text', disabled: true }">
+                    </dxi-button>
+                </dx-text-box>
+            </div>
+            <div class="form-group">
+                <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Email Address</label>
+                <dx-text-box 
+                    [(value)]="email" 
+                    placeholder="Enter your email"
+                    stylingMode="filled"
+                    mode="email"
+                    [inputAttr]="{ class: 'custom-input' }">
+                    <dxi-button
+                        name="email"
+                        location="before"
+                        [options]="{ icon: 'email', stylingMode: 'text', disabled: true }">
+                    </dxi-button>
+                </dx-text-box>
+            </div>
+            <div class="form-group">
+                <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Phone Number</label>
+                <dx-text-box 
+                    [(value)]="phone" 
+                    placeholder="Enter your phone"
+                    stylingMode="filled"
+                    mode="tel"
+                    [inputAttr]="{ class: 'custom-input' }">
+                    <dxi-button
+                        name="tel"
+                        location="before"
+                        [options]="{ icon: 'tel', stylingMode: 'text', disabled: true }">
+                    </dxi-button>
+                </dx-text-box>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Section -->
+    <section class="mb-12">
+        <div class="section-header flex items-center mb-6">
+            <div class="w-1 h-6 bg-[#4a90e2] mr-3"></div>
+            <h2 class="text-2xl font-bold">Subscription</h2>
+        </div>
+        
+        <div class="subscription-card p-6 rounded-2xl bg-gradient-to-r from-[#1a1a1a] to-[#121212] border border-[#222] flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-[#333] rounded-xl flex items-center justify-center mr-6 border border-[#444]">
+                    <i class="dx-icon-card text-[#e68a7a] text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-1">Premium Plan</h3>
+                    <p class="text-gray-500 text-sm">Billed monthly • Next billing date: June 18, 2024</p>
+                </div>
+            </div>
+            <dx-button 
+                text="Manage Plan" 
+                stylingMode="contained" 
+                class="manage-plan-btn">
+            </dx-button>
+        </div>
+        
+        <div class="flex gap-8 mt-6 text-gray-400 text-sm">
+            <div class="flex items-center"><i class="dx-icon-check mr-2 text-[#4a90e2]"></i> 4K+ HDR Streaming</div>
+            <div class="flex items-center"><i class="dx-icon-check mr-2 text-[#4a90e2]"></i> 4 Devices Simultaneously</div>
+            <div class="flex items-center"><i class="dx-icon-check mr-2 text-[#4a90e2]"></i> Offline Downloads</div>
+        </div>
+    </section>
+
+    <!-- Viewing Preferences Section -->
+    <section class="mb-12">
+        <div class="section-header flex items-center mb-6">
+            <div class="w-1 h-6 bg-[#9b51e0] mr-3"></div>
+            <h2 class="text-2xl font-bold">Viewing Preferences</h2>
+        </div>
+        
+        <div class="space-y-4">
+            <div class="preference-item p-4 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="dx-icon-video text-gray-500 mr-4 text-xl"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-200">Autoplay next episode</h4>
+                        <p class="text-gray-500 text-xs">Automatically play the next episode in a series.</p>
+                    </div>
+                </div>
+                <dx-switch [(value)]="autoplayNext" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+            </div>
+            
+            <div class="preference-item p-4 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="dx-icon-image text-gray-500 mr-4 text-xl"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-200">High Quality Streaming</h4>
+                        <p class="text-gray-500 text-xs">Always stream in the highest resolution available.</p>
+                    </div>
+                </div>
+                <dx-switch [(value)]="highQualityStreaming" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+            </div>
+            
+            <div class="preference-item p-4 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="dx-icon-mention text-gray-500 mr-4 text-xl"></i>
+                    <div>
+                        <h4 class="font-semibold text-gray-200">Email Notifications</h4>
+                        <p class="text-gray-500 text-xs">Get updates about new releases and recommendations.</p>
+                    </div>
+                </div>
+                <dx-switch [(value)]="emailNotifications" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Actions -->
+    <footer class="mt-16 flex justify-end items-center gap-8">
+        <button class="text-gray-400 hover:text-white font-semibold transition-colors" (click)="cancel()">Cancel</button>
+        <dx-button 
+            text="Save Changes" 
+            stylingMode="contained" 
+            class="save-changes-btn"
+            (onClick)="saveChanges()">
+        </dx-button>
+    </footer>
+</div>
