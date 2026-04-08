@@ -139,11 +139,42 @@ dx-drawer {
     font-weight: 400;
     color: #8E8E8E;
     transition: all 0.3s ease;
-    width: 90%; 
+    width: 100%; 
+    position: relative;
 
     i {
         font-size: 22px;
         color: #8E8E8E;
+    }
+
+    &.active {
+        /* ย้ายสีพื้นหลังและสีตัวอักษรมาจัดการตรงนี้เลย จะได้ไม่ตีกับ DevExtreme */
+        background-color: rgba(61, 30, 30, 0.8);
+        color: #FF8A80;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+
+        i {
+            color: #FF8A80;
+        }
+
+        /* 🌟 3. สร้างแถบไฮไลต์ (Indicator) ด้านซ้ายมือ */
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;                   /* ชิดขอบซ้ายสุด */
+            top: 50%;                  /* ให้อยู่กึ่งกลางแนวตั้ง */
+            transform: translateY(-50%); /* จัดให้อยู่ตรงกลางเป๊ะๆ */
+            width: 10px;                /* ความหนาของแถบชี้ตำแหน่ง */
+            height: 60%;               /* ความสูง (ปรับให้สั้นกว่าปุ่มเล็กน้อยจะดูสวย) */
+            background-color: #FF8A80; /* สีเดียวกับตัวอักษร (สีส้มแซลมอน) */
+            
+            border-top-right-radius: 6px;    /* ลบมุมให้ดูละมุนขึ้น */
+            border-bottom-right-radius: 6px;
+            
+            /* (แถม) ใส่เงาเรืองแสงนิดๆ ให้เข้ากับธีม Dark Mode */
+            box-shadow: 2px 0 8px rgba(255, 138, 128, 0.4); 
+        }
     }
 }
 
