@@ -1,0 +1,45 @@
+<div class="min-h-screen bg-[#0a0a0c] flex items-center justify-center p-4 font-sans text-slate-300">
+  <div class="w-full max-w-md bg-[#111216] p-8 md:p-10 rounded-2xl shadow-2xl border border-slate-800/60 relative overflow-hidden">
+    
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-black uppercase tracking-tight text-white mb-2">Welcome <span class="text-[#ff6b6b]">Back</span></h1>
+      <p class="text-sm text-slate-400">The stories are waiting for you.</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="space-y-5">
+      <div>
+        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Email Address</label>
+        <input type="email" formControlName="email" placeholder="name@example.com" 
+               class="w-full bg-[#1a1c23] text-white text-sm px-4 py-3 rounded-lg outline-none focus:ring-1 focus:ring-[#ff6b6b] transition-all placeholder-slate-600">
+      </div>
+
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Password</label>
+          <a href="#" class="text-[10px] font-bold text-[#ff6b6b] uppercase tracking-widest hover:text-red-400 transition-colors">Forgot Password?</a>
+        </div>
+        <input type="password" formControlName="password" placeholder="••••••••" 
+               class="w-full bg-[#1a1c23] text-white text-sm px-4 py-3 rounded-lg outline-none focus:ring-1 focus:ring-[#ff6b6b] transition-all placeholder-slate-600 tracking-widest">
+      </div>
+
+      <div class="pt-4">
+        <button type="submit" 
+                class="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-slate-900 text-sm font-bold uppercase tracking-widest py-3.5 rounded-lg transition-all shadow-[0_0_20px_rgba(255,107,107,0.25)] hover:shadow-[0_0_25px_rgba(255,107,107,0.4)]">
+          Sign In
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-8 text-center text-xs text-slate-500">
+      New to Aura Cinema? 
+      <a routerLink="/auth/register" class="text-white font-bold hover:text-[#ff6b6b] transition-colors cursor-pointer">Sign up now</a>
+    </div>
+
+    <div class="mt-6">
+      <button type="button" class="w-full bg-[#ff6b6b] text-slate-900 text-sm font-bold uppercase tracking-widest py-3.5 rounded-full transition-all hover:bg-[#ff5252]">
+        Google
+      </button>
+    </div>
+
+  </div>
+</div>
