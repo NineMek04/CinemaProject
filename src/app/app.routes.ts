@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './page/home/home-component/home-component';
-import { TebberAccount } from './page/account/tebber-account/tebber-account';
+import { AsideAccount } from './page/components/account/aside-account/tebber-account';
 
 export const routes: Routes = [
     {
@@ -9,6 +9,6 @@ export const routes: Routes = [
     },
     {
         path: 'tebber-account',
-        component: TebberAccount
+        component: AsideAccount
     }
 ];
