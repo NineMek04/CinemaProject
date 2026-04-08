@@ -1,21 +1,37 @@
-<section class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between p-4">
+<section class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between py-4 px-8">
         <div class="flex items-center space-x-8">
             <h1 class="text-3xl font-bold">CINEMA</h1>
 
-            <ul class="flex space-x-4">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">TV Shows</a></li>
-                <li><a href="#">My List</a></li>
-            </ul>
+            <ul class="flex space-x-6 text-slate-400 font-medium">
+    <li>
+        <a routerLink="/" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">Home</a>
+    </li>
+    <li>
+        <a routerLink="/movies" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">Movies</a>
+    </li>
+    <li>
+        <a routerLink="/tv-shows" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">TV Shows</a>
+    </li>
+    <li>
+        <a routerLink="/my-list" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">My List</a>
+    </li>
+</ul>
         </div>
 
         
         <div class="flex items-center space-x-4">
              <input type="text" placeholder="Search..." class="search-input px-8 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 w-full">
             <h3>Sign In</h3>
-            <div routerLink="/tebber-account" class="profile-avatar-container">
-                <img src="/assets/svg/navbar/User profile avatar.svg" alt="Profile" class="profile-avatar">
+            <div routerLink="/tebber-account" class="profile-avatar-container bg-slate-950 rounded-full w-20 h-15 overflow-hidden cursor-pointer">
+                <img src="/assets/svg/navbar/User profile avatar.svg" alt="Profile" class="profile-avatar w-full h-full rounded-full object-cover border-2 border-transparent hover:border-slate-600 transition-all duration-300">
             </div>
         </div>
 </section>
