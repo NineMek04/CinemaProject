@@ -2,6 +2,16 @@
 <dx-drawer [opened]="isDrawerOpen" openedStateMode="shrink" position="left" revealMode="expand" template="menuTemplate">
 
     <div *dxTemplate="let data of 'menuTemplate'" class="drawer-menu-container">
+        <!-- Back Button Section -->
+        <div class="sidebar-header">
+            <dx-button 
+                icon="arrowleft" 
+                stylingMode="text" 
+                class="back-btn"
+                (onClick)="goBack()">
+            </dx-button>
+        </div>
+
         <!-- Profile Section -->
         <div class="profile-header">
             <div class="avatar-container">
@@ -26,30 +36,9 @@
         </dx-list>
     </div>
 
-    <!-- <div id="content" class="main-content">
-        <h2>Account List</h2>
-
-        <dx-data-grid [dataSource]="dataSource" [showBorders]="true" [columnAutoWidth]="true"
-            [rowAlternationEnabled]="true">
-
-            <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-search-panel [visible]="true"></dxo-search-panel>
-            <dxo-paging [pageSize]="5"></dxo-paging>
-
-            <dxi-column dataField="id" caption="ID" [width]="70"></dxi-column>
-            <dxi-column dataField="name" caption="Full Name"></dxi-column>
-            <dxi-column dataField="email" caption="Email"></dxi-column>
-            <dxi-column dataField="role" caption="Role"></dxi-column>
-            <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate"></dxi-column>
-
-            <div *dxTemplate="let data of 'statusTemplate'">
-                <span
-                    [style.color]="data.value === 'Active' ? 'green' : (data.value === 'Inactive' ? 'red' : 'orange')">
-                    {{data.value}}
-                </span>
-            </div>
-        </dx-data-grid>
-    </div> -->
+    <div id="content" class="main-content">
+        <app-users></app-users>
+    </div>
 
 </dx-drawer>
 }
