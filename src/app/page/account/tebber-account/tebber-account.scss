@@ -1,0 +1,137 @@
+/* จัดการความสูงให้เต็มจอ */
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+/* ให้ Drawer กินพื้นที่ส่วนที่เหลือทั้งหมด */
+dx-drawer {
+    flex: 1;
+}
+
+.drawer-menu-container {
+    width: 320px;
+    height: 100%;
+    background-color: #111111;
+    color: #ADAAAA;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    border-right: none;
+}
+
+/* Profile Section */
+.profile-header {
+    padding: 30px 20px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.avatar-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 24px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-status {
+    color: #757575;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin: 4px 0 0 0;
+    text-transform: uppercase;
+}
+
+/* Navigation Menu */
+.panel-list {
+    background-color: transparent !important;
+    border: none !important;
+
+    ::ng_deep {
+        .dx-list-item {
+            border: none !important;
+            margin-bottom: 2px;
+            padding: 0 !important;
+            
+            &.dx-list-item-selected {
+                background-color: transparent !important;
+                
+                .menu-item {
+                    background-color: rgba(61, 30, 30, 0.8) !important;
+                    color: #FF8A80 !important;
+                    border-top-right-radius: 40px;
+                    border-bottom-right-radius: 40px;
+
+                    i {
+                      color: #FF8A80 !important;
+                    }
+                }
+            }
+
+            &.dx-list-item-hover {
+                background-color: transparent !important;
+                
+                .menu-item:not(.active) {
+                    background-color: rgba(255, 255, 255, 0.05);
+                }
+            }
+
+            .dx-list-item-content {
+                padding: 0 !important;
+            }
+        }
+    }
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 30px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #8E8E8E;
+    transition: all 0.3s ease;
+    width: 90%; 
+
+    i {
+        font-size: 22px;
+        color: #8E8E8E;
+    }
+}
+
+.main-content {
+    background-color: #111111;
+    color: #ffffff !important;
+    padding: 30px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}

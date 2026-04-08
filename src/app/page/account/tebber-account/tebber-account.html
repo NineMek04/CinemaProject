@@ -1,0 +1,58 @@
+@defer {
+<dx-drawer [opened]="isDrawerOpen" openedStateMode="shrink" position="left" revealMode="expand" template="menuTemplate">
+
+    <div *dxTemplate="let data of 'menuTemplate'" class="drawer-menu-container">
+        <!-- Profile Section -->
+        <div class="profile-header">
+            <div class="avatar-container">
+                <img src="assets/avatar.png" alt="User Avatar" class="profile-avatar">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">{{currentUser.name}}</h1>
+                <p class="profile-status">{{currentUser.class}}</p>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <dx-list [dataSource]="navigationItems" [hoverStateEnabled]="true" [activeStateEnabled]="true"
+            [focusStateEnabled]="false" class="panel-list" [selectedItemKeys]="[selectedItemId]" keyExpr="id"
+            selectionMode="single" (onItemClick)="onItemClick($event)">
+            <div *dxTemplate="let item of 'item'">
+                <div class="menu-item" [class.active]="item.id === selectedItemId">
+                    <i [class]="'dx-icon-' + item.icon"></i>
+                    <span>{{ item.text }}</span>
+                </div>
+            </div>
+        </dx-list>
+    </div>
+
+    <!-- <div id="content" class="main-content">
+        <h2>Account List</h2>
+
+        <dx-data-grid [dataSource]="dataSource" [showBorders]="true" [columnAutoWidth]="true"
+            [rowAlternationEnabled]="true">
+
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-search-panel [visible]="true"></dxo-search-panel>
+            <dxo-paging [pageSize]="5"></dxo-paging>
+
+            <dxi-column dataField="id" caption="ID" [width]="70"></dxi-column>
+            <dxi-column dataField="name" caption="Full Name"></dxi-column>
+            <dxi-column dataField="email" caption="Email"></dxi-column>
+            <dxi-column dataField="role" caption="Role"></dxi-column>
+            <dxi-column dataField="status" caption="Status" cellTemplate="statusTemplate"></dxi-column>
+
+            <div *dxTemplate="let data of 'statusTemplate'">
+                <span
+                    [style.color]="data.value === 'Active' ? 'green' : (data.value === 'Inactive' ? 'red' : 'orange')">
+                    {{data.value}}
+                </span>
+            </div>
+        </dx-data-grid>
+    </div> -->
+
+</dx-drawer>
+}
+@placeholder {
+<div>กำลังโหลดตารางข้อมูล...</div>
+}

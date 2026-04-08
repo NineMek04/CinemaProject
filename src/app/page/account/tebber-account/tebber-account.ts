@@ -1,0 +1,56 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // เพิ่ม CommonModule สำหรับคำสั่งพื้นฐาน เช่น NgIf, NgFor และ Property Binding
+import { DxToolbarModule, DxDrawerModule, DxListModule, DxDataGridModule, DxTemplateModule, DxButtonModule } from 'devextreme-angular';
+
+@Component({
+  selector: 'app-tebber-account',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    DxToolbarModule,
+    DxDrawerModule,
+    DxListModule,
+    DxDataGridModule,
+    DxTemplateModule,
+    DxButtonModule
+  ],
+  templateUrl: './tebber-account.html',
+  styleUrl: './tebber-account.scss',
+})
+export class TebberAccount {
+  isDrawerOpen = true;
+  selectedItemId: number = 1;
+
+  // ข้อมูลเมนูด้านซ้าย
+  navigationItems = [
+    { id: 1, text: 'Profile', path: '/Profile', icon: 'user' },
+    { id: 2, text: 'Security', path: '/Security', icon: 'preferences' },
+    { id: 3, text: 'Subscription', path: '/Subscription', icon: 'card' },
+    { id: 4, text: 'Notifications', path: '/Notification', icon: 'bell' },
+    { id: 5, text: 'Payment', path: '/Payment', icon: 'money' },
+    { id: 6, text: 'Logout', path: '/Logout', icon: 'runner' }
+  ];
+
+  // ข้อมูลตัวอย่างสำหรับ DataGrid
+  dataSource = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' ,class:"PREMIUM MEMBER"},
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' ,class:"STANDART MEMBER"},
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Editor', status: 'Inactive' ,class:"STANDART MEMBER"},
+    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'Active' ,class:"STANDART MEMBER"},
+    { id: 5, name: 'Charlie Green', email: 'charlie@example.com', role: 'User', status: 'Pending' ,class:"PREMIUM MEMBER"},
+  ];
+
+  currentUser = this.dataSource[0];
+
+  // ฟังก์ชันสลับเปิด/ปิดลิ้นชัก
+  // toggleDrawer() {
+  //   this.isDrawerOpen = !this.isDrawerOpen;
+  // }
+
+  // ฟังก์ชันเมื่อคลิกเลือกเมนู
+  onItemClick(e: any) {
+    const selectedItem = e.itemData;
+    this.selectedItemId = selectedItem.id;
+    console.log('เปลี่ยนหน้าไปที่:', selectedItem.path);
+  }
+}
