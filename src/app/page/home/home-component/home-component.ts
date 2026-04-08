@@ -5,7 +5,7 @@ import { ContentComponent } from '../components/content-component/content-compon
 
 @Component({
   selector: 'app-home-component',
-  imports: [NavbarComponent , HeroComponent, ContentComponent],
+  imports: [ HeroComponent, ContentComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })

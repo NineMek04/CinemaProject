@@ -1,13 +1,29 @@
-<section class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between p-4">
+<section class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between py-4 px-8">
         <div class="flex items-center space-x-8">
             <h1 class="text-3xl font-bold">CINEMA</h1>
 
-            <ul class="flex space-x-4">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Movies</a></li>
-                <li><a href="#">TV Shows</a></li>
-                <li><a href="#">My List</a></li>
-            </ul>
+            <ul class="flex space-x-6 text-slate-400 font-medium">
+    <li>
+        <a routerLink="/" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">Home</a>
+    </li>
+    <li>
+        <a routerLink="/movies" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">Movies</a>
+    </li>
+    <li>
+        <a routerLink="/tv-shows" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">TV Shows</a>
+    </li>
+    <li>
+        <a routerLink="/my-list" 
+           routerLinkActive="text-white font-bold drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+           class="hover:text-white transition-all duration-300">My List</a>
+    </li>
+</ul>
         </div>
 
         
