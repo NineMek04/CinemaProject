@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './page/home/home-component/home-component';
 import { AsideAccount } from './page/components/account/aside-account/tebber-account';
+import { Admin } from './page/components/account/admin/admin';
+import { Payment } from './page/components/payment/payment';
 import { MovieComponent } from './page/components/movie-component/movie-component';
 import { MylistComponent } from './page/components/mylist-component/mylist-component';
 
@@ -12,6 +14,14 @@ export const routes: Routes = [
     {
         path: 'tebber-account',
         component: AsideAccount
+    },
+    {
+        path: 'admin',
+        component: Admin
+    },
+    {
+        path: 'checkout',
+        component: Payment
     },
     {path: 'movies', component: MovieComponent},
     {path: 'mylist', component: MylistComponent},
