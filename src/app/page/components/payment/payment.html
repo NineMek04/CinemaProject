@@ -1,0 +1,145 @@
+@defer {
+<div class="checkout-page">
+    <!-- Left Sidebar: Steps -->
+    <aside class="checkout-sidebar">
+        <div class="brand">
+            <h1>AURA</h1>
+        </div>
+
+        <nav class="steps-nav">
+            <div class="step-item" *ngFor="let step of steps" [class.active]="step.isActive"
+                [class.completed]="step.isCompleted">
+                <div class="step-icon">
+                    <i [class]="'dx-icon-' + step.icon"></i>
+                </div>
+                <span class="step-label">{{step.label}}</span>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="profile-brief">
+                <img src="https://via.placeholder.com/32" alt="User">
+                <div class="info">
+                    <span class="name">Checkout</span>
+                    <span class="status">Step 2 of 4</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Center Content: Payment Form -->
+    <main class="payment-main">
+        <section class="section-header">
+            <h2 class="title">Choose Payment Method</h2>
+            <p class="subtitle">Select your preferred way to subscribe and start your cinematic journey.</p>
+        </section>
+
+        <!-- Payment Methods Grid -->
+        <div class="methods-grid">
+            <div class="method-card" *ngFor="let method of paymentMethods"
+                [class.selected]="method.id === selectedMethodId" (click)="selectMethod(method.id)">
+                <div class="card-header">
+                    <i [class]="'dx-icon-' + method.icon"></i>
+                </div>
+                <div class="card-body">
+                    <span class="name">{{method.name}}</span>
+                    <span class="desc">{{method.description}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Card Form -->
+        <form class="payment-form" *ngIf="selectedMethodId === 'card'">
+            <div class="form-group full">
+                <label>CARDHOLDER NAME</label>
+                <dx-text-box placeholder="John Wick" stylingMode="filled"></dx-text-box>
+            </div>
+
+            <div class="form-group full">
+                <label>CARD NUMBER</label>
+                <dx-text-box placeholder="0000 0000 0000 0000" stylingMode="filled">
+                    <dxi-button name="today" location="after"
+                        [options]="{ icon: 'card', stylingMode: 'text' }"></dxi-button>
+                </dx-text-box>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>EXPIRY DATE</label>
+                    <dx-text-box placeholder="MM/YY" stylingMode="filled"></dx-text-box>
+                </div>
+                <div class="form-group">
+                    <label>CVV</label>
+                    <dx-text-box placeholder="***" mode="password" stylingMode="filled"></dx-text-box>
+                </div>
+            </div>
+
+            <div class="toggle-row">
+                <dx-switch [value]="true"></dx-switch>
+                <span>Save card for future purchases</span>
+            </div>
+        </form>
+
+        <!-- Security Footer -->
+        <div class="security-info">
+            <i class="dx-icon-lock"></i>
+            <p>Your payment information is encrypted and processed securely. We do not store your full card details on
+                our servers.</p>
+        </div>
+    </main>
+
+    <!-- Right Panel: Order Summary -->
+    <aside class="order-summary-panel" *ngIf="orderSummary">
+        <h2 class="summary-title">Order Summary</h2>
+
+        <div class="selected-plan-card">
+            <span class="badge">SELECTED PLAN</span>
+            <div class="plan-info">
+                <h3>{{orderSummary.planName}}</h3>
+                <p>{{orderSummary.planDescription}}</p>
+            </div>
+            <div class="plan-price">
+                <span class="price">${{orderSummary.price}}</span>
+                <span class="cycle">/{{orderSummary.billingCycle}}</span>
+            </div>
+        </div>
+
+        <div class="promo-section">
+            <label>PROMO CODE</label>
+            <div class="promo-input">
+                <dx-text-box [(value)]="promoCode" placeholder="Enter code" stylingMode="filled"></dx-text-box>
+                <dx-button text="Apply" (onClick)="applyPromo()" stylingMode="contained" class="apply-btn"></dx-button>
+            </div>
+        </div>
+
+        <div class="cost-breakdown">
+            <div class="line">
+                <span>Subtotal</span>
+                <span>${{orderSummary.subtotal | number:'1.2-2'}}</span>
+            </div>
+            <div class="line">
+                <span>Taxes</span>
+                <span>${{orderSummary.taxes | number:'1.2-2'}}</span>
+            </div>
+            <div class="line total" *ngIf="discount > 0">
+                <span>Discount ({{discount}}%)</span>
+                <span>-${{(orderSummary.total * discount / 100) | number:'1.2-2'}}</span>
+            </div>
+            <hr>
+            <div class="line grand-total">
+                <span>Total Amount</span>
+                <span class="amount">${{finalTotal | number:'1.2-2'}}</span>
+            </div>
+        </div>
+
+        <div class="checkout-actions">
+            <dx-button text="Confirm & Pay" icon="chevronright" [rtlEnabled]="true" stylingMode="contained"
+                class="pay-btn"></dx-button>
+            <p class="legal-text">BY CLICKING "CONFIRM & PAY", YOU AGREE TO AURA'S TERMS OF SERVICE AND PRIVACY POLICY.
+            </p>
+        </div>
+    </aside>
+</div>
+}@placeholder {
+<div>กำลังโหลดตารางข้อมูล...</div>
+}
