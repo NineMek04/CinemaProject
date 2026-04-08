@@ -35,9 +35,9 @@ export class AsideAccount {
   selectedItemId: number = 1;
 
   // ฟังก์ชันย้อนกลับไปยังหน้าหลัก
-  goBack() {
-    this.router.navigate(['/']);
-  }
+  // goBack() {
+  //   this.router.navigate(['/']);
+  // }
 
   // ข้อมูลเมนูด้านซ้าย
   navigationItems = [

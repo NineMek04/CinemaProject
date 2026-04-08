@@ -3,24 +3,14 @@
 
     <div *dxTemplate="let data of 'menuTemplate'" class="drawer-menu-container">
         <!-- Back Button Section -->
-        <div class="sidebar-header">
-            <dx-button 
-                icon="arrowleft" 
-                stylingMode="text" 
-                class="back-btn"
-                (onClick)="goBack()">
+        <!-- <div class="sidebar-header">
+            <dx-button icon="arrowleft" stylingMode="text" class="back-btn" (onClick)="goBack()">
             </dx-button>
-        </div>
+        </div> -->
 
         <!-- Profile Section -->
         <div class="profile-header">
-            <div class="avatar-container">
-                <img src="assets/avatar.png" alt="User Avatar" class="profile-avatar">
-            </div>
-            <div class="profile-info">
-                <h1 class="profile-name">{{currentUser.name}}</h1>
-                <p class="profile-status">{{currentUser.class}}</p>
-            </div>
+            <h1 class="text-2xl font-bold mb-1">Account Settings</h1>
         </div>
 
         <!-- Navigation Menu -->
@@ -37,7 +27,7 @@
     </div>
 
     <div id="content" class="main-content">
-        <app-users></app-users>
+        <app-users [currentUser]="currentUser"></app-users>
     </div>
 
 </dx-drawer>
