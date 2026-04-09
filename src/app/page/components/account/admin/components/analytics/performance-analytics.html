@@ -75,13 +75,27 @@
                 </div>
             </div>
             <div class="card-body">
-                <dx-pie-chart [dataSource]="deviceReach" type="doughnut" [innerRadius]="0.85" class="device-chart">
-                    <dxi-series argumentField="platform" valueField="val">
+                <dx-pie-chart [dataSource]="deviceReach" type="doughnut" [innerRadius]="0.85" class="device-chart"
+                    [palette]="['#cc0000', '#ff7a85', '#4a1111']" centerTemplate="centerTemplate"> <dxi-series
+                        argumentField="platform" valueField="val">
                         <dxo-label [visible]="false"></dxo-label>
+                        <dxo-border [visible]="false"></dxo-border>
                     </dxi-series>
-                    <dxo-legend [visible]="false"></dxo-legend>
-                </dx-pie-chart>
 
+                    <dxo-legend [visible]="false"></dxo-legend>
+
+                    <svg *dxTemplate="let pieChart of 'centerTemplate'">
+                        <text text-anchor="middle" x="50%" y="48%"
+                            style="font-size: 28px; font-weight: bold; fill: #ffffff;">
+                            Global
+                        </text>
+                        <text text-anchor="middle" x="50%" y="60%"
+                            style="font-size: 12px; font-weight: normal; fill: #a0a0a0; text-transform: uppercase; letter-spacing: 1px;">
+                            AVERAGE
+                        </text>
+                    </svg>
+
+                </dx-pie-chart>
                 <div class="donut-center">
                     <span class="c-title">Global</span>
                     <span class="c-value">AVERAGE</span>

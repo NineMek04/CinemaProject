@@ -45,26 +45,6 @@
     <!-- Main Content -->
     <main class="content-area">
         <!-- Top Header -->
-        <header class="top-nav">
-            <div class="search-box">
-                <dx-text-box placeholder="Search films, users, or metadata..." mode="search" stylingMode="filled">
-                    <dxi-button name="search" location="before"
-                        [options]="{ icon: 'search', stylingMode: 'text' }"></dxi-button>
-                </dx-text-box>
-            </div>
-
-            <div class="top-actions">
-                <dx-button icon="bell" stylingMode="text"></dx-button>
-                <dx-button icon="preferences" stylingMode="text"></dx-button>
-                <div class="admin-profile">
-                    <div class="profile-text">
-                        <span class="name">{{appConfig.currentUser.name}}</span>
-                        <span class="role">{{appConfig.currentUser.role}}</span>
-                    </div>
-                    <img [src]="appConfig.currentUser.avatarPath" alt="Admin Avatar" class="profile-img">
-                </div>
-            </div>
-        </header>
 
         <!-- Sub-component Viewport -->
         <router-outlet></router-outlet>
