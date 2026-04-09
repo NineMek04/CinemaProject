@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    label { font-size: 10px; font-weight: 800; color: #333; letter-spacing: 1px; }
+    label { font-size: 10px; font-weight: 800; color: #fdfdfd; letter-spacing: 1px; }
     
     ::ng_deep .dx-selectbox.custom-select, ::ng_deep .dx-textbox {
         .dx-texteditor-container {
@@ -59,7 +59,7 @@
             border: 1px solid #1a1a1a !important;
             border-radius: 12px !important;
             height: 50px !important;
-            .dx-texteditor-input { color: #fff !important; font-weight: 700; padding-left: 15px; }
+            .dx-texteditor-input { color: #fffdff !important; font-weight: 700; padding-left: 15px; }
         }
     }
 }
