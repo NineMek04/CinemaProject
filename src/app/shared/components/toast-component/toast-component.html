@@ -3,10 +3,10 @@
     @for (toast of toasts$ | async; track toast.id) {
     <div class="flex items-start gap-4 p-5 bg-[#141519] text-slate-100 rounded-lg shadow-[0_0_15px_rgba(255,107,107,0.1)] border border-slate-800/80 animate-slide-in-right relative overflow-hidden"
         [ngClass]="{
-           'border-l-4 border-l-[#ff6b6b]': toast.type === 'error',
-           'border-l-4 border-l-[#0066ff]': toast.type === 'info',
-           'border-l-4 border-l-[#1eff00]': toast.type === 'success',
-           'border-l-4 border-l-[#ffa200]': toast.type === 'warning',
+           'border-l-12 border-l-[#ff6b6b]': toast.type === 'error',
+           'border-l-12 border-l-[#0066ff]': toast.type === 'info',
+           'border-l-12 border-l-[#1eff00]': toast.type === 'success',
+           'border-l-12 border-l-[#ffa200]': toast.type === 'warning',
          }">
 
         <div class="flex-shrink-0 mt-0.5" [innerHTML]="getIconSvg(toast.type)"></div>

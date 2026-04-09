@@ -34,3 +34,8 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
+
+html {
+  /* ทำให้การ Scroll ทั้งเว็บ (รวมถึงเวลา Angular เปลี่ยนหน้า) เป็นแบบ Smooth */
+  scroll-behavior: smooth;
+}
