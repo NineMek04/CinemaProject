@@ -123,9 +123,13 @@
       width: 100%;
       color: #333 !important;
       font-size: 11px !important;
-      font-weight: 800 !important;
+      font-weight: 800 !important;  
       height: 36px !important;
       &:hover { color: #fff !important; }
+      .dx-widget ::before{
+        box-sizing: border-box;
+        color: #b0b0b0;
+      }
     }
   }
 }
@@ -165,7 +169,7 @@
     align-items: center;
     gap: 20px;
 
-    ::ng_deep .dx-button { color: #333 !important; }
+    ::ng_deep .dx-button { color:  #b0b0b0 !important; }
 
     .admin-profile {
       display: flex;
@@ -177,7 +181,7 @@
       .profile-text {
         text-align: right;
         .name { display: block; font-size: 13px; font-weight: 700; color: #fff; }
-        .role { font-size: 10px; color: #333; font-weight: 800; }
+        .role { font-size: 10px; color:  #b0b0b0; font-weight: 800; }
       }
 
       .profile-img {
