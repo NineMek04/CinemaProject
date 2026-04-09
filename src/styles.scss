@@ -19,3 +19,18 @@
 .animate-slide-in-right {
   animation: slide-in-right 0.4s ease-out forwards;
 }
+
+
+
+
+/* ซ่อน Scrollbar ทั้งเว็บไซต์ แต่ยังไถได้ */
+html, body {
+  overflow-x: hidden; /* ห้ามเลื่อนซ้ายขวา */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none;
+}

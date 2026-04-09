@@ -183,7 +183,16 @@ dx-drawer {
     color: #ffffff !important;
     padding: 30px;
     height: 100%;
-    overflow-y: auto;
+    overflow-x: hidden;
+
+  overflow-y: auto; /* อนุญาตให้เลื่อนแกน Y ได้ */
+  scrollbar-width: none; /* ซ่อนใน Firefox */
+  -ms-overflow-style: none; /* ซ่อนใน IE และ Edge */
+  
+  &::-webkit-scrollbar {
+    display: none; /* ซ่อนใน Chrome, Safari และ Opera */
+  }
+
 }
 
 h2 {
