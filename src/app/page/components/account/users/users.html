@@ -12,15 +12,15 @@
                 </div>
             </div>
             <div class="ml-6 flex-grow">
-                <h3 class="text-xl font-semibold mb-1">{{currentUser.name}}</h3>
-                <h5 class="text-md font-semibold mb-2">{{currentUser.class}}</h5>
-                <p class="text-gray-500 text-sm mb-4">{{currentUser.email}}</p>
+                <h3 class="text-xl font-semibold mb-1">{{currentUser().name}}</h3>
+                <h5 class="text-md font-semibold mb-2">{{currentUser().class}}</h5>
+                <p class="text-gray-500 text-sm mb-4">{{currentUser().email}}</p>
                 <div class="flex gap-4">
                     <dx-button text="Change Photo" stylingMode="contained" class="change-photo-btn"
                         (onClick)="changePhoto()">
                     </dx-button>
                     <dx-button text="Remove" stylingMode="text" class="remove-photo-btn"
-                        (onClick)="profileImage.set('avatar.png')">
+                        (onClick)="profileImage.set('/assets/svg/navbar/avatar-default.svg')">
                     </dx-button>
                 </div>
             </div>
@@ -37,7 +37,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="form-group">
                 <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Full Name</label>
-                <dx-text-box [(value)]="currentUser.name" placeholder="Enter your name" stylingMode="filled" mode="text"
+                <dx-text-box 
+                    [value]="fullName()" 
+                    (onValueChanged)="fullName.set($event.value)"
+                    placeholder="Enter your name" stylingMode="filled" mode="text"
                     [inputAttr]="{ class: 'custom-input' }">
                     <dxi-button name="user" location="before"
                         [options]="{ icon: 'user', stylingMode: 'text', disabled: true }">
@@ -46,7 +49,10 @@
             </div>
             <div class="form-group">
                 <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Email Address</label>
-                <dx-text-box [(value)]="currentUser.email" placeholder="Enter your email" stylingMode="filled"
+                <dx-text-box 
+                    [value]="email()" 
+                    (onValueChanged)="email.set($event.value)"
+                    placeholder="Enter your email" stylingMode="filled"
                     mode="email" [inputAttr]="{ class: 'custom-input' }">
                     <dxi-button name="email" location="before"
                         [options]="{ icon: 'email', stylingMode: 'text', disabled: true }">
@@ -55,7 +61,10 @@
             </div>
             <div class="form-group">
                 <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Phone Number</label>
-                <dx-text-box [(value)]="currentUser.phone" placeholder="Enter your phone" stylingMode="filled"
+                <dx-text-box 
+                    [value]="phone()" 
+                    (onValueChanged)="phone.set($event.value)"
+                    placeholder="Enter your phone" stylingMode="filled"
                     mode="tel" [inputAttr]="{ class: 'custom-input' }">
                     <dxi-button name="tel" location="before"
                         [options]="{ icon: 'tel', stylingMode: 'text', disabled: true }">
@@ -112,7 +121,10 @@
                         <p class="text-gray-500 text-xs">Automatically play the next episode in a series.</p>
                     </div>
                 </div>
-                <dx-switch [(value)]="autoplayNext" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+                <dx-switch 
+                    [value]="autoplayNext()" 
+                    (onValueChanged)="autoplayNext.set($event.value)"
+                    [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
             </div>
 
             <div
@@ -124,7 +136,10 @@
                         <p class="text-gray-500 text-xs">Always stream in the highest resolution available.</p>
                     </div>
                 </div>
-                <dx-switch [(value)]="highQualityStreaming" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+                <dx-switch 
+                    [value]="highQualityStreaming()" 
+                    (onValueChanged)="highQualityStreaming.set($event.value)"
+                    [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
             </div>
 
             <div
@@ -136,7 +151,10 @@
                         <p class="text-gray-500 text-xs">Get updates about new releases and recommendations.</p>
                     </div>
                 </div>
-                <dx-switch [(value)]="emailNotifications" [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
+                <dx-switch 
+                    [value]="emailNotifications()" 
+                    (onValueChanged)="emailNotifications.set($event.value)"
+                    [switchedOnText]="''" [switchedOffText]="''"></dx-switch>
             </div>
         </div>
     </section>

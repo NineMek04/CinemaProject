@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { 
   DxChartModule, 
   DxDataGridModule, 
@@ -23,7 +22,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-admin',
   standalone: true,
   imports: [
-    CommonModule,
     DxChartModule,
     DxDataGridModule,
     DxButtonModule,
@@ -40,19 +38,19 @@ export class Admin implements OnInit {
   private dashboardService = inject(AdminDashboardService);
   private configService = inject(GlobalConfigService);
 
-  config?: GlobalConfig;
+  config = signal<GlobalConfig | undefined>(undefined);
 
   // Statistics Data
-  stats: StatCard[] = [];
+  stats = signal<StatCard[]>([]);
 
   // Chart Data
-  engagementData: EngagementPoint[] = [];
+  engagementData = signal<EngagementPoint[]>([]);
 
   // System Health
-  systemHealth: SystemHealthMetric[] = [];
+  systemHealth = signal<SystemHealthMetric[]>([]);
 
   // Recent Uploads
-  recentUploads: MovieUpload[] = [];
+  recentUploads = signal<MovieUpload[]>([]);
 
   ngOnInit(): void {
     this.loadDashboardData();
@@ -61,16 +59,16 @@ export class Admin implements OnInit {
 
   loadGlobalConfig(): void {
     this.configService.getConfig().subscribe((data: GlobalConfig) => {
-      this.config = data;
+      this.config.set(data);
     });
   }
 
   loadDashboardData(): void {
     this.dashboardService.getDashboardData().subscribe(data => {
-      this.stats = data.stats;
-      this.engagementData = data.engagementData;
-      this.systemHealth = data.systemHealth;
-      this.recentUploads = data.recentUploads;
+      this.stats.set(data.stats);
+      this.engagementData.set(data.engagementData);
+      this.systemHealth.set(data.systemHealth);
+      this.recentUploads.set(data.recentUploads);
     });
   }
 

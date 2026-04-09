@@ -1,5 +1,4 @@
-import { Component, effect, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
-// import { CommonModule } from '@angular/common';
+import { Component, computed, input, signal, effect } from '@angular/core';
 import { 
   DxTextBoxModule, 
   DxButtonModule, 
@@ -19,33 +18,32 @@ import {
   templateUrl: './users.html',
   styleUrl: './users.scss',
 })
-export class Users implements OnChanges{
-  // @Input() userName = "Default User"
-  // @Input() userClass = ""
-  // @Input() userEmail = ""
-  @Input() currentUser = <any>({});
-  // Personal Information
+export class Users {
+  // Modern Signal Input
+  currentUser = input<any>({});
+  
+  // Personal Information Signals
   fullName = signal('');
   email = signal('');
   phone = signal('');
   profileImage = signal('/assets/svg/navbar/avatar-default.svg');
 
-  // Viewing Preferences
+  // Viewing Preferences Signals
   autoplayNext = signal(true);
   highQualityStreaming = signal(true);
   emailNotifications = signal(false);
 
-  // ฟังก์ชันนี้จะถูกเรียกอัตโนมัติทุกครั้งที่ค่า @Input() ถูกตัวแม่เปลี่ยนแปลง
-  ngOnChanges(changes: SimpleChanges) {
-    // เช็คว่ามีการส่ง currentUser มาใหม่จริงๆ ใช่ไหม
-    if (changes['currentUser'] && changes['currentUser'].currentValue) {
-      const user = changes['currentUser'].currentValue;
-      
-      // ดึงค่ามาเซ็ตลงฟอร์ม (จำไว้ว่าข้อมูลชุดนี้ Key เป็นตัวพิมพ์เล็ก name, email)
-      this.fullName.set(user.name || '');
-      this.email.set(user.email || '');
-      this.phone.set(user.phone || '');
-    }
+  constructor() {
+    // Effect to sync model when input changes
+    effect(() => {
+      const user = this.currentUser();
+      if (user) {
+        this.fullName.set(user.name || '');
+        this.email.set(user.email || '');
+        this.phone.set(user.phone || '');
+        // Keep existing preferences or reset
+      }
+    }, { allowSignalWrites: true });
   }
   
   // Actions
@@ -58,9 +56,15 @@ export class Users implements OnChanges{
       streaming: this.highQualityStreaming(),
       notifications: this.emailNotifications()
     });
+    // In a real app, emit an event or call a service
   }
 
   cancel() {
+    // Reset to current input values
+    const user = this.currentUser();
+    this.fullName.set(user.name || '');
+    this.email.set(user.email || '');
+    this.phone.set(user.phone || '');
     console.log('Changes cancelled');
   }
 

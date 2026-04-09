@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; // เพิ่ม CommonModule สำหรับคำสั่งพื้นฐาน เช่น NgIf, NgFor และ Property Binding
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { 
   DxToolbarModule, 
@@ -14,10 +13,9 @@ import { dataSource } from '../../../../core/interfaces/dataSourceInfo.interface
 import { accountData } from '../../../../data/mock/AccountData/account.data';
 
 @Component({
-  selector: 'app-tebber-account',
+  selector: 'app-aside-account',
   standalone: true,
   imports: [
-    CommonModule, 
     DxToolbarModule,
     DxDrawerModule,
     DxListModule,
@@ -31,13 +29,9 @@ import { accountData } from '../../../../data/mock/AccountData/account.data';
 })
 export class AsideAccount {
   private router = inject(Router);
-  isDrawerOpen = true;
-  selectedItemId: number = 1;
-
-  // ฟังก์ชันย้อนกลับไปยังหน้าหลัก
-  // goBack() {
-  //   this.router.navigate(['/']);
-  // }
+  
+  isDrawerOpen = signal(true);
+  selectedItemId = signal(1);
 
   // ข้อมูลเมนูด้านซ้าย
   navigationItems = [
@@ -50,19 +44,14 @@ export class AsideAccount {
   ];
 
   // ข้อมูลตัวอย่างสำหรับ DataGrid
-  dataSource : dataSource[] = accountData;
+  dataSourceSignal = signal<dataSource[]>(accountData);
 
-  currentUser = this.dataSource[0];
-
-  // ฟังก์ชันสลับเปิด/ปิดลิ้นชัก
-  // toggleDrawer() {
-  //   this.isDrawerOpen = !this.isDrawerOpen;
-  // }
+  currentUser = signal<dataSource>(this.dataSourceSignal()[0]);
 
   // ฟังก์ชันเมื่อคลิกเลือกเมนู
   onItemClick(e: any) {
     const selectedItem = e.itemData;
-    this.selectedItemId = selectedItem.id;
+    this.selectedItemId.set(selectedItem.id);
     console.log('เปลี่ยนหน้าไปที่:', selectedItem.path);
   }
 }

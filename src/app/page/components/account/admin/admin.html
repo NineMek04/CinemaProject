@@ -1,24 +1,26 @@
 @defer {
+@if (config(); as appConfig) {
 <div class="admin-dashboard">
     <!-- Sidebar -->
-    <aside class="sidebar" *ngIf="config">
+    <aside class="sidebar">
         <div class="brand">
             <div class="logo-box">
-                <i [class]="'dx-icon-' + config.brand.icon"></i>
+                <i [class]="'dx-icon-' + appConfig.brand.icon"></i>
             </div>
             <div class="brand-text">
-                <h1>{{config.brand.name}}</h1>
+                <h1>{{appConfig.brand.name}}</h1>
                 <span>ADMIN CONSOLE</span>
             </div>
         </div>
 
         <nav class="nav-links">
-            <a *ngFor="let item of config.navItems" 
-               [routerLink]="item.route" 
+            @for (item of appConfig.navItems; track item.route) {
+            <a [routerLink]="item.route" 
                routerLinkActive="active" 
                class="nav-item">
                 <i [class]="'dx-icon-' + item.icon"></i> {{item.label}}
             </a>
+            }
         </nav>
 
         <div class="sidebar-footer">
@@ -47,19 +49,20 @@
             <div class="top-actions">
                 <dx-button icon="bell" stylingMode="text"></dx-button>
                 <dx-button icon="preferences" stylingMode="text"></dx-button>
-                <div class="admin-profile" *ngIf="config">
+                <div class="admin-profile">
                     <div class="profile-text">
-                        <span class="name">{{config.currentUser.name}}</span>
-                        <span class="role">{{config.currentUser.role}}</span>
+                        <span class="name">{{appConfig.currentUser.name}}</span>
+                        <span class="role">{{appConfig.currentUser.role}}</span>
                     </div>
-                    <img [src]="config.currentUser.avatarPath" alt="Admin Avatar" class="profile-img">
+                    <img [src]="appConfig.currentUser.avatarPath" alt="Admin Avatar" class="profile-img">
                 </div>
             </div>
         </header>
 
         <!-- Stats Grid -->
         <section class="stats-grid">
-            <div class="stat-card" *ngFor="let stat of stats">
+            @for (stat of stats(); track stat.title) {
+            <div class="stat-card">
                 <div class="stat-header">
                     <div class="stat-icon" [style.background-color]="stat.color + '20'" [style.color]="stat.color">
                         <i [class]="'dx-icon-' + stat.icon"></i>
@@ -72,6 +75,7 @@
                     <h3 class="stat-value">{{stat.value}}</h3>
                 </div>
             </div>
+            }
         </section>
 
         <!-- Charts Section -->
@@ -88,7 +92,7 @@
                     </div>
                 </div>
                 <div class="chart-body">
-                    <dx-chart [dataSource]="engagementData" class="engagement-chart">
+                    <dx-chart [dataSource]="engagementData()" class="engagement-chart">
                         <dxi-series argumentField="month" valueField="value" type="splinearea" color="#FF8A80">
                         </dxi-series>
                         <dxo-argument-axis [visible]="true" [grid]="{visible: false}"></dxo-argument-axis>
@@ -107,7 +111,8 @@
                     </div>
                 </div>
                 <div class="health-metrics">
-                    <div class="metric-item" *ngFor="let metric of systemHealth">
+                    @for (metric of systemHealth(); track metric.label) {
+                    <div class="metric-item">
                         <div class="metric-label">
                             <span>{{metric.label}}</span>
                             <span class="metric-value">{{metric.value}}%</span>
@@ -115,6 +120,7 @@
                         <dx-progress-bar [min]="0" [max]="100" [value]="metric.value" [showStatus]="false"
                             [style.color]="metric.color"></dx-progress-bar>
                     </div>
+                    }
 
                     <div class="mini-stats-row">
                         <div class="mini-stat">
@@ -145,7 +151,8 @@
                     <span class="col-views">VIEWS</span>
                     <span class="col-action">ACTION</span>
                 </div>
-                <div class="table-row" *ngFor="let upload of recentUploads">
+                @for (upload of recentUploads(); track upload.title) {
+                <div class="table-row">
                     <div class="movie-cell">
                         <img [src]="upload.image" alt="Movie Thumbnail">
                         <div class="movie-info">
@@ -162,10 +169,13 @@
                         <dx-button icon="edit" stylingMode="text"></dx-button>
                     </div>
                 </div>
+                }
             </div>
         </section>
     </main>
 </div>
-}@placeholder {
+}
+}
+@placeholder {
 <div>กำลังโหลดตารางข้อมูล...</div>
 }

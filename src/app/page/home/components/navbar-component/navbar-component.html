@@ -1,76 +1,62 @@
-<section *ngIf="config"
-  class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between py-4 px-8">
+@if (config(); as appConfig) {
+<section class="bg-gradient-to-r from-red-950 to-slate-900 text-white flex items-center justify-between py-4 px-8">
   <div class="flex items-center space-x-8">
-    <h1 class="text-3xl font-bold">{{config.brand.name}}</h1>
+    <h1 class="text-3xl font-bold">{{appConfig.brand.name}}</h1>
 
     <ul class="flex space-x-6 text-slate-400 font-medium">
-      <li *ngFor="let item of config.navItems">
+      @for (item of appConfig.navItems; track item.route) {
+      <li>
         <a [routerLink]="item.route"
           routerLinkActive="text-white font-bold border-b-2 border-red-900 ease-in-out duration-300"
           class="hover:text-white transition-all duration-300">{{item.label}}</a>
       </li>
+      }
     </ul>
   </div>
 
-        
-        <div class="flex items-center space-x-4 w-full max-w-md">
-             <input type="text" placeholder="Search..." class="search-input px-8 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 w-full">
-            <div (click)="openPopup('login')" class="bg-gradient-to-tr from-red-600 to-red-400 px-2 py-1  rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-colors duration-300">
-                <h3 class="text-white font-medium">SignIn</h3>
-            </div>
-            <div routerLink="/tebber-account" class="profile-avatar-container bg-slate-950 rounded-full w-20 h-15 overflow-hidden cursor-pointer">
-                <img src="/assets/svg/navbar/User profile avatar.svg" alt="Profile" class="profile-avatar w-full h-full rounded-full object-cover border-2 border-transparent hover:border-slate-600 transition-all duration-300">
-            </div>
-        </div>
-</section>
-
-
-
-<div *ngIf="showLoginPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity h-auto p-4">
-  
-  <div class="relative  max-w-md animate-fade-in-up">
-    <button (click)="showLoginPopup = false" class="absolute top-4 right-4 z-50 text-slate-500 hover:text-white transition-colors p-2 bg-slate-900/50 rounded-full">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
 
   <div class="flex items-center space-x-4 w-full max-w-md">
-    <input type="text" placeholder="Search..."
-      class="search-input px-8 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 w-full">
-    <div (click)="showLoginPopup = true"
-      class="bg-gradient-to-tr from-red-600 to-red-400 px-2 py-1  rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-colors duration-300">
-      <h3 class="text-white font-medium">SignIn</h3>
+    <div class="relative w-full">
+      <input type="text" placeholder="Search..."
+        class="search-input pl-10 pr-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 w-full transition-all duration-300">
+      <i class="dx-icon-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
     </div>
+
+    <div (click)="openPopup('login')"
+      class="bg-gradient-to-tr from-red-600 to-red-400 px-4 py-2 rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-all duration-300 shadow-lg shadow-red-900/20 active:scale-95 whitespace-nowrap">
+      <h3 class="text-white font-bold text-sm">SignIn</h3>
+    </div>
+    
     <div routerLink="/account"
-      class="profile-avatar-container bg-slate-950 rounded-full w-20 h-15 overflow-hidden cursor-pointer">
-      <img [src]="config.currentUser.avatarPath" alt="Profile"
-        class="profile-avatar w-full h-full rounded-full object-cover border-2 border-transparent hover:border-slate-600 transition-all duration-300">
+      class="profile-avatar-container bg-slate-950 rounded-full w-12 h-12 flex-shrink-0 overflow-hidden cursor-pointer border-2 border-slate-800 hover:border-red-500 transition-all duration-300">
+      <img [src]="appConfig.currentUser.avatarPath" alt="Profile"
+        class="profile-avatar w-full h-full object-cover">
     </div>
   </div>
 </section>
+}
 
-
-<div *ngIf="showLoginPopup"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+@if (showLoginPopup()) {
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-500 p-4">
 
   <div class="relative w-full max-w-md animate-fade-in-up">
-
-    <button (click)="showLoginPopup = false"
-      class="absolute top-4 right-4 z-50 text-slate-500 hover:text-white transition-colors p-2 bg-slate-900/50 rounded-full">
+    <button (click)="closePopup()"
+      class="absolute -top-12 -right-0 md:-right-12 z-50 text-slate-400 hover:text-white transition-colors p-2 bg-slate-900/50 rounded-full hover:bg-red-500">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
 
-    <app-login-component 
-      *ngIf="authMode === 'login'" 
-      (switchToRegister)="authMode = 'register'"
-      (closeModal)="showLoginPopup = false">
-    </app-login-component>
-
-    <app-register-component 
-      *ngIf="authMode === 'register'" 
-      (switchToLogin)="authMode = 'login'">
-    </app-register-component>
+    <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
+      @if (authMode() === 'login') {
+      <app-login-component (switchToRegister)="openPopup('register')" (closeModal)="closePopup()">
+      </app-login-component>
+      } @else {
+      <app-register-component (switchToLogin)="openPopup('login')">
+      </app-register-component>
+      }
+    </div>
 
   </div>
-
 </div>
+}

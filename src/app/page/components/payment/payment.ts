@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { 
   DxTextBoxModule, 
   DxButtonModule, 
@@ -18,7 +17,6 @@ import {
   selector: 'app-payment',
   standalone: true,
   imports: [
-    CommonModule,
     DxTextBoxModule,
     DxButtonModule,
     DxSwitchModule,
@@ -30,13 +28,20 @@ import {
 export class Payment implements OnInit {
   private paymentService = inject(PaymentService);
 
-  steps: CheckoutStep[] = [];
-  paymentMethods: PaymentMethod[] = [];
-  orderSummary?: OrderSummary;
+  steps = signal<CheckoutStep[]>([]);
+  paymentMethods = signal<PaymentMethod[]>([]);
+  orderSummary = signal<OrderSummary | undefined>(undefined);
   
-  selectedMethodId: string = 'card';
-  promoCode: string = '';
-  discount: number = 0;
+  selectedMethodId = signal('card');
+  promoCode = signal('');
+  discount = signal(0);
+
+  finalTotal = computed(() => {
+    const summary = this.orderSummary();
+    if (!summary) return 0;
+    const base = summary.total;
+    return base - (base * (this.discount() / 100));
+  });
 
   ngOnInit(): void {
     this.loadCheckoutData();
@@ -44,26 +49,20 @@ export class Payment implements OnInit {
 
   loadCheckoutData(): void {
     this.paymentService.getCheckoutState().subscribe((state: CheckoutState) => {
-      this.steps = state.steps;
-      this.paymentMethods = state.paymentMethods;
-      this.orderSummary = state.orderSummary;
+      this.steps.set(state.steps);
+      this.paymentMethods.set(state.paymentMethods);
+      this.orderSummary.set(state.orderSummary);
     });
   }
 
   selectMethod(methodId: string): void {
-    this.selectedMethodId = methodId;
+    this.selectedMethodId.set(methodId);
   }
 
   applyPromo(): void {
-    this.paymentService.applyPromoCode(this.promoCode).subscribe((discount: number) => {
-      this.discount = discount;
+    this.paymentService.applyPromoCode(this.promoCode()).subscribe((val: number) => {
+      this.discount.set(val);
       // In a real app, you'd recalculate totals here
     });
-  }
-
-  get finalTotal(): number {
-    if (!this.orderSummary) return 0;
-    const base = this.orderSummary.total;
-    return base - (base * (this.discount / 100));
   }
 }

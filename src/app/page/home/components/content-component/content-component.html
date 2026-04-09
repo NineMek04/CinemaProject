@@ -2,7 +2,8 @@
   
   <div class="max-w-7xl mx-auto space-y-16">
 
-    <div *ngIf="featuredMovie" class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    @if (featuredMovie(); as movie) {
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
       
       <div class="lg:col-span-2">
         <div class="flex items-center gap-4 mb-6">
@@ -10,7 +11,7 @@
           <h2 class="text-2xl font-bold tracking-wide">Synopsis</h2>
         </div>
         <p class="text-slate-400 text-lg leading-relaxed font-light">
-          {{featuredMovie.description}}
+          {{movie.description}}
         </p>
       </div>
 
@@ -23,17 +24,17 @@
           </div>
           <div>
             <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Year</p>
-            <p class="text-sm font-semibold">{{featuredMovie.year}}</p>
+            <p class="text-sm font-semibold">{{movie.year}}</p>
           </div>
           <div>
             <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Genre</p>
-            <p class="text-sm font-semibold">{{featuredMovie.genre}}</p>
+            <p class="text-sm font-semibold">{{movie.genre}}</p>
           </div>
           <div>
             <p class="text-xs text-slate-500 tracking-widest uppercase mb-3">Rating</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{featuredMovie.ageRating}}</span>
-              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{featuredMovie.rating}} / 10</span>
+              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{movie.ageRating}}</span>
+              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{movie.rating}} / 10</span>
             </div>
           </div>
         </div>
@@ -45,6 +46,7 @@
 
       </div>
     </div>
+    }
 
 
     <section>
@@ -141,7 +143,8 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         
-        <div *ngFor="let movie of movies" class="group cursor-pointer">
+        @for (movie of movies(); track movie.id) {
+        <div class="group cursor-pointer">
           <div class="relative rounded-xl overflow-hidden aspect-[2/3] mb-3">
             <img [src]="movie.posterPath" [alt]="movie.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-red-500 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-500/30">{{movie.rating}}</div>
@@ -149,6 +152,7 @@
           <h3 class="font-bold text-sm text-slate-200 truncate">{{movie.title}}</h3>
           <p class="text-[11px] text-slate-500 mt-0.5">{{movie.year}} • {{movie.genre}}</p>
         </div>
+        }
 
       </div>
     </section>

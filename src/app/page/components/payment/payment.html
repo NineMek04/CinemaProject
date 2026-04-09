@@ -7,18 +7,19 @@
         </div>
 
         <nav class="steps-nav">
-            <div class="step-item" *ngFor="let step of steps" [class.active]="step.isActive"
-                [class.completed]="step.isCompleted">
+            @for (step of steps(); track step.label) {
+            <div class="step-item" [class.active]="step.isActive" [class.completed]="step.isCompleted">
                 <div class="step-icon">
                     <i [class]="'dx-icon-' + step.icon"></i>
                 </div>
                 <span class="step-label">{{step.label}}</span>
             </div>
+            }
         </nav>
 
         <div class="sidebar-footer">
             <div class="profile-brief">
-                <img src="https://via.placeholder.com/32" alt="User">
+                <img src="/assets/svg/navbar/User profile avatar.svg" alt="User">
                 <div class="info">
                     <span class="name">Checkout</span>
                     <span class="status">Step 2 of 4</span>
@@ -36,8 +37,10 @@
 
         <!-- Payment Methods Grid -->
         <div class="methods-grid">
-            <div class="method-card" *ngFor="let method of paymentMethods"
-                [class.selected]="method.id === selectedMethodId" (click)="selectMethod(method.id)">
+            @for (method of paymentMethods(); track method.id) {
+            <div class="method-card" 
+                [class.selected]="method.id === selectedMethodId()" 
+                (click)="selectMethod(method.id)">
                 <div class="card-header">
                     <i [class]="'dx-icon-' + method.icon"></i>
                 </div>
@@ -46,10 +49,12 @@
                     <span class="desc">{{method.description}}</span>
                 </div>
             </div>
+            }
         </div>
 
         <!-- Credit Card Form -->
-        <form class="payment-form" *ngIf="selectedMethodId === 'card'">
+        @if (selectedMethodId() === 'card') {
+        <form class="payment-form">
             <div class="form-group full">
                 <label>CARDHOLDER NAME</label>
                 <dx-text-box placeholder="John Wick" stylingMode="filled"></dx-text-box>
@@ -79,6 +84,7 @@
                 <span>Save card for future purchases</span>
             </div>
         </form>
+        }
 
         <!-- Security Footer -->
         <div class="security-info">
@@ -89,25 +95,30 @@
     </main>
 
     <!-- Right Panel: Order Summary -->
-    <aside class="order-summary-panel" *ngIf="orderSummary">
+    @if (orderSummary(); as summary) {
+    <aside class="order-summary-panel">
         <h2 class="summary-title">Order Summary</h2>
 
         <div class="selected-plan-card">
             <span class="badge">SELECTED PLAN</span>
             <div class="plan-info">
-                <h3>{{orderSummary.planName}}</h3>
-                <p>{{orderSummary.planDescription}}</p>
+                <h3>{{summary.planName}}</h3>
+                <p>{{summary.planDescription}}</p>
             </div>
             <div class="plan-price">
-                <span class="price">${{orderSummary.price}}</span>
-                <span class="cycle">/{{orderSummary.billingCycle}}</span>
+                <span class="price">${{summary.price}}</span>
+                <span class="cycle">/{{summary.billingCycle}}</span>
             </div>
         </div>
 
         <div class="promo-section">
             <label>PROMO CODE</label>
             <div class="promo-input">
-                <dx-text-box [(value)]="promoCode" placeholder="Enter code" stylingMode="filled"></dx-text-box>
+                <dx-text-box 
+                    [value]="promoCode()" 
+                    (onValueChanged)="promoCode.set($event.value)"
+                    placeholder="Enter code" stylingMode="filled">
+                </dx-text-box>
                 <dx-button text="Apply" (onClick)="applyPromo()" stylingMode="contained" class="apply-btn"></dx-button>
             </div>
         </div>
@@ -115,20 +126,24 @@
         <div class="cost-breakdown">
             <div class="line">
                 <span>Subtotal</span>
-                <span>${{orderSummary.subtotal | number:'1.2-2'}}</span>
+                <span>${{summary.subtotal}}</span>
             </div>
             <div class="line">
                 <span>Taxes</span>
-                <span>${{orderSummary.taxes | number:'1.2-2'}}</span>
+                <span>${{summary.taxes}}</span>
             </div>
-            <div class="line total" *ngIf="discount > 0">
-                <span>Discount ({{discount}}%)</span>
-                <span>-${{(orderSummary.total * discount / 100) | number:'1.2-2'}}</span>
+            
+            @if (discount() > 0) {
+            <div class="line total">
+                <span>Discount ({{discount()}}%)</span>
+                <span>-${{summary.total * discount() / 100}}</span>
             </div>
+            }
+            
             <hr>
             <div class="line grand-total">
                 <span>Total Amount</span>
-                <span class="amount">${{finalTotal | number:'1.2-2'}}</span>
+                <span class="amount">${{finalTotal()}}</span>
             </div>
         </div>
 
@@ -139,7 +154,11 @@
             </p>
         </div>
     </aside>
+    }
 </div>
-}@placeholder {
-<div>กำลังโหลดตารางข้อมูล...</div>
+}
+@placeholder {
+<div class="p-8 text-slate-500 font-medium animate-pulse text-center">
+    Loading secure checkout...
+</div>
 }
