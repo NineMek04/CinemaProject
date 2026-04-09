@@ -5,4 +5,5 @@ export interface dataSource {
     role: string;
     status: string;
     class: string;
+    phone: string;
 }
