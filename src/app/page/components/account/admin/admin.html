@@ -9,12 +9,12 @@
             </div>
             <div class="brand-text">
                 <h1>{{appConfig.brand.name}}</h1>
-                <span>ADMIN CONSOLE</span>
+                <span class="editorial-label">EDITORIAL ADMIN</span>
             </div>
         </div>
 
         <nav class="nav-links">
-            @for (item of appConfig.navItems; track item.route) {
+            @for (item of adminNavItems; track item.route) {
             <a [routerLink]="item.route" 
                routerLinkActive="active" 
                class="nav-item">
@@ -24,13 +24,20 @@
         </nav>
 
         <div class="sidebar-footer">
+            <dx-button 
+                icon="plus" 
+                text="New Release" 
+                stylingMode="contained" 
+                class="new-release-btn">
+            </dx-button>
+
             <div class="license-card">
                 <p>Subscription Level</p>
                 <div class="level-badge">
                     <span>Enterprise</span>
                     <span class="pro-tag">Pro</span>
                 </div>
-                <dx-button text="Manage Licenses" stylingMode="contained" class="manage-btn"></dx-button>
+                <dx-button text="Manage Licenses" stylingMode="text" class="manage-btn"></dx-button>
             </div>
         </div>
     </aside>
@@ -59,123 +66,14 @@
             </div>
         </header>
 
-        <!-- Stats Grid -->
-        <section class="stats-grid">
-            @for (stat of stats(); track stat.title) {
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon" [style.background-color]="stat.color + '20'" [style.color]="stat.color">
-                        <i [class]="'dx-icon-' + stat.icon"></i>
-                    </div>
-                    <span class="trend" [class.positive]="stat.trend.startsWith('+')">{{stat.trend}} <i
-                            class="dx-icon-arrowup"></i></span>
-                </div>
-                <div class="stat-body">
-                    <p class="stat-title">{{stat.title}}</p>
-                    <h3 class="stat-value">{{stat.value}}</h3>
-                </div>
-            </div>
-            }
-        </section>
-
-        <!-- Charts Section -->
-        <section class="charts-row">
-            <div class="chart-card main-chart">
-                <div class="chart-header">
-                    <div class="chart-title">
-                        <h2>User Engagement & Growth</h2>
-                        <p>Total stream time vs user acquisition (12 Mo.)</p>
-                    </div>
-                    <div class="chart-filters">
-                        <span class="filter-tag">MTD</span>
-                        <dx-button icon="more" stylingMode="text"></dx-button>
-                    </div>
-                </div>
-                <div class="chart-body">
-                    <dx-chart [dataSource]="engagementData()" class="engagement-chart">
-                        <dxi-series argumentField="month" valueField="value" type="splinearea" color="#FF8A80">
-                        </dxi-series>
-                        <dxo-argument-axis [visible]="true" [grid]="{visible: false}"></dxo-argument-axis>
-                        <dxi-value-axis [visible]="false" [grid]="{visible: false}"></dxi-value-axis>
-                        <dxo-legend [visible]="false"></dxo-legend>
-                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
-                    </dx-chart>
-                </div>
-            </div>
-
-            <div class="chart-card system-health">
-                <div class="chart-header">
-                    <div class="chart-title">
-                        <h2>System Health</h2>
-                        <span class="status-badge stable">Stable</span>
-                    </div>
-                </div>
-                <div class="health-metrics">
-                    @for (metric of systemHealth(); track metric.label) {
-                    <div class="metric-item">
-                        <div class="metric-label">
-                            <span>{{metric.label}}</span>
-                            <span class="metric-value">{{metric.value}}%</span>
-                        </div>
-                        <dx-progress-bar [min]="0" [max]="100" [value]="metric.value" [showStatus]="false"
-                            [style.color]="metric.color"></dx-progress-bar>
-                    </div>
-                    }
-
-                    <div class="mini-stats-row">
-                        <div class="mini-stat">
-                            <span class="mini-label">ERRORS (24H)</span>
-                            <span class="mini-value">0.02%</span>
-                        </div>
-                        <div class="mini-stat">
-                            <span class="mini-label">UPTIME</span>
-                            <span class="mini-value uptime">99.99</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bottom Table -->
-        <section class="table-section">
-            <div class="section-header">
-                <h2>Recent Content Uploads</h2>
-                <dx-button text="View Catalog" stylingMode="text" class="view-catalog-btn"></dx-button>
-            </div>
-
-            <div class="custom-table">
-                <div class="table-row head">
-                    <span class="col-movie">MOVIE DETAIL</span>
-                    <span class="col-date">DATE ADDED</span>
-                    <span class="col-status">STATUS</span>
-                    <span class="col-views">VIEWS</span>
-                    <span class="col-action">ACTION</span>
-                </div>
-                @for (upload of recentUploads(); track upload.title) {
-                <div class="table-row">
-                    <div class="movie-cell">
-                        <img [src]="upload.image" alt="Movie Thumbnail">
-                        <div class="movie-info">
-                            <span class="movie-title">{{upload.title}}</span>
-                            <span class="movie-genre">{{upload.genre}}</span>
-                        </div>
-                    </div>
-                    <span class="date-cell">{{upload.date}}</span>
-                    <div class="status-cell">
-                        <span class="status-tag" [class]="upload.status.toLowerCase()">{{upload.status}}</span>
-                    </div>
-                    <span class="views-cell">{{upload.views}}</span>
-                    <div class="action-cell">
-                        <dx-button icon="edit" stylingMode="text"></dx-button>
-                    </div>
-                </div>
-                }
-            </div>
-        </section>
+        <!-- Sub-component Viewport -->
+        <router-outlet></router-outlet>
     </main>
 </div>
 }
 }
 @placeholder {
-<div>กำลังโหลดตารางข้อมูล...</div>
+<div class="p-20 text-center animate-pulse text-slate-500">
+    Initializing Editorial Core...
+</div>
 }

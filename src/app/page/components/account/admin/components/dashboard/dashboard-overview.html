@@ -1,0 +1,156 @@
+<!-- Stats Grid Refined -->
+<section class="stats-grid">
+    <div class="stat-card">
+        <div class="s-header">
+            <i class="dx-icon-group"></i>
+            <span class="trend pos">+12.5%</span>
+        </div>
+        <div class="s-body">
+            <span class="label">TOTAL USERS</span>
+            <h3 class="value">142,890</h3>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="s-header">
+            <i class="dx-icon-money"></i>
+            <span class="trend pos">+8.2%</span>
+        </div>
+        <div class="s-body">
+            <span class="label">MONTHLY REVENUE</span>
+            <h3 class="value">$842.2k</h3>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="s-header">
+            <i class="dx-icon-box"></i>
+            <span class="trend">Live Now</span>
+        </div>
+        <div class="s-body">
+            <span class="label">ACTIVE STREAMERS</span>
+            <h3 class="value">12,402</h3>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="s-header">
+            <i class="dx-icon-video"></i>
+            <span class="trend">Global Archive</span>
+        </div>
+        <div class="s-body">
+            <span class="label">MOVIE LIBRARY</span>
+            <h3 class="value">4,289</h3>
+        </div>
+    </div>
+</section>
+
+<!-- Charts Section Refined -->
+<section class="charts-row">
+    <div class="chart-card main-chart">
+        <div class="chart-header">
+            <div class="chart-title">
+                <h2>User Engagement & Growth</h2>
+                <p>Total stream time vs user acquisition (12 Mo.)</p>
+            </div>
+            <div class="chart-actions">
+                <span class="tag">YTD</span>
+                <dx-button icon="more" stylingMode="text"></dx-button>
+            </div>
+        </div>
+        <div class="chart-body">
+            <dx-chart [dataSource]="engagementData()" class="engagement-chart">
+                <dxi-series argumentField="month" valueField="value" type="spline" color="#f28c82">
+                </dxi-series>
+                <dxo-argument-axis [visible]="true" [grid]="{visible: false}" [tick]="{visible: false}"></dxo-argument-axis>
+                <dxi-value-axis [visible]="false" [grid]="{visible: false}"></dxi-value-axis>
+                <dxo-legend [visible]="false"></dxo-legend>
+                <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+            </dx-chart>
+            <!-- Shadow Glow Glow -->
+        </div>
+    </div>
+
+    <div class="chart-card system-health">
+        <div class="chart-header">
+            <div class="chart-title">
+                <h2>System Health</h2>
+                <span class="status-badge stable">Stable</span>
+            </div>
+        </div>
+        <div class="health-metrics">
+            <div class="metric-item">
+                <div class="m-label">
+                    <span>Server Load (Node-Alpha)</span>
+                    <span class="val">42%</span>
+                </div>
+                <dx-progress-bar [value]="42" [showStatus]="false" class="load-bar"></dx-progress-bar>
+            </div>
+
+            <div class="metric-item">
+                <div class="m-label">
+                    <span>CDN Traffic Distribution</span>
+                    <span class="val">78%</span>
+                </div>
+                <dx-progress-bar [value]="78" [showStatus]="false" class="cdn-bar"></dx-progress-bar>
+            </div>
+
+            <div class="metric-item">
+                <div class="m-label">
+                    <span>Database Latency</span>
+                    <span class="val">14ms</span>
+                </div>
+                <dx-progress-bar [value]="14" [showStatus]="false" class="db-bar"></dx-progress-bar>
+            </div>
+
+            <div class="mini-metrics">
+                <div class="m-box">
+                    <span class="l">ERRORS (24H)</span>
+                    <span class="v">0.02%</span>
+                </div>
+                <div class="m-box">
+                    <span class="l">UPTIME</span>
+                    <span class="v green">99.99</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content Uploads Refined -->
+<section class="uploads-section">
+    <div class="section-header">
+        <h2>Recent Content Uploads</h2>
+        <dx-button text="View Catalog" stylingMode="text" class="view-all-btn"></dx-button>
+    </div>
+
+    <div class="uploads-table">
+        <div class="table-head">
+            <span class="col-movie">MOVIE DETAIL</span>
+            <span class="col-date">DATE ADDED</span>
+            <span class="col-status">STATUS</span>
+            <span class="col-views">VIEWS</span>
+            <span class="col-action">ACTION</span>
+        </div>
+
+        @for (upload of recentUploads(); track upload.title) {
+        <div class="table-row">
+            <div class="movie-cell">
+                <img [src]="upload.image" alt="Poster">
+                <div class="m-info">
+                    <span class="m-title">{{upload.title}}</span>
+                    <span class="m-genre">{{upload.genre}}</span>
+                </div>
+            </div>
+            <span class="date-cell">{{upload.date}}</span>
+            <div class="status-cell">
+                <span class="status-pill" [class]="upload.status.toLowerCase()">{{upload.status}}</span>
+            </div>
+            <span class="views-cell">{{upload.views}}</span>
+            <div class="action-cell">
+                <dx-button icon="edit" stylingMode="text"></dx-button>
+            </div>
+        </div>
+        }
+    </div>
+</section>

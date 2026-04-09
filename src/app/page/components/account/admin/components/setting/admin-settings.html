@@ -1,0 +1,126 @@
+<div class="settings-container">
+    <header class="settings-header">
+        <h1 class="title">System Configuration</h1>
+        <p class="subtitle">Enterprise level platform orchestration and global parameters.</p>
+    </header>
+
+    <div class="settings-grid">
+        <!-- Column 1: Core Settings -->
+        <div class="settings-column">
+            <!-- General Settings -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <i class="dx-icon-preferences"></i>
+                    <h3>General Settings</h3>
+                </div>
+                <div class="section-body">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>PLATFORM NAME</label>
+                            <dx-text-box [value]="platformName()" stylingMode="filled"></dx-text-box>
+                        </div>
+                        <div class="input-group">
+                            <label>GLOBAL TIMEZONE</label>
+                            <dx-text-box [value]="platformTimezone()" stylingMode="filled"></dx-text-box>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>SUPPORT EMAIL</label>
+                        <dx-text-box [value]="supportEmail()" stylingMode="filled"></dx-text-box>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Streaming & CDN -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <i class="dx-icon-globe"></i>
+                    <h3>Streaming & CDN</h3>
+                </div>
+                <div class="section-body">
+                    <div class="cdn-provider-box">
+                        <div class="p-info">
+                            <span class="p-title">CDN Primary Provider</span>
+                            <span class="p-desc">Cloudflare Global Edge</span>
+                        </div>
+                        <dx-button text="SWITCH PROVIDER" stylingMode="contained" class="switch-btn"></dx-button>
+                    </div>
+
+                    <div class="metric-row">
+                        <span class="m-label">Global Bitrate Cap</span>
+                        <span class="m-value">25.0 Mbps</span>
+                    </div>
+
+                    <div class="toggle-row">
+                        <div class="t-info">
+                            <span class="t-title">4K Transcoding</span>
+                            <span class="t-desc">HEVC Encoders active</span>
+                        </div>
+                        <dx-switch [value]="isTranscodingActive()"></dx-switch>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column 2: Finance & API -->
+        <div class="settings-column">
+            <!-- Billing & Payments -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <i class="dx-icon-card"></i>
+                    <h3>Billing & Payments</h3>
+                </div>
+                <div class="section-body">
+                    <div class="integration-card stripe">
+                        <div class="i-icon"><i class="dx-icon-money"></i></div>
+                        <div class="i-text">
+                            <span class="i-title">Stripe Integration</span>
+                            <span class="i-status connected">CONNECTED & LIVE</span>
+                        </div>
+                        <dx-button icon="preferences" stylingMode="text"></dx-button>
+                    </div>
+
+                    <div class="input-group api-key-input">
+                        <label>LIVE API SECRET</label>
+                        <dx-text-box value="sk_live_51P8Xxxxxxxxx" mode="password" stylingMode="filled">
+                            <dxi-button name="today" location="after" [options]="{ icon: 'eyeopen', stylingMode: 'text' }"></dxi-button>
+                        </dx-text-box>
+                    </div>
+
+                    <dx-button icon="plus" text="Add New Gateway" stylingMode="text" class="add-gateway-btn"></dx-button>
+                </div>
+            </section>
+
+            <!-- API Key Management -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <i class="dx-icon-key"></i>
+                    <h3>API Key Management</h3>
+                </div>
+                <div class="section-body">
+                    <div class="key-card">
+                        <div class="k-header">
+                            <span class="k-title">PRODUCTION KEY</span>
+                            <span class="k-badge active">ACTIVE</span>
+                        </div>
+                        <div class="k-value">c_78234-x-9902-cinematic-prod-88</div>
+                        <div class="k-actions">
+                            <button class="k-btn rotate">ROTATE</button>
+                            <button class="k-btn revoke">REVOKE</button>
+                        </div>
+                    </div>
+
+                    <div class="create-key-placeholder">
+                        <i class="dx-icon-plus"></i>
+                        <span>CREATE NEW ENVIRONMENT KEY</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="settings-footer">
+        <dx-button text="Reset Changes" stylingMode="text" class="reset-btn"></dx-button>
+        <dx-button text="Commit Configuration" stylingMode="contained" class="commit-btn" (onClick)="onCommit()"></dx-button>
+    </footer>
+</div>

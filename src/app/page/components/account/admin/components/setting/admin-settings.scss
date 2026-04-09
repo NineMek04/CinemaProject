@@ -1,0 +1,219 @@
+.settings-container {
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.settings-header {
+    margin-bottom: 40px;
+    .title { font-size: 48px; font-weight: 800; margin: 0; color: #fff; }
+    .subtitle { font-size: 16px; color: #555; margin-top: 15px; font-weight: 500; }
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+}
+
+.settings-section {
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    overflow: hidden;
+
+    .section-header {
+        padding: 25px 30px;
+        background: rgba(255, 255, 255, 0.01);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 1px solid #1a1a1a;
+        i { font-size: 20px; color: #f28c82; }
+        h3 { font-size: 16px; font-weight: 800; margin: 0; color: #fff; }
+    }
+
+    .section-body {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+    .input-group { flex: 1; }
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    label { font-size: 10px; font-weight: 800; color: #333; letter-spacing: 1px; }
+    
+    ::ng_deep .dx-selectbox.custom-select, ::ng_deep .dx-textbox {
+        .dx-texteditor-container {
+            background-color: #080808 !important;
+            border: 1px solid #1a1a1a !important;
+            border-radius: 12px !important;
+            height: 50px !important;
+            .dx-texteditor-input { color: #fff !important; font-weight: 700; padding-left: 15px; }
+        }
+    }
+}
+
+.cdn-provider-box {
+    background: #111;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .p-info {
+        display: flex;
+        flex-direction: column;
+        .p-title { font-size: 14px; font-weight: 800; color: #fff; }
+        .p-desc { font-size: 12px; color: #555; margin-top: 4px; font-weight: 600; }
+    }
+
+    ::ng_deep .switch-btn {
+        background: #D82D1B20 !important;
+        color: #D82D1B !important;
+        font-size: 10px !important;
+        font-weight: 800 !important;
+        border-radius: 8px !important;
+        height: 36px !important;
+    }
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 14px;
+    .m-label { color: #555; font-weight: 700; }
+    .m-value { font-weight: 800; color: #fff; }
+}
+
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .t-info {
+        display: flex;
+        flex-direction: column;
+        .t-title { font-size: 14px; font-weight: 800; color: #fff; }
+        .t-desc { font-size: 12px; color: #555; font-weight: 600; }
+    }
+}
+
+.integration-card {
+    background: #111;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+    .i-icon {
+        width: 48px;
+        height: 48px;
+        background: #D82D1B;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i { font-size: 24px; color: #fff; }
+    }
+
+    .i-text {
+        flex-grow: 1;
+        .i-title { display: block; font-size: 14px; font-weight: 800; color: #fff; }
+        .i-status { font-size: 10px; font-weight: 800; &.connected { color: #4CAF50; } }
+    }
+}
+
+.add-gateway-btn {
+    align-self: flex-start;
+    color: #333 !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    &:hover { color: #555 !important; }
+}
+
+.key-card {
+    background: #111;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid #1a1a1a;
+    
+    .k-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        .k-title { font-size: 10px; color: #333; font-weight: 800; letter-spacing: 1.5px; }
+        .k-badge { font-size: 9px; font-weight: 800; color: #4CAF50; border: 1px solid rgba(76, 175, 80, 0.3); padding: 2px 8px; border-radius: 6px; }
+    }
+
+    .k-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #555; margin-bottom: 25px; word-break: break-all; }
+
+    .k-actions {
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+        .k-btn {
+            background: transparent;
+            border: none;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            &.rotate { color: #555; }
+            &.revoke { color: #D82D1B; }
+        }
+    }
+}
+
+.create-key-placeholder {
+    border: 2px dashed #1a1a1a;
+    border-radius: 20px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    i { font-size: 24px; }
+    span { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; }
+    &:hover { border-color: #333; color: #555; }
+}
+
+.settings-footer {
+    position: sticky;
+    bottom: 0;
+    margin-top: 40px;
+    background: #0d0d0d;
+    padding: 30px 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    border-top: 1px solid #1a1a1a;
+    
+    ::ng_deep .reset-btn { color: #555 !important; font-weight: 800 !important; font-size: 14px !important; }
+    ::ng_deep .commit-btn {
+        background: #f28c82 !important; // Pixel-perfect color from image
+        color: #0d0d0d !important;
+        font-weight: 800 !important;
+        border-radius: 16px !important;
+        padding: 0 45px !important;
+        height: 52px !important;
+        box-shadow: 0 10px 20px rgba(242, 140, 130, 0.2) !important;
+    }
+}

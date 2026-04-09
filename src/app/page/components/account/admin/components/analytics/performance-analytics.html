@@ -1,0 +1,129 @@
+<div class="analytics-container">
+    <header class="analytics-header">
+        <div class="header-main">
+            <h1 class="title">Performance Metrics</h1>
+            <p class="subtitle">Deep dive into global viewership and retention data for Q4 2023.</p>
+        </div>
+        <div class="header-actions">
+            <div class="date-range">
+                <i class="dx-icon-event"></i>
+                <span>Oct 01, 2023 — Dec 31, 2023</span>
+            </div>
+            <dx-button icon="exportpdf" text="Export PDF" stylingMode="contained" class="export-pdf-btn"></dx-button>
+        </div>
+    </header>
+
+    <!-- Top KPI Row -->
+    <section class="kpi-grid">
+        @for (kpi of kpis(); track kpi.label) {
+        <div class="kpi-card">
+            <div class="kpi-info">
+                <span class="k-label">{{kpi.label}}</span>
+                <h3 class="k-value">{{kpi.value}}</h3>
+                <span class="k-trend" [class]="kpi.trendType">
+                    <i [class]="kpi.trendType === 'positive' ? 'dx-icon-arrowup' : 'dx-icon-arrowdown'"></i>
+                    {{kpi.trend}}
+                </span>
+            </div>
+            <div class="kpi-visual">
+                <div class="icon-container">
+                    <img [src]="kpi.icon" [alt]="kpi.label">
+                </div>
+            </div>
+        </div>
+        }
+    </section>
+
+    <!-- Charts Middle Row -->
+    <section class="charts-row">
+        <div class="chart-card main-trends">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>Viewership Trends</h2>
+                    <p>Engagement by content type over time</p>
+                </div>
+                <div class="legend-custom">
+                    <span class="l-item series">Original Series</span>
+                    <span class="l-item movies">Movies</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <dx-chart [dataSource]="viewershipTrends" class="trends-chart">
+                    <dxi-series valueField="series" name="Original Series" color="#f28c82" type="spline"></dxi-series>
+                    <dxi-series valueField="movies" name="Movies" color="#333" type="spline"></dxi-series>
+
+                    <dxo-argument-axis [visible]="true" [grid]="{visible: false}"
+                        [tick]="{visible: false}"></dxo-argument-axis>
+                    <dxi-value-axis [visible]="false" [grid]="{visible: false}"></dxi-value-axis>
+                    <dxo-legend [visible]="false"></dxo-legend>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                </dx-chart>
+
+                <div class="peak-annotation">
+                    <span class="a-label">PEAK DAY</span>
+                    <span class="a-value">4.2M</span>
+                    <span class="a-sub">Viewers</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card device-reach">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>Device Reach</h2>
+                    <p>Active sessions per platform</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <dx-pie-chart [dataSource]="deviceReach" type="doughnut" [innerRadius]="0.85" class="device-chart">
+                    <dxi-series argumentField="platform" valueField="val">
+                        <dxo-label [visible]="false"></dxo-label>
+                    </dxi-series>
+                    <dxo-legend [visible]="false"></dxo-legend>
+                </dx-pie-chart>
+
+                <div class="donut-center">
+                    <span class="c-title">Global</span>
+                    <span class="c-value">AVERAGE</span>
+                </div>
+
+                <div class="device-legend">
+                    @for (item of deviceReach; track item.platform) {
+                    <div class="legend-row">
+                        <div class="l-left">
+                            <span class="dot"
+                                [style.background-color]="item.platform.includes('Smart') ? '#f28c82' : (item.platform.includes('Mobile') ? '#F28C8280' : '#222')"></span>
+                            <span>{{item.platform}}</span>
+                        </div>
+                        <span class="l-val">{{item.val}}%</span>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Metrics Bottom -->
+    <section class="regional-engagement">
+        <div class="section-header">
+            <div class="card-title">
+                <h2>Regional Engagement</h2>
+                <p>Top performing territories by subscription density</p>
+            </div>
+            <dx-button text="VIEW HEATMAP" stylingMode="text" class="heatmap-btn"></dx-button>
+        </div>
+
+        <div class="regional-bars">
+            @for (region of regionalData; track region.region) {
+            <div class="region-bar-container">
+                <div class="bar-top"></div>
+                <div class="bar-fill" [style.height]="(region.subs / 2.5 * 100) + '%'"></div>
+                <div class="region-info">
+                    <span class="r-name">{{region.region}}</span>
+                    <span class="r-subs">{{region.subs}}M Subs</span>
+                </div>
+            </div>
+            }
+        </div>
+    </section>
+</div>

@@ -7,7 +7,7 @@ export const GLOBAL_APP_CONFIG: GlobalConfig = {
         icon: 'video'
     },
     currentUser: {
-        name: 'Admin Aura',
+        name: 'Aura',
         role: 'Systems Chief',
         avatarPath: '/assets/svg/navbar/avatar-default.svg'
     },

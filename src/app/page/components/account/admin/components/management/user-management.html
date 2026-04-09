@@ -1,0 +1,95 @@
+<div class="users-container">
+    <header class="users-header">
+        <div class="header-main">
+            <h1 class="title">Users</h1>
+            <p class="subtitle">Manage your cinematic community. Review membership tiers, account statuses, and viewer engagement across the global network.</p>
+        </div>
+        
+        <div class="header-actions">
+            <dx-button icon="export" text="Export CSV" stylingMode="text" class="export-btn"></dx-button>
+            <dx-button icon="plus" text="Add User" stylingMode="contained" class="add-user-btn"></dx-button>
+        </div>
+    </header>
+
+    <!-- Stats Row -->
+    <section class="user-stats-grid">
+        @for (stat of userStats; track stat.label) {
+        <div class="u-stat-card">
+            <span class="u-label">{{stat.label}}</span>
+            <h3 class="u-value">{{stat.value}}</h3>
+            <span class="u-trend" [style.color]="stat.color">{{stat.trend}}</span>
+        </div>
+        }
+    </section>
+
+    <!-- Content Card -->
+    <div class="users-card">
+        <div class="card-filters">
+            <div class="filters-left">
+                <dx-select-box 
+                    [items]="['All Membership Plans', 'Premium', 'Enterprise', 'Free']" 
+                    defaultValue="All Membership Plans"
+                    stylingMode="filled"
+                    class="mini-select">
+                    <dxi-button name="today" location="before" [options]="{ icon: 'filter', stylingMode: 'text' }"></dxi-button>
+                </dx-select-box>
+
+                <dx-select-box 
+                    [items]="['All Statuses', 'Active', 'Suspended', 'Pending']" 
+                    defaultValue="All Statuses"
+                    stylingMode="filled"
+                    class="mini-select">
+                    <dxi-button name="today" location="before" [options]="{ icon: 'check', stylingMode: 'text' }"></dxi-button>
+                </dx-select-box>
+            </div>
+            <span class="count-text">Showing 1-10 of 128,402 cinematic profiles</span>
+        </div>
+
+        <dx-data-grid
+            [dataSource]="users()"
+            [showBorders]="false"
+            [rowAlternationEnabled]="false"
+            class="users-grid">
+            
+            <dxi-column dataField="name" caption="USER & IDENTITY" cellTemplate="userTemplate" [width]="300"></dxi-column>
+            <dxi-column dataField="joinDate" caption="JOIN DATE" [width]="180"></dxi-column>
+            <dxi-column dataField="lastActive" caption="LAST ACTIVE" [width]="180"></dxi-column>
+            <dxi-column dataField="membership" caption="MEMBERSHIP" cellTemplate="memberTemplate" [width]="150"></dxi-column>
+            <dxi-column dataField="status" caption="STATUS" cellTemplate="statusTemplate" [width]="150"></dxi-column>
+            <dxi-column caption="ACTIONS" cellTemplate="actionTemplate" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let data of 'userTemplate'" class="user-cell">
+                <img [src]="data.data.avatar" alt="Avatar">
+                <div class="u-info">
+                    <span class="u-name">{{data.data.name}}</span>
+                    <span class="u-email">{{data.data.email}}</span>
+                </div>
+            </div>
+
+            <div *dxTemplate="let data of 'memberTemplate'">
+                <span class="member-badge" [class]="data.data.membership.toLowerCase()">{{data.data.membership}}</span>
+            </div>
+
+            <div *dxTemplate="let data of 'statusTemplate'" class="u-status-cell">
+                <span class="dot" [class]="data.data.status.toLowerCase()"></span>
+                <span>{{data.data.status}}</span>
+            </div>
+
+            <div *dxTemplate="let data of 'actionTemplate'">
+                <dx-button icon="more" stylingMode="text" (onClick)="onActionClick(data.data)"></dx-button>
+            </div>
+        </dx-data-grid>
+
+        <div class="card-footer">
+            <button class="footer-btn">Previous</button>
+            <div class="pages">
+                <span class="page active">1</span>
+                <span class="page">2</span>
+                <span class="page">3</span>
+                <span class="ellipsis">...</span>
+                <span class="page">12,840</span>
+            </div>
+            <button class="footer-btn">Next</button>
+        </div>
+    </div>
+</div>

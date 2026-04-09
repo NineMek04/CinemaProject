@@ -8,6 +8,13 @@ import { MylistComponent } from './page/components/mylist-component/mylist-compo
 import { RegisterComponent } from './page/auth/register-component/register-component';
 import { LoginComponent } from './page/auth/login-component/login-component';
 
+// Admin Sub-components
+import { DashboardOverview } from './page/components/account/admin/components/dashboard/dashboard-overview';
+import { MovieLibrary } from './page/components/account/admin/components/library/movie-library';
+import { UserManagement } from './page/components/account/admin/components/management/user-management';
+import { AdminSettings } from './page/components/account/admin/components/setting/admin-settings';
+import { PerformanceAnalytics } from './page/components/account/admin/components/analytics/performance-analytics';
+
 export const routes: Routes = [
     {
         path: 'home',
@@ -19,7 +26,15 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        component: Admin
+        component: Admin,
+        children: [
+            { path: '', redirectTo: 'overview', pathMatch: 'full' },
+            { path: 'overview', component: DashboardOverview },
+            { path: 'movies', component: MovieLibrary },
+            { path: 'users', component: UserManagement },
+            { path: 'analytics', component: PerformanceAnalytics },
+            { path: 'settings', component: AdminSettings }
+        ]
     },
     {
         path: 'checkout',

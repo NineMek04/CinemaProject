@@ -35,12 +35,12 @@ export class AsideAccount {
 
   // ข้อมูลเมนูด้านซ้าย
   navigationItems = [
-    { id: 1, text: 'Profile', path: '/Profile', icon: 'user' },
-    { id: 2, text: 'Security', path: '/Security', icon: 'preferences' },
-    { id: 3, text: 'Subscription', path: '/Subscription', icon: 'card' },
-    { id: 4, text: 'Notifications', path: '/Notification', icon: 'bell' },
-    { id: 5, text: 'Payment', path: '/Payment', icon: 'money' },
-    { id: 6, text: 'Logout', path: '/Logout', icon: 'runner' }
+    { id: 1, text: 'Profile', path: '/account', icon: 'user' },
+    { id: 2, text: 'Security', path: '/account', icon: 'preferences' },
+    { id: 3, text: 'Subscription', path: '/account', icon: 'card' },
+    { id: 4, text: 'Notifications', path: '/account', icon: 'bell' },
+    { id: 5, text: 'Payment', path: '/checkout', icon: 'money' },
+    { id: 6, text: 'Logout', path: '/home', icon: 'runner' }
   ];
 
   // ข้อมูลตัวอย่างสำหรับ DataGrid
@@ -52,6 +52,12 @@ export class AsideAccount {
   onItemClick(e: any) {
     const selectedItem = e.itemData;
     this.selectedItemId.set(selectedItem.id);
+    
+    // ดำเนินการนำทางไปยัง Path ที่กำหนด
+    if (selectedItem.path) {
+      this.router.navigate([selectedItem.path]);
+    }
+    
     console.log('เปลี่ยนหน้าไปที่:', selectedItem.path);
   }
 }

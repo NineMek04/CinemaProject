@@ -1,0 +1,119 @@
+<div class="library-container">
+    <header class="library-header">
+        <div class="header-main">
+            <h1 class="title">Movie Library</h1>
+            <p class="subtitle">Curate the next generation of cinematic masterpieces. Manage status, regions, and distribution from a central editorial desk.</p>
+        </div>
+        <div class="distribution-status">
+            <div class="tags">
+                <span class="tag">US</span>
+                <span class="tag">EU</span>
+                <span class="tag">AS</span>
+            </div>
+            <span class="label">Global Distribution Active</span>
+        </div>
+    </header>
+
+    <!-- Filters Row -->
+    <div class="filters-row">
+        <div class="filter-group">
+            <label>GENRE</label>
+            <dx-select-box 
+                [items]="genres" 
+                defaultValue="All Categories"
+                stylingMode="filled"
+                class="custom-select">
+            </dx-select-box>
+        </div>
+
+        <div class="filter-group">
+            <label>RELEASE DATE</label>
+            <dx-select-box 
+                [items]="releaseDates" 
+                defaultValue="Coming Soon (2024)"
+                stylingMode="filled"
+                class="custom-select">
+            </dx-select-box>
+        </div>
+
+        <div class="filter-group status-filter">
+            <label>STATUS</label>
+            <div class="status-toggle">
+                <span class="s-tag active">Live</span>
+                <span class="s-tag">Draft</span>
+                <span class="s-tag">Archived</span>
+            </div>
+        </div>
+
+        <div class="selection-box">
+            <div class="selection-info">
+                <span class="label">SELECTED</span>
+                <span class="value">12 Movies</span>
+            </div>
+            <div class="selection-actions">
+                <dx-button icon="trash" stylingMode="text"></dx-button>
+                <dx-button icon="export" stylingMode="text"></dx-button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Grid -->
+    <div class="grid-container">
+        <dx-data-grid
+            [dataSource]="movies()"
+            [showBorders]="false"
+            [rowAlternationEnabled]="false"
+            [hoverStateEnabled]="true"
+            class="custom-library-grid">
+            
+            <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
+            <dxo-paging [pageSize]="10"></dxo-paging>
+
+            <dxi-column dataField="posterPath" caption="MOVIE & TITLE" cellTemplate="movieTemplate" [width]="350"></dxi-column>
+            <dxi-column dataField="genre" caption="GENRE" [width]="150" cellTemplate="genreTemplate"></dxi-column>
+            <dxi-column dataField="releaseYear" caption="YEAR" [width]="100" alignment="center"></dxi-column>
+            <dxi-column dataField="duration" caption="RUNTIME" [width]="120" alignment="center"></dxi-column>
+            <dxi-column dataField="availability" caption="AVAILABILITY" cellTemplate="availTemplate" [width]="150"></dxi-column>
+            <dxi-column dataField="status" caption="STATUS" cellTemplate="statusTemplate" [width]="140"></dxi-column>
+            <dxi-column caption="ACTION" [width]="80" cellTemplate="actionTemplate" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let data of 'movieTemplate'" class="movie-cell">
+                <img [src]="data.data.posterPath" alt="Poster">
+                <div class="movie-info">
+                    <span class="m-title">{{data.data.title}}</span>
+                    <span class="m-director">Dir. {{data.data.director || 'Elena Kostic'}}</span>
+                </div>
+            </div>
+
+            <div *dxTemplate="let data of 'genreTemplate'">
+                <span class="genre-tag">{{data.data.genre}}</span>
+            </div>
+
+            <div *dxTemplate="let data of 'availTemplate'" class="avail-tags">
+                <span class="tag">NA</span>
+                <span class="tag">EU</span>
+                <span class="tag">AS</span>
+            </div>
+
+            <div *dxTemplate="let data of 'statusTemplate'" class="status-cell">
+                <span class="status-indicator" [class]="data.data.status.toLowerCase()"></span>
+                <span class="status-text">{{data.data.status}}</span>
+            </div>
+
+            <div *dxTemplate="let data of 'actionTemplate'">
+                <dx-button icon="more" stylingMode="text" (onClick)="onActionClick(data.data)"></dx-button>
+            </div>
+        </dx-data-grid>
+
+        <div class="grid-footer">
+            <span class="entries-info">Showing 1 - 10 of 482 entries</span>
+            <div class="pagination-mock">
+                <button class="p-btn"><i class="dx-icon-chevronleft"></i></button>
+                <button class="p-btn active">1</button>
+                <button class="p-btn">2</button>
+                <button class="p-btn">3</button>
+                <button class="p-btn"><i class="dx-icon-chevronright"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
