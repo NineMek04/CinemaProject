@@ -26,8 +26,8 @@ import { accountData } from '../../../../data/mock/AccountData/account.data';
     DxButtonModule,
     Users
   ],
-  templateUrl: './tebber-account.html',
-  styleUrl: './tebber-account.scss',
+  templateUrl: './aside-bar.account.html',
+  styleUrl: './aside-bar.account.scss',
 })
 export class AsideAccount {
   private router = inject(Router);

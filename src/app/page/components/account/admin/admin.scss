@@ -11,6 +11,7 @@
   width: 100%;
   background-color: #0d0d0d;
   font-family: 'Inter', sans-serif;
+  color: #fff;
 }
 
 /* Sidebar Styling */
@@ -20,7 +21,7 @@
   border-right: 1px solid #222;
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  padding: 30px 20px; 
   position: sticky;
   top: 0;
   height: 100vh;

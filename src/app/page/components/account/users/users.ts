@@ -27,8 +27,8 @@ export class Users implements OnChanges{
   // Personal Information
   fullName = signal('');
   email = signal('');
-  phone = signal('+1 (555) 234-5678');
-  profileImage = signal('avatar.png');
+  phone = signal('');
+  profileImage = signal('/assets/svg/navbar/avatar-default.svg');
 
   // Viewing Preferences
   autoplayNext = signal(true);
@@ -44,6 +44,7 @@ export class Users implements OnChanges{
       // ดึงค่ามาเซ็ตลงฟอร์ม (จำไว้ว่าข้อมูลชุดนี้ Key เป็นตัวพิมพ์เล็ก name, email)
       this.fullName.set(user.name || '');
       this.email.set(user.email || '');
+      this.phone.set(user.phone || '');
     }
   }
   

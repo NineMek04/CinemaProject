@@ -1,24 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { AdminDashboardData } from '../interfaces/admin-dashboard.interfaces';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of, map, switchMap, forkJoin } from 'rxjs';
+import { AdminDashboardData, MovieUpload } from '../interfaces/admin-dashboard.interfaces';
 import { ADMIN_DASHBOARD_MOCK_DATA } from '../../data/mock/AdminData/admin-dashboard.data';
+import { MovieService } from './movie.service';
+import { Movie } from '../interfaces/movie.interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminDashboardService {
-
-  constructor() { }
+  private movieService = inject(MovieService);
 
   /**
-   * Fetches the complete dashboard data.
-   * In the future, replace 'of()' with 'this.http.get<AdminDashboardData>(url)'
+   * Fetches the complete dashboard data, merging static stats with synchronized movie data.
    */
   getDashboardData(): Observable<AdminDashboardData> {
-    return of(ADMIN_DASHBOARD_MOCK_DATA);
+    return this.movieService.getRecentUploads().pipe(
+      map(movies => {
+        const mappedMovies: MovieUpload[] = movies.map(m => ({
+          title: m.title,
+          genre: m.genre,
+          date: m.uploadedDate,
+          status: m.status,
+          views: m.views,
+          image: m.posterPath
+        }));
+
+        return {
+          ...ADMIN_DASHBOARD_MOCK_DATA,
+          recentUploads: mappedMovies
+        };
+      })
+    );
   }
 
-  // Individual getters for more granular access
   getStats() {
     return of(ADMIN_DASHBOARD_MOCK_DATA.stats);
   }
@@ -31,7 +46,16 @@ export class AdminDashboardService {
     return of(ADMIN_DASHBOARD_MOCK_DATA.systemHealth);
   }
 
-  getRecentUploads() {
-    return of(ADMIN_DASHBOARD_MOCK_DATA.recentUploads);
+  getRecentUploads(): Observable<MovieUpload[]> {
+    return this.movieService.getRecentUploads().pipe(
+      map(movies => movies.map(m => ({
+        title: m.title,
+        genre: m.genre,
+        date: m.uploadedDate,
+        status: m.status,
+        views: m.views,
+        image: m.posterPath
+      })))
+    );
   }
 }

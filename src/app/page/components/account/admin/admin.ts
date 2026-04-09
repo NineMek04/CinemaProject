@@ -15,6 +15,9 @@ import {
   SystemHealthMetric, 
   MovieUpload 
 } from '../../../../core/interfaces/admin-dashboard.interfaces';
+import { GlobalConfigService } from '../../../../core/services/global-config.service';
+import { GlobalConfig } from '../../../../core/interfaces/global-config.interfaces';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -26,13 +29,18 @@ import {
     DxButtonModule,
     DxTextBoxModule,
     DxProgressBarModule,
-    DxTemplateModule
+    DxTemplateModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })
 export class Admin implements OnInit {
   private dashboardService = inject(AdminDashboardService);
+  private configService = inject(GlobalConfigService);
+
+  config?: GlobalConfig;
 
   // Statistics Data
   stats: StatCard[] = [];
@@ -48,6 +56,13 @@ export class Admin implements OnInit {
 
   ngOnInit(): void {
     this.loadDashboardData();
+    this.loadGlobalConfig();
+  }
+
+  loadGlobalConfig(): void {
+    this.configService.getConfig().subscribe((data: GlobalConfig) => {
+      this.config = data;
+    });
   }
 
   loadDashboardData(): void {

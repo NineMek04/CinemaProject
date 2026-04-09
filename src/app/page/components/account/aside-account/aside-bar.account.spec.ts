@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TebberAccount } from './tebber-account';
+import { AsideAccount } from './aside-bar.account';
 
-describe('TebberAccount', () => {
-  let component: TebberAccount;
-  let fixture: ComponentFixture<TebberAccount>;
+describe('AsideAccount', () => {
+  let component: AsideAccount;
+  let fixture: ComponentFixture<AsideAccount>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TebberAccount]
+      imports: [AsideAccount]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TebberAccount);
+    fixture = TestBed.createComponent(AsideAccount);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

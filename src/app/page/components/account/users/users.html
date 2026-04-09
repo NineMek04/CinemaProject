@@ -55,8 +55,8 @@
             </div>
             <div class="form-group">
                 <label class="block text-gray-400 text-xs font-bold uppercase mb-2">Phone Number</label>
-                <dx-text-box [(value)]="phone" placeholder="Enter your phone" stylingMode="filled" mode="tel"
-                    [inputAttr]="{ class: 'custom-input' }">
+                <dx-text-box [(value)]="currentUser.phone" placeholder="Enter your phone" stylingMode="filled"
+                    mode="tel" [inputAttr]="{ class: 'custom-input' }">
                     <dxi-button name="tel" location="before"
                         [options]="{ icon: 'tel', stylingMode: 'text', disabled: true }">
                     </dxi-button>

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './page/home/home-component/home-component';
-import { AsideAccount } from './page/components/account/aside-account/tebber-account';
+import { AsideAccount } from './page/components/account/aside-account/aside-bar.account';
 import { Admin } from './page/components/account/admin/admin';
 import { Payment } from './page/components/payment/payment';
 import { MovieComponent } from './page/components/movie-component/movie-component';
@@ -14,7 +14,7 @@ export const routes: Routes = [
         component: HomeComponent,
     },
     {
-        path: 'tebber-account',
+        path: 'account',
         component: AsideAccount
     },
     {
