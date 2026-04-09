@@ -2,7 +2,7 @@
   
   <div class="max-w-7xl mx-auto space-y-16">
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <div *ngIf="featuredMovie" class="grid grid-cols-1 lg:grid-cols-3 gap-12">
       
       <div class="lg:col-span-2">
         <div class="flex items-center gap-4 mb-6">
@@ -10,7 +10,7 @@
           <h2 class="text-2xl font-bold tracking-wide">Synopsis</h2>
         </div>
         <p class="text-slate-400 text-lg leading-relaxed font-light">
-          Director Marcus Thorne brings a visceral, neon-soaked vision of the future. Follow Jax as he navigates the high-stakes underworld of Neo-Veridia. When a mysterious artifact falls into his hands, the hunter becomes the hunted in a race against time and a corrupt mega-corporation.
+          {{featuredMovie.description}}
         </p>
       </div>
 
@@ -22,19 +22,18 @@
             <p class="text-sm font-semibold">Marcus Thorne</p>
           </div>
           <div>
-            <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Writers</p>
-            <p class="text-sm font-semibold">Lila Vance, David Goyer</p>
+            <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Year</p>
+            <p class="text-sm font-semibold">{{featuredMovie.year}}</p>
           </div>
           <div>
-            <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Studio</p>
-            <p class="text-sm font-semibold">Aether Pictures</p>
+            <p class="text-xs text-slate-500 tracking-widest uppercase mb-1">Genre</p>
+            <p class="text-sm font-semibold">{{featuredMovie.genre}}</p>
           </div>
           <div>
-            <p class="text-xs text-slate-500 tracking-widest uppercase mb-3">Languages</p>
+            <p class="text-xs text-slate-500 tracking-widest uppercase mb-3">Rating</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">English (Original)</span>
-              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">Spanish</span>
-              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">Japanese</span>
+              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{featuredMovie.ageRating}}</span>
+              <span class="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300">{{featuredMovie.rating}} / 10</span>
             </div>
           </div>
         </div>
@@ -128,7 +127,7 @@
       <div class="flex items-center justify-between mb-8">
         <div class="flex items-center gap-4">
           <div class="w-6 h-1.5 bg-red-500 rounded-full"></div>
-          <h2 class="text-2xl font-bold tracking-wide">Similar Movies</h2>
+          <h2 class="text-2xl font-bold tracking-wide">More Movies</h2>
         </div>
         <div class="flex gap-2">
           <button class="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center hover:bg-slate-800 hover:border-slate-500 transition-colors">
@@ -142,25 +141,16 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         
-        <div class="group cursor-pointer">
+        <div *ngFor="let movie of movies" class="group cursor-pointer">
           <div class="relative rounded-xl overflow-hidden aspect-[2/3] mb-3">
-            <img src="assets/image/movie1.jpg" alt="Cyber Circuit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-red-500 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-500/30">8.2</div>
+            <img [src]="movie.posterPath" [alt]="movie.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-red-500 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-500/30">{{movie.rating}}</div>
           </div>
-          <h3 class="font-bold text-sm text-slate-200 truncate">Cyber Circuit</h3>
-          <p class="text-[11px] text-slate-500 mt-0.5">2023 • Sci-Fi</p>
+          <h3 class="font-bold text-sm text-slate-200 truncate">{{movie.title}}</h3>
+          <p class="text-[11px] text-slate-500 mt-0.5">{{movie.year}} • {{movie.genre}}</p>
         </div>
 
-        <div class="group cursor-pointer">
-          <div class="relative rounded-xl overflow-hidden aspect-[2/3] mb-3">
-            <img src="assets/image/movie2.jpg" alt="Void Walker" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-red-500 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-500/30">7.5</div>
-          </div>
-          <h3 class="font-bold text-sm text-slate-200 truncate">Void Walker</h3>
-          <p class="text-[11px] text-slate-500 mt-0.5">2022 • Action</p>
-        </div>
-
-        </div>
+      </div>
     </section>
 
   </div>
