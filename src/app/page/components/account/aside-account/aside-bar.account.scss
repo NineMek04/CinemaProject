@@ -12,7 +12,7 @@ dx-drawer {
 }
 
 .drawer-menu-container {
-    width: 320px;
+    width: 270px;
     height: 100%;
     background-color: #1a1a1a;
     color: #ADAAAA;
@@ -23,28 +23,28 @@ dx-drawer {
 }
 
 /* Sidebar Header */
-.sidebar-header {
-    padding: 20px 0 0 20px;
+// .sidebar-header {
+//     padding: 20px 0 0 20px;
     
-    ::ng-deep .dx-button.back-btn {
-        color: #8E8E8E !important;
-        border-radius: 50% !important;
-        width: 45px !important;
-        height: 45px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+//     ::ng-deep .dx-button.back-btn {
+//         color: #8E8E8E !important;
+//         border-radius: 50% !important;
+//         width: 45px !important;
+//         height: 45px !important;
+//         display: flex !important;
+//         align-items: center !important;
+//         justify-content: center !important;
         
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            color: #ffffff !important;
-        }
+//         &:hover {
+//             background-color: rgba(255, 255, 255, 0.05) !important;
+//             color: #ffffff !important;
+//         }
 
-        .dx-icon {
-            font-size: 24px !important;
-        }
-    }
-}
+//         .dx-icon {
+//             font-size: 24px !important;
+//         }
+//     }
+// }
 
 /* Profile Section */
 .profile-header {
@@ -75,7 +75,7 @@ dx-drawer {
 
 .profile-name {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 600;
     margin: 0;
 }
@@ -143,7 +143,7 @@ dx-drawer {
     position: relative;
 
     i {
-        font-size: 22px;
+        font-size: 15px;
         color: #8E8E8E;
     }
 
