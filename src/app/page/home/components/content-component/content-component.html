@@ -144,7 +144,7 @@
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         
         @for (movie of movies(); track movie.id) {
-        <div class="group cursor-pointer">
+        <div [routerLink]="['/movie', createSlug(movie.title)]" class="group cursor-pointer">
           <div class="relative rounded-xl overflow-hidden aspect-[2/3] mb-3">
             <img [src]="movie.posterPath" [alt]="movie.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-red-500 text-[10px] font-black px-1.5 py-0.5 rounded border border-red-500/30">{{movie.rating}}</div>

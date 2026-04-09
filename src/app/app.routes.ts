@@ -7,6 +7,7 @@ import { MovieComponent } from './page/components/movie-component/movie-componen
 import { MylistComponent } from './page/components/mylist-component/mylist-component';
 import { RegisterComponent } from './page/auth/register-component/register-component';
 import { LoginComponent } from './page/auth/login-component/login-component';
+import { MovieDetailsComponent } from './page/home/components/movie-details-component/movie-details-component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,8 @@ export const routes: Routes = [
     },
     {path: 'movies', component: MovieComponent},
     {path: 'mylist', component: MylistComponent},
+
+    { path: 'movie/:slug', component: MovieDetailsComponent },
 
     { path: '**', redirectTo: 'home' }
 ];
