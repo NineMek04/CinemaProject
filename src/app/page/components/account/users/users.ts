@@ -28,7 +28,7 @@ export class Users implements OnChanges{
   fullName = signal('');
   email = signal('');
   phone = signal('+1 (555) 234-5678');
-  profileImage = signal('avatar.png');
+  profileImage = signal('/assets/svg/navbar/avatar-default.svg');
 
   // Viewing Preferences
   autoplayNext = signal(true);
