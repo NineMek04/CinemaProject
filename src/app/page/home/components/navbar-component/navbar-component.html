@@ -24,7 +24,7 @@
         
         <div class="flex items-center space-x-4 w-full max-w-md">
              <input type="text" placeholder="Search..." class="search-input px-8 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 w-full">
-            <div (click)="showLoginPopup = true" class="bg-gradient-to-tr from-red-600 to-red-400 px-2 py-1  rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-colors duration-300">
+            <div (click)="openPopup('login')" class="bg-gradient-to-tr from-red-600 to-red-400 px-2 py-1  rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-colors duration-300">
                 <h3 class="text-white font-medium">SignIn</h3>
             </div>
             <div routerLink="/tebber-account" class="profile-avatar-container bg-slate-950 rounded-full w-20 h-15 overflow-hidden cursor-pointer">
@@ -34,15 +34,24 @@
 </section>
 
 
-<div *ngIf="showLoginPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+
+<div *ngIf="showLoginPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity h-auto p-4">
   
-  <div class="relative w-full max-w-md animate-fade-in-up">
-    
+  <div class="relative  max-w-md animate-fade-in-up">
     <button (click)="showLoginPopup = false" class="absolute top-4 right-4 z-50 text-slate-500 hover:text-white transition-colors p-2 bg-slate-900/50 rounded-full">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
 
-    <app-login-component></app-login-component>
+    <app-login-component 
+      *ngIf="authMode === 'login'" 
+      (switchToRegister)="authMode = 'register'"
+      (closeModal)="showLoginPopup = false">
+    </app-login-component>
+
+    <app-register-component 
+      *ngIf="authMode === 'register'" 
+      (switchToLogin)="authMode = 'login'">
+    </app-register-component>
 
   </div>
 

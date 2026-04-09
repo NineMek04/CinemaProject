@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#0a0a0c] flex items-center justify-center p-4 font-sans text-slate-300">
+<div class=" bg-[#0a0a0c] flex items-center justify-center p-4 font-sans text-slate-300">
   <div class="w-full max-w-md bg-[#111216] p-8 md:p-10 rounded-2xl shadow-2xl border border-slate-800/60 relative overflow-hidden">
     
     <div class="text-center mb-8">
@@ -23,7 +23,8 @@
       </div>
 
       <div class="pt-4">
-        <button type="submit" 
+        <button 
+        type="submit" 
                 class="w-full bg-[#ff6b6b] hover:bg-[#ff5252] text-slate-900 text-sm font-bold uppercase tracking-widest py-3.5 rounded-lg transition-all shadow-[0_0_20px_rgba(255,107,107,0.25)] hover:shadow-[0_0_25px_rgba(255,107,107,0.4)]">
           Sign In
         </button>
@@ -32,14 +33,9 @@
 
     <div class="mt-8 text-center text-xs text-slate-500">
       New to Aura Cinema? 
-      <a routerLink="/auth/register" class="text-white font-bold hover:text-[#ff6b6b] transition-colors cursor-pointer">Sign up now</a>
+      <a (click)="onGoToRegister($event)" class="text-white font-bold hover:text-[#ff6b6b] transition-colors cursor-pointer">Sign up now</a>
     </div>
 
-    <div class="mt-6">
-      <button type="button" class="w-full bg-[#ff6b6b] text-slate-900 text-sm font-bold uppercase tracking-widest py-3.5 rounded-full transition-all hover:bg-[#ff5252]">
-        Google
-      </button>
-    </div>
 
   </div>
 </div>

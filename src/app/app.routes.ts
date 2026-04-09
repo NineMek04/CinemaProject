@@ -5,6 +5,8 @@ import { Admin } from './page/components/account/admin/admin';
 import { Payment } from './page/components/payment/payment';
 import { MovieComponent } from './page/components/movie-component/movie-component';
 import { MylistComponent } from './page/components/mylist-component/mylist-component';
+import { RegisterComponent } from './page/auth/register-component/register-component';
+import { LoginComponent } from './page/auth/login-component/login-component';
 
 export const routes: Routes = [
     {
@@ -25,5 +27,6 @@ export const routes: Routes = [
     },
     {path: 'movies', component: MovieComponent},
     {path: 'mylist', component: MylistComponent},
+
     { path: '**', redirectTo: 'home' }
 ];

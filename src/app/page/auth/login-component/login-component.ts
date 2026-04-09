@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output , EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router'; // นำเข้า Router และ RouterLink
+import { Router,  } from '@angular/router'; // นำเข้า Router และ RouterLink
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-login-component',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // ใส่ RouterLink ด้วย
+  imports: [CommonModule, ReactiveFormsModule,], // ใส่ RouterLink ด้วย
   templateUrl: './login-component.html',
   styleUrls: ['./login-component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
+
+
+  @Output() closeModal = new EventEmitter<void>();
+  @Output() switchToRegister = new EventEmitter<void>(); // สร้าง EventEmitter สำหรับส่งสัญญาณไปยังพ่อแม่
+
+  private toast = inject(ToastService); // Inject ToastService มาใช้ใน Component นี้
   constructor(private fb: FormBuilder, private router: Router) {} // Inject Router
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -24,13 +32,21 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin() {
     if (this.loginForm.valid) {
-      console.log('✅ Login Data:', this.loginForm.value);
-      // TODO: ส่งข้อมูลไป API
-      // สมมติว่า Login สำเร็จ ให้เด้งไปหน้าแรก
-      // this.router.navigate(['/home']); 
+      this.toast.success('Login successful!'); // แสดง Toast แจ้งความสำเร็จ
+      this.closeModal.emit(); // ปิด Popup
+
     } else {
       this.loginForm.markAllAsTouched();
-      console.error('❌ Login Form is invalid');
+      this.toast.error('Please fill in all required fields correctly.'); // แสดง Toast แจ้งความผิดพลาด
     }
+  }
+
+
+
+
+  // 🌟 3. สร้างฟังก์ชันกดปุ่มเพื่อส่งสัญญาณ
+  onGoToRegister(event: Event) {
+    event.preventDefault(); // กันเว็บกระตุก
+    this.switchToRegister.emit(); // ยิงสัญญาณ!
   }
 }

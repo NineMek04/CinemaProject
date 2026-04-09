@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#0a0a0c] flex items-center justify-center p-4 font-sans text-slate-300">
+<div class=" bg-[#0a0a0c] flex items-center justify-center p-4 font-sans text-slate-300">
   <div class="w-full max-w-md bg-[#111216] p-8 md:p-10 rounded-2xl shadow-2xl border border-slate-800/60 relative overflow-hidden">
     
     <div class="text-center mb-8">
@@ -36,7 +36,7 @@
 
     <div class="mt-8 mb-10 text-center text-xs text-slate-500">
       Already have an account? 
-      <a routerLink="/auth/login" class="text-white font-bold hover:text-[#ff6b6b] transition-colors cursor-pointer">Sign in</a>
+      <a (click)="onGoToLogin($event)" class="text-white font-bold hover:text-[#ff6b6b] transition-colors cursor-pointer">Sign in</a>
     </div>
 
     <div class="border-t border-slate-800/80 pt-6 flex justify-between text-center px-4">
