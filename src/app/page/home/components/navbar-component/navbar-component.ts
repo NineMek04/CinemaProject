@@ -14,6 +14,9 @@ import { GlobalConfig } from '../../../../core/interfaces/global-config.interfac
 })
 export class NavbarComponent implements OnInit {
     private configService = inject(GlobalConfigService);
+
+    isMobileMenuOpen: boolean = false;
+  isMobileSearchOpen: boolean = false;
     
     config = signal<GlobalConfig | undefined>(undefined);
     showLoginPopup = signal(false);
@@ -33,4 +36,19 @@ export class NavbarComponent implements OnInit {
             this.config.set(data);
         });
     }
+
+
+
+    toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    // ถ้าเปิดเมนูอยู่ ให้ปิดช่องค้นหา
+    if (this.isMobileMenuOpen) this.isMobileSearchOpen = false; 
+  }
+
+  // ฟังก์ชันสำหรับเปิด/ปิดช่องค้นหา
+  toggleMobileSearch() {
+    this.isMobileSearchOpen = !this.isMobileSearchOpen;
+    // ถ้าเปิดช่องค้นหาอยู่ ให้ปิดเมนู
+    if (this.isMobileSearchOpen) this.isMobileMenuOpen = false;
+  }
 }
