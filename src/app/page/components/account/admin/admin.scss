@@ -142,9 +142,10 @@
   }
 
   ::ng-deep .new-release-btn .dx-button-content {
-    justify-content: flex-start;
+    justify-content: center;
     gap: 12px;
-    padding: 0 28px;
+    padding: 12px;
+    background: linear-gradient(180deg, #fc9684 0%, #ff8b7d 100%);
   }
 
   ::ng-deep .new-release-btn .dx-icon {
@@ -174,6 +175,7 @@
       gap: 10px;
       margin-bottom: 15px;
       font-weight: 800;
+
       span:first-child {
         font-size: 20px;
         color: #fffaf8;
@@ -189,10 +191,10 @@
       }
     }
 
-    ::ng-deep .manage-btn .dx-button {
+    ::ng-deep .manage-btn .dx-button-content {
       width: 100%;
       min-height: 42px;
-      background: rgba(255, 255, 255, 0.03) !important;
+      background: rgba(255, 255, 255, 0) !important;
       color: #fff1ee !important;
       border: 1px solid rgba(255, 255, 255, 0.07) !important;
       border-radius: 14px !important;
@@ -200,9 +202,13 @@
       font-weight: 800 !important;
     }
 
-    ::ng-deep .manage-btn .dx-button:hover {
+    ::ng-deep .manage-btn .dx-button-content:hover {
       background: rgba(255, 255, 255, 0.06) !important;
     }
+
+    // ::ng-deep .manage-btn .dx-button-content {
+    //   color: #fff1ee !important;
+    // }
   }
 }
 
@@ -356,7 +362,7 @@
   }
 }
 
-router-outlet + * {
+router-outlet+* {
   display: block;
   width: 100%;
   flex-grow: 1;
