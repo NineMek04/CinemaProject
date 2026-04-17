@@ -84,6 +84,7 @@
         flex-direction: column;
         gap: 10px;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        box-shadow: #888 0 0 10px;
 
         .u-label {
             font-size: 12px;
@@ -113,6 +114,7 @@
     border-radius: 30px;
     overflow: hidden;
     box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+    box-shadow: #888 0 0 10px;
 
     .card-filters {
         padding: 30px 32px;
@@ -171,7 +173,7 @@
         letter-spacing: 0.16em;
     }
 
-    .dx-header-row > td {
+    .dx-header-row>td {
         padding-top: 18px !important;
         padding-bottom: 18px !important;
     }
@@ -184,7 +186,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
             height: 92px;
 
-            > td {
+            >td {
                 padding-top: 18px !important;
                 padding-bottom: 18px !important;
                 color: #dad4d5 !important;
@@ -193,7 +195,7 @@
             }
         }
 
-        .dx-row:hover > td {
+        .dx-row:hover>td {
             background: rgba(255, 255, 255, 0.015) !important;
         }
     }

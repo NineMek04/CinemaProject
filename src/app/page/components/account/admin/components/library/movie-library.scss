@@ -62,6 +62,7 @@
                 padding: 0;
                 border-radius: 999px;
                 border: 1px solid rgba(255, 156, 146, 0.12);
+                box-shadow: #888 0 0 10px;
             }
         }
 
@@ -78,7 +79,7 @@
     grid-template-columns: repeat(3, minmax(210px, 1fr)) minmax(250px, 320px);
     gap: 20px;
     align-items: flex-end;
-    margin-bottom: 34px;
+    margin-bottom: 16px;
 
     .filter-group {
         display: flex;
@@ -87,40 +88,44 @@
         position: relative;
 
         label {
-            position: absolute;
-            top: 22px;
-            left: 20px;
+            top: 0px;
             z-index: 1;
             font-size: 11px;
             font-weight: 800;
             color: #d29da1;
             letter-spacing: 0.18em;
+
         }
+    }
 
-        ::ng-deep .dx-selectbox.custom-select {
-            .dx-texteditor-container {
-                background: linear-gradient(180deg, #560d1a 0%, #4a0a16 100%) !important;
-                border: 1px solid var(--library-border) !important;
-                border-radius: 20px !important;
-                height: 112px !important;
-                padding: 32px 18px 18px !important;
+    .select-box-group {
+        padding: 8px;
 
-                .dx-dropdowneditor-icon,
-                .dx-icon {
-                    color: #8ea0ba !important;
+        .custom-select {
+            ::ng-deep {
+
+                .dx-dropdowneditor-input-wrapper {
+                    background: linear-gradient(180deg, #560d1a 0%, #4a0a16 100%);
+                    border-radius: 20px;
+                    border: 1px solid var(--library-border);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    box-shadow: #888 0 0 10px;
                 }
-            }
 
-            .dx-texteditor-input {
-                color: #fff6f3 !important;
-                font-size: 18px;
-                font-weight: 700;
-                padding-left: 0 !important;
-                padding-right: 14px !important;
-                padding-top: 26px !important;
+                .dx-dropdowneditor-icon {
+                    color: #fff8f4;
+                }
+
+                .dx-texteditor-input {
+                    color: #fff8f4c1;
+                }
+
             }
         }
     }
+
 
     .status-filter {
         label {
@@ -139,6 +144,7 @@
             align-items: center;
             padding: 42px 18px 20px;
             gap: 10px;
+            box-shadow: #888 0 0 10px;
 
             .s-tag {
                 min-width: 72px;
@@ -172,6 +178,7 @@
         justify-content: space-between;
         padding: 18px 18px 18px 22px;
         gap: 16px;
+        box-shadow: #888 0 0 10px;
 
         .selection-info {
             display: flex;
@@ -213,7 +220,7 @@
     border-radius: 28px;
     border: 1px solid rgba(255, 149, 138, 0.09);
     overflow: hidden;
-    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+    box-shadow: #888 0 0 10px;
 
     ::ng-deep .custom-library-grid {
         background: transparent !important;
@@ -227,7 +234,8 @@
             letter-spacing: 0.16em;
         }
 
-        .dx-header-row > td {
+
+        .dx-header-row>td {
             padding-top: 18px !important;
             padding-bottom: 18px !important;
         }
@@ -239,7 +247,8 @@
                 background: transparent !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 
-                > td {
+                // ค่าเริ่มต้นของเซลล์
+                >td {
                     padding-top: 22px !important;
                     padding-bottom: 22px !important;
                     color: #f8dbda !important;
@@ -247,30 +256,31 @@
                     vertical-align: middle !important;
                 }
 
-                &.dx-selection {
-                    background: rgba(255, 170, 160, 0.05) !important;
-                }
-
-                &.dx-state-hover {
-                background-color: rgba(255, 156, 146, 0.08) !important; // เปลี่ยนเป็นสีแดงจางๆ ตามธีม
-                color: #fff !important; // บังคับสีตัวอักษรให้สว่าง
-                cursor: pointer;
-
-                // คุมสีตัวอักษรของแต่ละ Cell ในแถวที่ Hover
-                > td {
+                // 🟢 ตอนเอาเมาส์ไปชี้ (Hover) - เจาะลึกไปที่ > td
+                &.dx-state-hover>td,
+                &.dx-state-hover>tr>td {
+                    background-color: rgba(255, 156, 146, 0.08) !important; // สีแดงจางๆ
                     color: #fff !important;
+                    cursor: pointer;
                 }
 
-                // ถ้ามี Tag หรือปุ่มภายในการ์ด แล้วอยากให้เปลี่ยนสีด้วย
-                .genre-tag {
+                // เปลี่ยนสีปุ่ม/Tag ด้านในตอน Hover ด้วย
+                &.dx-state-hover .genre-tag {
                     background: rgba(255, 183, 182, 0.15) !important;
                 }
-            }
-            
-            // 🌟 แถม: ถ้าต้องการเปลี่ยนสีตอน "คลิกเลือก" (Selected) ให้ไม่เป็นสีขาว
-            &.dx-selection {
-                background-color: rgba(255, 170, 160, 0.12) !important;
-            }
+
+                // 🌟 ตอนคลิกเลือก (Selected) - เจาะลึกไปที่ > td
+                &.dx-selection>td,
+                &.dx-selection>tr>td {
+                    background-color: rgba(255, 156, 146, 0.08) !important; // สว่างขึ้นตอนเลือก
+                    color: #ffffff !important;
+                }
+
+                // ✨ ตอนที่ 'โดนคลิกเลือกอยู่' แล้วเอา 'เมาส์ไปชี้ซ้ำ'
+                &.dx-selection.dx-state-hover>td,
+                &.dx-selection.dx-state-hover>tr>td {
+                    background-color: rgba(255, 170, 160, 0.22) !important; // สีเข้มขึ้นอีกนิดนึง
+                }
             }
         }
 
@@ -426,6 +436,48 @@
                     box-shadow: 0 12px 26px rgba(255, 154, 143, 0.28);
                 }
             }
+        }
+    }
+}
+
+/* ==========================================================================
+   ส่วนปรับแต่ง Dropdown Popup (เจาะจงเฉพาะคลาส maroon-theme-dropdown)
+   ========================================================================== */
+::ng-deep .maroon-theme-dropdown {
+
+    /* 1. เปลี่ยนพื้นหลังสีขาว ให้เป็นสีแดงเข้ม (Maroon) ตามธีม */
+    .dx-popup-content {
+        background: #c79091 !important;
+        border: 1px solid rgba(255, 148, 138, 0.15) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* 2. ปรับสีตัวอักษรในรายการให้เข้ากับพื้นหลังเข้ม */
+    .dx-list-item {
+        color: #d79d9f !important;
+        /* สีชมพูหม่น สำหรับข้อความปกติ */
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(180deg, #560d1a 0%, #4a0a16 100%) !important;
+
+        .dx-list-item-content {
+            padding: 12px 18px !important;
+        }
+
+        /* 🟢 3. ตอนเอาเมาส์ไปชี้ (Hover) */
+        &.dx-state-hover {
+            background-color: rgba(255, 156, 146, 0.1) !important;
+            /* สีแดงจางๆ */
+            color: #fff8f5 !important;
+            /* เปลี่ยนข้อความเป็นสีขาวสว่าง */
+        }
+
+        /* 🌟 4. ตอนที่ตัวเลือกนั้นถูกเลือกอยู่ (Selected) */
+        &.dx-list-item-selected {
+            background-color: rgba(255, 137, 119, 0.15) !important;
+            color: #ff8c7f !important;
+            /* สีข้อความตอนเลือกให้เด่นขึ้น */
+            font-weight: 800 !important;
         }
     }
 }

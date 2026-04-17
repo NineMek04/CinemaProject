@@ -17,16 +17,17 @@
 
     <!-- Filters Row -->
     <div class="filters-row">
-        <div class="filter-group">
+        <div class="filter-group select-box-group">
             <label>GENRE</label>
-            <dx-select-box [items]="genres" defaultValue="All Categories" stylingMode="filled" class="custom-select">
+            <dx-select-box [items]="genres" defaultValue="All Categories" stylingMode="filled" class="custom-select"
+                [dropDownOptions]="{ wrapperAttr: { class: 'maroon-theme-dropdown' } }">
             </dx-select-box>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group select-box-group">
             <label>RELEASE DATE</label>
             <dx-select-box [items]="releaseDates" defaultValue="Coming Soon (2024)" stylingMode="filled"
-                class="custom-select">
+                class="custom-select" [dropDownOptions]="{ wrapperAttr: { class: 'maroon-theme-dropdown' } }">
             </dx-select-box>
         </div>
 
