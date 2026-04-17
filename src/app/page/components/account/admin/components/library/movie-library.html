@@ -2,7 +2,8 @@
     <header class="library-header">
         <div class="header-main">
             <h1 class="title">Movie Library</h1>
-            <p class="subtitle">Curate the next generation of cinematic masterpieces. Manage status, regions, and distribution from a central editorial desk.</p>
+            <p class="subtitle">Curate the next generation of cinematic masterpieces. Manage status, regions, and
+                distribution from a central editorial desk.</p>
         </div>
         <div class="distribution-status">
             <div class="tags">
@@ -18,20 +19,13 @@
     <div class="filters-row">
         <div class="filter-group">
             <label>GENRE</label>
-            <dx-select-box 
-                [items]="genres" 
-                defaultValue="All Categories"
-                stylingMode="filled"
-                class="custom-select">
+            <dx-select-box [items]="genres" defaultValue="All Categories" stylingMode="filled" class="custom-select">
             </dx-select-box>
         </div>
 
         <div class="filter-group">
             <label>RELEASE DATE</label>
-            <dx-select-box 
-                [items]="releaseDates" 
-                defaultValue="Coming Soon (2024)"
-                stylingMode="filled"
+            <dx-select-box [items]="releaseDates" defaultValue="Coming Soon (2024)" stylingMode="filled"
                 class="custom-select">
             </dx-select-box>
         </div>
@@ -59,21 +53,19 @@
 
     <!-- Data Grid -->
     <div class="grid-container">
-        <dx-data-grid
-            [dataSource]="movies()"
-            [showBorders]="false"
-            [rowAlternationEnabled]="false"
-            [hoverStateEnabled]="true"
-            class="custom-library-grid">
-            
+        <dx-data-grid [dataSource]="movies()" [showBorders]="false" [rowAlternationEnabled]="false"
+            [hoverStateEnabled]="true" class="custom-library-grid">
+
             <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
             <dxo-paging [pageSize]="10"></dxo-paging>
 
-            <dxi-column dataField="posterPath" caption="MOVIE & TITLE" cellTemplate="movieTemplate" [width]="350"></dxi-column>
+            <dxi-column dataField="posterPath" caption="MOVIE & TITLE" cellTemplate="movieTemplate"
+                [width]="350"></dxi-column>
             <dxi-column dataField="genre" caption="GENRE" [width]="150" cellTemplate="genreTemplate"></dxi-column>
             <dxi-column dataField="releaseYear" caption="YEAR" [width]="100" alignment="center"></dxi-column>
             <dxi-column dataField="duration" caption="RUNTIME" [width]="120" alignment="center"></dxi-column>
-            <dxi-column dataField="availability" caption="AVAILABILITY" cellTemplate="availTemplate" [width]="150"></dxi-column>
+            <dxi-column dataField="availability" caption="AVAILABILITY" cellTemplate="availTemplate"
+                [width]="150"></dxi-column>
             <dxi-column dataField="status" caption="STATUS" cellTemplate="statusTemplate" [width]="140"></dxi-column>
             <dxi-column caption="ACTION" [width]="80" cellTemplate="actionTemplate" alignment="center"></dxi-column>
 

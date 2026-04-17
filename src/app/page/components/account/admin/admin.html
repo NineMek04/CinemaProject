@@ -15,20 +15,14 @@
 
         <nav class="nav-links">
             @for (item of adminNavItems; track item.route) {
-            <a [routerLink]="item.route" 
-               routerLinkActive="active" 
-               class="nav-item">
+            <a [routerLink]="item.route" routerLinkActive="active" class="nav-item">
                 <i [class]="'dx-icon-' + item.icon"></i> {{item.label}}
             </a>
             }
         </nav>
 
         <div class="sidebar-footer">
-            <dx-button 
-                icon="plus" 
-                text="New Release" 
-                stylingMode="contained" 
-                class="new-release-btn">
+            <dx-button icon="plus" text="New Release" stylingMode="contained" class="new-release-btn">
             </dx-button>
 
             <div class="license-card">

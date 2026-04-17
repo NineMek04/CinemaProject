@@ -2,9 +2,10 @@
     <header class="users-header">
         <div class="header-main">
             <h1 class="title">Users</h1>
-            <p class="subtitle">Manage your cinematic community. Review membership tiers, account statuses, and viewer engagement across the global network.</p>
+            <p class="subtitle">Manage your cinematic community. Review membership tiers, account statuses, and viewer
+                engagement across the global network.</p>
         </div>
-        
+
         <div class="header-actions">
             <dx-button icon="export" text="Export CSV" stylingMode="text" class="export-btn"></dx-button>
             <dx-button icon="plus" text="Add User" stylingMode="contained" class="add-user-btn"></dx-button>
@@ -26,35 +27,29 @@
     <div class="users-card">
         <div class="card-filters">
             <div class="filters-left">
-                <dx-select-box 
-                    [items]="['All Membership Plans', 'Premium', 'Enterprise', 'Free']" 
-                    defaultValue="All Membership Plans"
-                    stylingMode="filled"
-                    class="mini-select">
-                    <dxi-button name="today" location="before" [options]="{ icon: 'filter', stylingMode: 'text' }"></dxi-button>
+                <dx-select-box [items]="['All Membership Plans', 'Premium', 'Enterprise', 'Free']"
+                    defaultValue="All Membership Plans" stylingMode="filled" class="mini-select">
+                    <dxi-button name="today" location="before"
+                        [options]="{ icon: 'filter', stylingMode: 'text' }"></dxi-button>
                 </dx-select-box>
 
-                <dx-select-box 
-                    [items]="['All Statuses', 'Active', 'Suspended', 'Pending']" 
-                    defaultValue="All Statuses"
-                    stylingMode="filled"
-                    class="mini-select">
-                    <dxi-button name="today" location="before" [options]="{ icon: 'check', stylingMode: 'text' }"></dxi-button>
+                <dx-select-box [items]="['All Statuses', 'Active', 'Suspended', 'Pending']" defaultValue="All Statuses"
+                    stylingMode="filled" class="mini-select">
+                    <dxi-button name="today" location="before"
+                        [options]="{ icon: 'check', stylingMode: 'text' }"></dxi-button>
                 </dx-select-box>
             </div>
             <span class="count-text">Showing 1-10 of 128,402 cinematic profiles</span>
         </div>
 
-        <dx-data-grid
-            [dataSource]="users()"
-            [showBorders]="false"
-            [rowAlternationEnabled]="false"
-            class="users-grid">
-            
-            <dxi-column dataField="name" caption="USER & IDENTITY" cellTemplate="userTemplate" [width]="300"></dxi-column>
+        <dx-data-grid [dataSource]="users()" [showBorders]="false" [rowAlternationEnabled]="false" class="users-grid">
+
+            <dxi-column dataField="name" caption="USER & IDENTITY" cellTemplate="userTemplate"
+                [width]="300"></dxi-column>
             <dxi-column dataField="joinDate" caption="JOIN DATE" [width]="180"></dxi-column>
             <dxi-column dataField="lastActive" caption="LAST ACTIVE" [width]="180"></dxi-column>
-            <dxi-column dataField="membership" caption="MEMBERSHIP" cellTemplate="memberTemplate" [width]="150"></dxi-column>
+            <dxi-column dataField="membership" caption="MEMBERSHIP" cellTemplate="memberTemplate"
+                [width]="150"></dxi-column>
             <dxi-column dataField="status" caption="STATUS" cellTemplate="statusTemplate" [width]="150"></dxi-column>
             <dxi-column caption="ACTIONS" cellTemplate="actionTemplate" alignment="center"></dxi-column>
 

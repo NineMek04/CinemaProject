@@ -83,11 +83,13 @@
                     <div class="input-group api-key-input">
                         <label>LIVE API SECRET</label>
                         <dx-text-box value="sk_live_51P8Xxxxxxxxx" mode="password" stylingMode="filled">
-                            <dxi-button name="today" location="after" [options]="{ icon: 'eyeopen', stylingMode: 'text' }"></dxi-button>
+                            <dxi-button name="today" location="after"
+                                [options]="{ icon: 'eyeopen', stylingMode: 'text' }"></dxi-button>
                         </dx-text-box>
                     </div>
 
-                    <dx-button icon="plus" text="Add New Gateway" stylingMode="text" class="add-gateway-btn"></dx-button>
+                    <dx-button icon="plus" text="Add New Gateway" stylingMode="text"
+                        class="add-gateway-btn"></dx-button>
                 </div>
             </section>
 
@@ -121,6 +123,7 @@
 
     <footer class="settings-footer">
         <dx-button text="Reset Changes" stylingMode="text" class="reset-btn"></dx-button>
-        <dx-button text="Commit Configuration" stylingMode="contained" class="commit-btn" (onClick)="onCommit()"></dx-button>
+        <dx-button text="Commit Configuration" stylingMode="contained" class="commit-btn"
+            (onClick)="onCommit()"></dx-button>
     </footer>
 </div>

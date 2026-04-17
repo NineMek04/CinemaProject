@@ -1,9 +1,9 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { 
-  DxTextBoxModule, 
-  DxButtonModule, 
+import {
+  DxTextBoxModule,
+  DxButtonModule,
   DxSwitchModule,
-  DxTemplateModule 
+  DxTemplateModule
 } from 'devextreme-angular';
 
 @Component({
@@ -19,14 +19,14 @@ import {
   styleUrl: './admin-settings.scss'
 })
 export class AdminSettings implements OnInit {
-  
+
   platformName = signal('Cinematic Editorial Pro');
   platformTimezone = signal('UTC (Coordinated Universal Time)');
   supportEmail = signal('ops@cinematic-editorial.com');
 
   isTranscodingActive = signal(true);
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onCommit() {
     console.log('Committing configuration...');
