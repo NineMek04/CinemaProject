@@ -1,0 +1,100 @@
+<div class="settings-dashboard">
+  <header class="dashboard-header">
+    <h1>Subscription Settings</h1>
+    <p>Manage your editorial experience and billing preferences.</p>
+  </header>
+
+  <div class="cards-row">
+    <div class="card premium-card">
+      <div class="card-top">
+        <span class="eyebrow">CURRENT SELECTION</span>
+        <span class="badge-red">ACTIVE PLAN</span>
+      </div>
+      
+      <h2 class="plan-name">Premium</h2>
+      
+      <div class="plan-meta">
+        <div class="meta-item">
+          <span class="eyebrow">MONTHLY BILLING</span>
+          <div class="meta-value">
+            <span class="price">$14.99</span><span class="period">/month</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <span class="eyebrow">NEXT PAYMENT</span>
+          <div class="meta-value">Oct 12, 2023</div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-primary">CHANGE PLAN</button>
+        <button class="btn-ghost">CANCEL MEMBERSHIP</button>
+      </div>
+    </div>
+
+    <div class="card payment-card">
+      <div class="card-top">
+        <span class="eyebrow">PAYMENT METHOD</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e50914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+      </div>
+
+      <div class="payment-details">
+        <div class="card-number">•••• •••• •••• 4242</div>
+        <div class="card-type">Visa Corporate Credit Card</div>
+        <div class="card-expiry">EXPIRES 09/25</div>
+      </div>
+
+      <button class="btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        UPDATE DETAILS
+      </button>
+    </div>
+  </div>
+
+  <div class="billing-history">
+    <div class="history-header">
+      <h3>Billing History</h3>
+      <button class="btn-text">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        EXPORT AS PDF
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>TRANSACTION ID</th>
+            <th>DATE</th>
+            <th>DESCRIPTION</th>
+            <th>AMOUNT</th>
+            <th>STATUS</th>
+            <th>RECEIPT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let txn of transactions">
+            <td class="muted">{{ txn.id }}</td>
+            <td>{{ txn.date }}</td>
+            <td class="muted">{{ txn.description }}</td>
+            <td class="bold">{{ txn.amount }}</td>
+            <td><span class="status-badge">{{ txn.status }}</span></td>
+            <td>
+              <button class="icon-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="upsell-banner">
+    <div class="upsell-content">
+      <h2>Switch to Annual and Save 25%</h2>
+      <p>Unlock the full year of auteur cinema for just $134.99. That's three months of curated storytelling on us.</p>
+    </div>
+    <button class="btn-primary">UPGRADE TO ANNUAL</button>
+  </div>
+</div>

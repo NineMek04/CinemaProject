@@ -15,6 +15,10 @@ import { MovieLibrary } from './page/components/account/admin/components/library
 import { UserManagement } from './page/components/account/admin/components/management/user-management';
 import { AdminSettings } from './page/components/account/admin/components/setting/admin-settings';
 import { PerformanceAnalytics } from './page/components/account/admin/components/analytics/performance-analytics';
+import { SubscriptionSettingsComponent } from './page/components/subscription-settings-component/subscription-settings-component';
+import { SecuritySettingsComponent } from './page/components/security-settings-component/security-settings-component';
+import { NotificationSettingsComponent } from './page/components/notification-settings-component/notification-settings-component';
+import { HelpCenterComponent } from './page/components/help-center-component/help-center-component';
 
 export const routes: Routes = [
     {
@@ -41,6 +45,10 @@ export const routes: Routes = [
         path: 'checkout',
         component: Payment
     },
+    {path: 'subscription', component: SubscriptionSettingsComponent},
+    {path: 'security', component: SecuritySettingsComponent},
+    {path: 'notifications', component: NotificationSettingsComponent},
+    {path: 'help', component: HelpCenterComponent},
     {path: 'movies', component: MovieComponent},
     {path: 'mylist', component: MylistComponent},
 

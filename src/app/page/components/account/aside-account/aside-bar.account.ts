@@ -36,11 +36,12 @@ export class AsideAccount {
   // ข้อมูลเมนูด้านซ้าย
   navigationItems = [
     { id: 1, text: 'Profile', path: '/account', icon: 'user' },
-    { id: 2, text: 'Security', path: '/account', icon: 'preferences' },
-    { id: 3, text: 'Subscription', path: '/account', icon: 'card' },
-    { id: 4, text: 'Notifications', path: '/account', icon: 'bell' },
+    { id: 2, text: 'Security', path: '/security', icon: 'preferences' },
+    { id: 3, text: 'Subscription', path: '/subscription', icon: 'card' },
+    { id: 4, text: 'Notifications', path: '/notifications', icon: 'bell' },
     { id: 5, text: 'Payment', path: '/checkout', icon: 'money' },
-    { id: 6, text: 'Logout', path: '/home', icon: 'runner' }
+    { id: 6, text: 'Help', path: '/help', icon: 'tips' },
+    { id: 7, text: 'Logout', path: '/home', icon: 'runner' }
   ];
 
   // ข้อมูลตัวอย่างสำหรับ DataGrid

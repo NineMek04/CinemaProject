@@ -1,0 +1,119 @@
+<div class="security-dashboard">
+  <div class="column-left">
+    
+    <div class="card change-password-card">
+      <div class="card-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <h2>Change Password</h2>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-group full-width">
+          <label>CURRENT PASSWORD</label>
+          <input type="password" value="............" readonly>
+        </div>
+        <div class="input-group">
+          <label>NEW PASSWORD</label>
+          <input type="password" placeholder="Enter new password">
+        </div>
+        <div class="input-group">
+          <label>CONFIRM NEW PASSWORD</label>
+          <input type="password" placeholder="Confirm new password">
+        </div>
+      </div>
+
+      <div class="card-actions right">
+        <button class="btn-primary glow">UPDATE CREDENTIALS</button>
+      </div>
+    </div>
+
+    <div class="card active-sessions-card">
+      <div class="card-header flex-between">
+        <div class="title-group">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <h2>Active Sessions</h2>
+        </div>
+        <button class="btn-outline">LOG OUT FROM ALL DEVICES</button>
+      </div>
+
+      <div class="sessions-list">
+        <div class="session-item" *ngFor="let session of sessions">
+          <div class="session-icon">
+            <svg *ngIf="session.type === 'desktop'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <svg *ngIf="session.type === 'mobile'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            <svg *ngIf="session.type === 'tv'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+          </div>
+          <div class="session-details">
+            <div class="session-title">
+              {{ session.device }} <span *ngIf="session.app">• {{ session.app }}</span>
+              <span class="badge-current" *ngIf="session.isCurrent">CURRENT SESSION</span>
+            </div>
+            <div class="session-meta">
+              {{ session.location }} • {{ session.ipOrTime }}
+            </div>
+          </div>
+          <button class="btn-icon close-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-right">
+    
+    <div class="card two-factor-card">
+      <div class="card-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        <h2>Two-Factor Auth</h2>
+      </div>
+      <p class="description">
+        Add an extra layer of security to your account by requiring a verification code from your mobile device.
+      </p>
+
+      <div class="toggle-list">
+        <div class="toggle-row active">
+          <span>Authenticator App</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle-row inactive">
+          <span>SMS Verification</span>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card audit-card">
+      <h3 class="red-title">Security Audit</h3>
+      
+      <div class="audit-list">
+        <div class="audit-item" *ngFor="let item of auditItems">
+          <div class="audit-icon" [ngClass]="item.status">
+            <svg *ngIf="item.status === 'good'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <svg *ngIf="item.status === 'warning'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <div class="audit-details">
+            <div class="audit-title" [ngClass]="item.status">{{ item.title }}</div>
+            <div class="audit-subtitle">{{ item.subtitle }}</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-secondary full-width">RUN FULL SCAN</button>
+    </div>
+
+    <div class="card promo-card">
+      <div class="promo-content">
+        <span class="eyebrow">NEW FEATURE</span>
+        <h4>Passkey Support Coming Soon</h4>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,334 @@
+// Variables
+$bg-color: #0d0d0f;
+$card-bg: #151517;
+$text-primary: #ffffff;
+$text-secondary: #9ca3af;
+$accent-red: #d91c1c;
+$accent-red-hover: #b91515;
+$border-color: #27272a;
+$font-family: 'Inter', system-ui, sans-serif; // Replace with actual font if known
+
+.settings-dashboard {
+  background-color: $bg-color;
+  color: $text-primary;
+  font-family: $font-family;
+  padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+    color: #ffd8d8; // Slight pinkish white tint matching the original header
+  }
+
+  p {
+    color: $text-secondary;
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+.cards-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.card {
+  background-color: $card-bg;
+  border-radius: 16px;
+  padding: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Premium Card Styling --- */
+.premium-card {
+  background: linear-gradient(135deg, #421115 0%, #1a0a0c 100%);
+  flex: 2;
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .badge-red {
+    background: rgba(217, 28, 28, 0.2);
+    color: #ff4d4d;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .plan-name {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0 0 32px 0;
+    letter-spacing: -0.03em;
+  }
+
+  .plan-meta {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 32px;
+
+    .meta-value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 600;
+
+      .price {
+        font-size: 28px;
+      }
+      
+      .period {
+        font-size: 14px;
+        color: $text-secondary;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: auto;
+  }
+}
+
+/* --- Payment Method Card --- */
+.payment-card {
+  flex: 1;
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .payment-details {
+    margin-bottom: 32px;
+
+    .card-number {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .card-type, .card-expiry {
+      color: $text-secondary;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    
+    .card-expiry {
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+  }
+}
+
+/* --- Billing History Table --- */
+.billing-history {
+  background-color: $card-bg;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+
+  .history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h3 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+
+    th {
+      @extend .eyebrow;
+      padding-bottom: 16px;
+      border-bottom: 1px solid $border-color;
+    }
+
+    td {
+      padding: 20px 0;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      &.muted { color: $text-secondary; }
+      &.bold { font-weight: 600; }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  .status-badge {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+}
+
+/* --- Upsell Banner --- */
+.upsell-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px;
+  border-radius: 16px;
+  
+  // Gradient border trick
+  border: 2px solid transparent;
+  background: 
+    linear-gradient($bg-color, $bg-color) padding-box,
+    linear-gradient(90deg, #ff4d4d, #800000) border-box;
+
+  .upsell-content {
+    max-width: 600px;
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: $text-secondary;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* --- Buttons --- */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background-color: $accent-red;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background-color: $accent-red-hover;
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #ffb3b3;
+  border: none;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $text-primary;
+  border: 1px solid $border-color;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.btn-text {
+  background: transparent;
+  color: $accent-red;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  &:hover {
+    color: #ff4d4d;
+  }
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: $text-secondary;
+  padding: 4px;
+
+  &:hover {
+    color: $text-primary;
+  }
+}

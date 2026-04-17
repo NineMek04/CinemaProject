@@ -1,0 +1,326 @@
+// Variables
+$bg-color: #0d0d0f;
+$card-bg: #151517;
+$text-primary: #ffffff;
+$text-secondary: #8a8a93;
+$text-muted: #5e5e66;
+$accent-red: #ea2b2b;
+$accent-red-hover: #ff3b3b;
+$border-color: #26262b;
+$font-family: 'Inter', system-ui, sans-serif;
+
+.notifications-dashboard {
+  background-color: $bg-color;
+  color: $text-primary;
+  font-family: $font-family;
+  padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header --- */
+.dashboard-header {
+  margin-bottom: 40px;
+  max-width: 600px;
+
+  h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.03em;
+    color: #ffd8d8; // Subtle pinkish white tint from the design
+  }
+
+  p {
+    color: $text-secondary;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* --- Layout Grid --- */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  margin-bottom: 40px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column-left, .column-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- Base Card Styles --- */
+.card {
+  background-color: $card-bg;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* --- Settings Cards --- */
+.settings-card {
+  padding: 32px;
+
+  .card-title-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+
+    .icon-wrapper {
+      background-color: rgba(234, 43, 43, 0.08);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title-text {
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+      }
+      p {
+        font-size: 13px;
+        color: $text-secondary;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  .item-info {
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    p {
+      font-size: 13px;
+      color: $text-secondary;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* --- Custom Toggle Switch --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3f3f46;
+    transition: .3s;
+    border-radius: 34px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+  }
+
+  input:checked + .slider {
+    background-color: $accent-red;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+}
+
+/* --- Feature Card (Quiet Hours) --- */
+.feature-card {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  
+  // Simulated background since we don't have the external image asset
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #150909 100%), 
+              linear-gradient(45deg, #2a0808 0%, #0d0d0f 100%);
+  background-size: cover;
+  background-position: center;
+
+  .feature-content {
+    position: relative;
+    z-index: 2;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: white;
+    }
+
+    p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      margin: 0 0 24px 0;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at top, rgba(234, 43, 43, 0.15) 0%, transparent 70%);
+  }
+}
+
+/* --- Privacy Note Card --- */
+.privacy-card {
+  background: linear-gradient(180deg, #1f1213 0%, $card-bg 100%);
+  padding: 32px;
+  border: 1px solid rgba(234, 43, 43, 0.05);
+
+  h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: white;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 13px;
+    color: $text-secondary;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+/* --- Buttons --- */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: $accent-red;
+  color: white;
+  padding: 14px 28px;
+  box-shadow: 0 4px 14px rgba(234, 43, 43, 0.3);
+
+  &:hover {
+    background-color: $accent-red-hover;
+    box-shadow: 0 4px 20px rgba(234, 43, 43, 0.5);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $text-secondary;
+  padding: 14px 24px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn-white {
+  background-color: white;
+  color: black;
+  padding: 14px 24px;
+
+  &:hover {
+    background-color: #f4f4f5;
+  }
+}
+
+/* --- Footer --- */
+.dashboard-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .last-updated {
+    font-size: 13px;
+    color: $text-secondary;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+
+    .last-updated {
+      text-align: center;
+      order: 2;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+      order: 1;
+
+      button { width: 100%; }
+    }
+  }
+}

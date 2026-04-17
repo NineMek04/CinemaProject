@@ -1,0 +1,100 @@
+<div class="help-dashboard">
+  
+  <header class="hero-section">
+    <h1>HOW CAN WE<br><span class="text-red">HELP YOU?</span></h1>
+    
+    <div class="search-container">
+      <div class="search-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <input type="text" placeholder="Search for streaming issues, account setup, billing...">
+    </div>
+  </header>
+
+  <div class="categories-grid">
+    <div class="card category-card large">
+      <div class="icon-wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      </div>
+      <h3>Account & Billing</h3>
+      <p>Manage your premium membership, update payment methods, and view your transaction history.</p>
+      <ul class="link-list">
+        <li><a href="#">Cancel Subscription</a></li>
+        <li><a href="#">Payment Failed Help</a></li>
+        <li><a href="#">Redeem Gift Card</a></li>
+      </ul>
+    </div>
+
+    <div class="card category-card">
+      <div class="icon-wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      </div>
+      <h3>Streaming Issues</h3>
+      <p>Troubleshoot buffering, 4K HDR playback, and audio sync problems.</p>
+    </div>
+
+    <div class="card category-card">
+      <div class="icon-wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+      </div>
+      <h3>Device Compatibility</h3>
+      <p>Setup CINESTREAM on your Smart TV, consoles, and mobile devices.</p>
+    </div>
+  </div>
+
+  <div class="request-banner">
+    <div class="banner-text">
+      <h3>Missing your favorite movie?</h3>
+      <p>We take requests! Submit content requests and we'll work on bringing them to the theater.</p>
+    </div>
+    <button class="btn-primary-light">Submit Content Request</button>
+  </div>
+
+  <section class="faq-section">
+    <div class="section-header">
+      <h2>FREQUENTLY ASKED QUESTIONS</h2>
+      <a href="#" class="view-all">View All FAQ</a>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.open]="faq.isOpen">
+        <button class="faq-question" (click)="toggleFaq(i)">
+          {{ faq.question }}
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer" *ngIf="faq.isOpen">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="support-grid">
+    <div class="card support-card chat-card">
+      <h3>LIVE CHAT</h3>
+      <p>Average wait time: 2 minutes. Our cinematic experts are ready to assist you right now.</p>
+      <button class="btn-white">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        START CONVERSATION
+      </button>
+    </div>
+
+    <div class="card support-card email-card">
+      <h3>EMAIL SUPPORT</h3>
+      <p>Expect a response within 24 hours. Best for detailed billing or technical inquiries.</p>
+      <button class="btn-primary-dark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        SEND AN EMAIL
+      </button>
+    </div>
+  </div>
+
+  <div class="footer-banner">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>STILL HAVE QUESTIONS?</h2>
+      <p>Our community forums are active 24/7. Join the conversation.</p>
+    </div>
+  </div>
+
+</div>

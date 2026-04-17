@@ -1,0 +1,412 @@
+// Variables matching the design
+$bg-color: #0d0d0f;
+$card-bg: #151517;
+$text-primary: #ffffff;
+$text-secondary: #8a8a93;
+$text-muted: #5e5e66;
+$accent-red: #e02a2a;
+$accent-red-hover: #ff3b3b;
+$border-color: #26262b;
+$input-bg: #1e1516;
+$input-border: #382022;
+$session-bg: #1a1415;
+$font-family: 'Inter', system-ui, sans-serif;
+
+.security-dashboard {
+  background-color: $bg-color;
+  color: $text-primary;
+  font-family: $font-family;
+  padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background-color: $card-bg;
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  &.flex-between {
+    justify-content: space-between;
+  }
+  
+  .title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+/* --- Forms & Inputs --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: $text-secondary;
+    text-transform: uppercase;
+  }
+
+  input {
+    background-color: $input-bg;
+    border: 1px solid $input-border;
+    color: $text-primary;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $accent-red;
+    }
+
+    &[readonly] {
+      color: $accent-red;
+      font-size: 24px;
+      letter-spacing: 4px;
+      padding: 8px 16px;
+    }
+  }
+}
+
+/* --- Buttons --- */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: $accent-red;
+  color: white;
+  padding: 14px 28px;
+  
+  &.glow {
+    box-shadow: 0 4px 20px rgba(224, 42, 42, 0.4);
+  }
+
+  &:hover {
+    background-color: $accent-red-hover;
+    box-shadow: 0 4px 24px rgba(255, 59, 59, 0.5);
+  }
+}
+
+.btn-secondary {
+  background-color: #2a1515;
+  color: #c94040;
+  padding: 16px;
+  border-radius: 12px;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: #3a1a1a;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $text-secondary;
+  border: 1px solid $border-color;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $text-secondary;
+  }
+}
+
+.btn-icon {
+  background: transparent;
+  color: $text-secondary;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.card-actions.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* --- Active Sessions --- */
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.session-item {
+  background-color: $session-bg;
+  border: 1px solid $input-border;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .session-icon {
+    background-color: rgba(224, 42, 42, 0.1);
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .session-details {
+    flex: 1;
+
+    .session-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .session-meta {
+      font-size: 13px;
+      color: $text-secondary;
+    }
+  }
+
+  .badge-current {
+    background-color: rgba(224, 42, 42, 0.15);
+    color: $accent-red;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* --- Two-Factor Auth --- */
+.description {
+  color: $text-secondary;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+
+  &.active {
+    background-color: #000;
+    color: $text-primary;
+  }
+
+  &.inactive {
+    background-color: #1a1a1c;
+    color: $text-secondary;
+  }
+}
+
+/* Custom Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 24px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #888;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: $accent-red;
+    box-shadow: 0 0 8px rgba(224, 42, 42, 0.5);
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: white;
+  }
+}
+
+/* --- Security Audit --- */
+.audit-card {
+  border: 1px solid rgba(224, 42, 42, 0.1);
+  background: linear-gradient(180deg, rgba(224, 42, 42, 0.03) 0%, transparent 100%);
+}
+
+.red-title {
+  color: $accent-red;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+}
+
+.audit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.audit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  .audit-icon {
+    margin-top: 2px;
+    &.good { color: #e02a2a; } // Assuming checkmarks are red based on design
+    &.warning { color: #e02a2a; }
+  }
+
+  .audit-details {
+    .audit-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 4px;
+
+      &.warning {
+        color: white;
+      }
+    }
+
+    .audit-subtitle {
+      font-size: 12px;
+      color: $text-secondary;
+    }
+  }
+}
+
+/* --- Promo Card --- */
+.promo-card {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23111"/></svg>'); // Placeholder for cinema seats
+  background-size: cover;
+  background-position: center;
+  min-height: 180px;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+
+  .promo-content {
+    position: relative;
+    z-index: 2;
+
+    .eyebrow {
+      color: $accent-red;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    h4 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+    }
+  }
+}

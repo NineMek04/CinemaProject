@@ -1,0 +1,120 @@
+<div class="notifications-dashboard">
+  <header class="dashboard-header">
+    <h1>Notifications</h1>
+    <p>Manage how you experience the cinematic journey. Tailor your alerts for premieres, live premieres, and curated picks.</p>
+  </header>
+
+  <div class="content-grid">
+    
+    <div class="column-left">
+      
+      <div class="card settings-card">
+        <div class="card-title-group">
+          <div class="icon-wrapper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div class="title-text">
+            <h2>Email Communications</h2>
+            <p>Direct updates to alex.sterling&#64;auteur.com</p>
+          </div>
+        </div>
+
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <div class="item-info">
+              <h3>New Releases</h3>
+              <p>Weekly digest of every new cinematic masterpiece added to Aura.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="settings.email.newReleases">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="item-info">
+              <h3>Recommendations</h3>
+              <p>Auteur-curated suggestions based on your unique viewing palette.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="settings.email.recommendations">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="item-info">
+              <h3>Account Updates</h3>
+              <p>Important notes regarding your premium subscription and security.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="settings.email.accountUpdates">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card settings-card">
+        <div class="card-title-group">
+          <div class="icon-wrapper">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ea2b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          </div>
+          <div class="title-text">
+            <h2>Push Notifications</h2>
+            <p>Real-time engagement on mobile and desktop</p>
+          </div>
+        </div>
+
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <div class="item-info">
+              <h3>Continue Watching</h3>
+              <p>Reminders for the stories you haven't finished yet.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="settings.push.continueWatching">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="item-info">
+              <h3>Live Premiere Events</h3>
+              <p>Be the first to know when global premieres go live.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="settings.push.livePremiere">
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column-right">
+      
+      <div class="card feature-card">
+        <div class="feature-content">
+          <h2>Quiet Hours are Here</h2>
+          <p>Schedule periods where Aura won't send any notifications, allowing you to immerse in reality without digital interruption.</p>
+          <button class="btn-white">CONFIGURE SCHEDULE</button>
+        </div>
+      </div>
+
+      <div class="card privacy-card">
+        <h3>PRIVACY NOTE</h3>
+        <p>Your notification data is used solely to enhance your viewing experience. We never share your preferences with third-party advertisers. Aura values your cinematic peace of mind.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="dashboard-footer">
+    <div class="last-updated">Last updated on Oct 24, 2023</div>
+    <div class="action-buttons">
+      <button class="btn-ghost" (click)="discardChanges()">DISCARD CHANGES</button>
+      <button class="btn-primary" (click)="savePreferences()">SAVE PREFERENCES</button>
+    </div>
+  </footer>
+</div>
