@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AccountService } from '../../../core/services/account.service';
 
 @Component({
   selector: 'app-notification-settings-component',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule
@@ -12,6 +14,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './notification-settings-component.scss',
 })
 export class NotificationSettingsComponent {
+  private accountService = inject(AccountService);
+  currentUser = this.accountService.currentUser;
 
   settings = {
     email: {

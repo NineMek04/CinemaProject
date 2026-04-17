@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuditItem, Session } from '../../../core/interfaces/security-setting-user.interface';
+import { AccountService } from '../../../core/services/account.service';
 
 @Component({
   selector: 'app-security-settings-component',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './security-settings-component.html',
   styleUrl: './security-settings-component.scss',
 })
 export class SecuritySettingsComponent {
+  private accountService = inject(AccountService);
+  currentUser = this.accountService.currentUser;
+
   sessions: Session[] = [
     {
       device: 'Chrome on macOS Monterey',

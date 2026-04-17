@@ -1,10 +1,11 @@
-import { Component, computed, input, signal, effect } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { 
   DxTextBoxModule, 
   DxButtonModule, 
   DxSwitchModule, 
   DxFileUploaderModule 
 } from 'devextreme-angular';
+import { AccountService } from '../../../../core/services/account.service';
 
 @Component({
   selector: 'app-users',
@@ -19,8 +20,10 @@ import {
   styleUrl: './users.scss',
 })
 export class Users {
-  // Modern Signal Input
-  currentUser = input<any>({});
+  private accountService = inject(AccountService);
+  
+  // Use shared signal from service
+  currentUser = this.accountService.currentUser;
   
   // Personal Information Signals
   fullName = signal('');
@@ -34,33 +37,29 @@ export class Users {
   emailNotifications = signal(false);
 
   constructor() {
-    // Effect to sync model when input changes
+    // Effect to sync model when service data changes
     effect(() => {
       const user = this.currentUser();
       if (user) {
         this.fullName.set(user.name || '');
         this.email.set(user.email || '');
         this.phone.set(user.phone || '');
-        // Keep existing preferences or reset
       }
     }, { allowSignalWrites: true });
   }
-  
+
   // Actions
   saveChanges() {
-    console.log('Saving changes...', {
+    this.accountService.updateUser({
       name: this.fullName(),
       email: this.email(),
-      phone: this.phone(),
-      autoplay: this.autoplayNext(),
-      streaming: this.highQualityStreaming(),
-      notifications: this.emailNotifications()
+      phone: this.phone()
     });
-    // In a real app, emit an event or call a service
+    console.log('Changes saved via service');
   }
 
   cancel() {
-    // Reset to current input values
+    // Reset to current service values
     const user = this.currentUser();
     this.fullName.set(user.name || '');
     this.email.set(user.email || '');

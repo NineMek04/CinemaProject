@@ -1,24 +1,18 @@
+@use "sass:color";
+
 .account-settings-container {
   font-family: 'Inter', sans-serif;
-  width: vw(100%);
+  width: 100%;
   margin: 0;
-  
-
-
-
-width: 100%; /* 🚨 เปลี่ยนจาก vw(100%) เป็น 100% ธรรมดา */
   overflow-x: hidden;
-
-
-
-
-  overflow-y: auto; /* อนุญาตให้เลื่อนแกน Y ได้ */
-  scrollbar-width: none; /* ซ่อนใน Firefox */
-  -ms-overflow-style: none; /* ซ่อนใน IE และ Edge */
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   
   &::-webkit-scrollbar {
-    display: none; /* ซ่อนใน Chrome, Safari และ Opera */
+    display: none;
   }
+
   // Custom Colors (Synced with Sidebar)
   $primary-salmon: #FF8A80;
   $bg-dark: #111111;
@@ -68,7 +62,8 @@ width: 100%; /* 🚨 เปลี่ยนจาก vw(100%) เป็น 100% �
             padding: 8px 16px !important;
             
             &:hover {
-                background-color: lighten($primary-salmon, 10%) !important;
+                // Modern Sass function replacement for lighten()
+                background-color: color.adjust($primary-salmon, $lightness: 10%) !important;
             }
         }
     }

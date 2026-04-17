@@ -100,7 +100,7 @@ export class Payment implements OnInit {
 
   goBack(): void {
     if (this.currentStepId() === 2) {
-      this.router.navigate(['/account']);
+      this.router.navigate(['/account/profile']);
     } else {
       this.prevStep();
     }
@@ -108,5 +108,10 @@ export class Payment implements OnInit {
 
   goToHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  // Helper for random order number
+  range(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

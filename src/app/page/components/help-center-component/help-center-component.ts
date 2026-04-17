@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FaqItem } from '../../../core/interfaces/FaqItem.interfaces';
+import { AccountService } from '../../../core/services/account.service';
 
 
 @Component({
   selector: 'app-help-center-component',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './help-center-component.html',
   styleUrl: './help-center-component.scss',
 })
 export class HelpCenterComponent {
+  private accountService = inject(AccountService);
+  currentUser = this.accountService.currentUser;
 
   faqs: FaqItem[] = [
     {

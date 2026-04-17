@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Transaction } from '../../../core/interfaces/Transaction.interfaces';
+import { AccountService } from '../../../core/services/account.service';
 
 @Component({
   selector: 'app-subscription-settings-component',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './subscription-settings-component.html',
   styleUrl: './subscription-settings-component.scss',
 })
 export class SubscriptionSettingsComponent {
+  private accountService = inject(AccountService);
+  currentUser = this.accountService.currentUser;
+
   transactions: Transaction[] = [
     {
       id: '#TXN-988122',

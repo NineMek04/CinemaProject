@@ -19,6 +19,7 @@ import { SubscriptionSettingsComponent } from './page/components/subscription-se
 import { SecuritySettingsComponent } from './page/components/security-settings-component/security-settings-component';
 import { NotificationSettingsComponent } from './page/components/notification-settings-component/notification-settings-component';
 import { HelpCenterComponent } from './page/components/help-center-component/help-center-component';
+import { Users } from './page/components/account/users/users';
 
 export const routes: Routes = [
     {
@@ -27,7 +28,16 @@ export const routes: Routes = [
     },
     {
         path: 'account',
-        component: AsideAccount
+        component: AsideAccount,
+        children: [
+            { path: '', redirectTo: 'profile', pathMatch: 'full' },
+            { path: 'profile', component: Users },
+            { path: 'security', component: SecuritySettingsComponent },
+            { path: 'subscription', component: SubscriptionSettingsComponent },
+            { path: 'notifications', component: NotificationSettingsComponent },
+            { path: 'checkout', component: Payment },
+            { path: 'help', component: HelpCenterComponent }
+        ]
     },
     {
         path: 'admin',
@@ -41,16 +51,8 @@ export const routes: Routes = [
             { path: 'settings', component: AdminSettings }
         ]
     },
-    {
-        path: 'checkout',
-        component: Payment
-    },
-    {path: 'subscription', component: SubscriptionSettingsComponent},
-    {path: 'security', component: SecuritySettingsComponent},
-    {path: 'notifications', component: NotificationSettingsComponent},
-    {path: 'help', component: HelpCenterComponent},
-    {path: 'movies', component: MovieComponent},
-    {path: 'mylist', component: MylistComponent},
+    { path: 'movies', component: MovieComponent },
+    { path: 'mylist', component: MylistComponent },
 
     { path: 'movie/:slug', component: MovieDetailsComponent },
 

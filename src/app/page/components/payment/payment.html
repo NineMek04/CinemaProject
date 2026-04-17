@@ -1,236 +1,247 @@
 @defer {
-<div class="checkout-page">
-    <!-- Left Sidebar: Steps -->
-    <aside class="checkout-sidebar">
-        <div class="brand">
-            <dx-button icon="arrowleft" stylingMode="text" class="back-btn" (onClick)="goBack()">
-            </dx-button>
-            <h1>AURA</h1>
-        </div>
-
-        <nav class="steps-nav">
-            @for (step of steps(); track step.label) {
-            <div class="step-item" [class.active]="step.isActive" [class.completed]="step.isCompleted">
-                <div class="step-icon">
-                    @if (step.isCompleted) {
-                        <i class="dx-icon-check"></i>
-                    } @else {
-                        <i [class]="'dx-icon-' + step.icon"></i>
-                    }
-                </div>
-                <span class="step-label">{{step.label}}</span>
-            </div>
-            }
-        </nav>
-
-        <div class="sidebar-footer">
-            @if (config(); as appConfig) {
-            <div class="profile-brief">
-                <img [src]="appConfig.currentUser.avatarPath" [alt]="appConfig.currentUser.name">
-                <div class="info">
-                    <span class="name">{{appConfig.currentUser.name}}</span>
-                    <span class="status">Step {{currentStepId()}} of 4</span>
-                </div>
-            </div>
-            }
-        </div>
-    </aside>
-
-    <!-- Center Content -->
-    <main class="payment-main">
+<div class="checkout-wrapper">
+    <!-- Main Checkout Container -->
+    <div class="checkout-container">
         
-        <!-- STEP 2: PAYMENT METHOD -->
-        @if (currentStepId() === 2) {
-            <section class="section-header">
-                <h2 class="title">Choose Payment Method</h2>
-                <p class="subtitle">Select your preferred way to subscribe and start your cinematic journey.</p>
-            </section>
-
-            <div class="methods-grid">
-                @for (method of paymentMethods(); track method.id) {
-                <div class="method-card" 
-                    [class.selected]="method.id === selectedMethodId()" 
-                    (click)="selectMethod(method.id)">
-                    <div class="card-header">
-                        <i [class]="'dx-icon-' + method.icon"></i>
-                    </div>
-                    <div class="card-body">
-                        <span class="name">{{method.name}}</span>
-                        <span class="desc">{{method.description}}</span>
-                    </div>
+        <!-- Header & Stepper Section -->
+        <header class="checkout-header">
+            <div class="header-content">
+                <div class="title-area">
+                    <h1 class="main-title">Secure Checkout</h1>
+                    <p class="subtitle">Complete your premium subscription and unlock the cinematic world.</p>
                 </div>
-                }
+                
+                <!-- Horizontal Stepper -->
+                <nav class="horizontal-stepper">
+                    @for (step of steps(); track step.id) {
+                        <!-- Only show steps relevant to checkout flow (2, 3, 4) -->
+                        @if (step.id >= 2) {
+                            <div class="step-node" [class.active]="step.isActive" [class.completed]="step.isCompleted">
+                                <div class="node-icon">
+                                    @if (step.isCompleted) {
+                                        <i class="dx-icon-check"></i>
+                                    } @else {
+                                        <i [class]="'dx-icon-' + step.icon"></i>
+                                    }
+                                </div>
+                                <div class="node-info">
+                                    <span class="label">{{step.label}}</span>
+                                    <span class="status-text">{{step.isActive ? 'IN PROGRESS' : (step.isCompleted ? 'COMPLETE' : 'PENDING')}}</span>
+                                </div>
+                                @if (step.id < 4) {
+                                    <div class="node-connector"></div>
+                                }
+                            </div>
+                        }
+                    }
+                </nav>
             </div>
+        </header>
 
-            @if (selectedMethodId() === 'card') {
-            <form class="payment-form">
-                <div class="form-group full">
-                    <label>CARDHOLDER NAME</label>
-                    <dx-text-box placeholder="John Wick" stylingMode="filled"></dx-text-box>
-                </div>
+        <div class="checkout-grid">
+            <!-- Left Column: Forms -->
+            <main class="checkout-content">
+                
+                <!-- STEP 2: PAYMENT METHOD -->
+                @if (currentStepId() === 2) {
+                    <div class="content-animate">
+                        <h3 class="group-title">Select Payment Method</h3>
+                        <div class="payment-methods-grid">
+                            @for (method of paymentMethods(); track method.id) {
+                                <div class="payment-method-card" 
+                                    [class.selected]="method.id === selectedMethodId()" 
+                                    (click)="selectMethod(method.id)">
+                                    <div class="method-indicator"></div>
+                                    <div class="method-icon-box">
+                                        <i [class]="'dx-icon-' + method.icon"></i>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="m-name">{{method.name}}</span>
+                                        <span class="m-desc">{{method.description}}</span>
+                                    </div>
+                                    <div class="selection-check">
+                                        <i class="dx-icon-check"></i>
+                                    </div>
+                                </div>
+                            }
+                        </div>
 
-                <div class="form-group full">
-                    <label>CARD NUMBER</label>
-                    <dx-text-box placeholder="0000 0000 0000 0000" stylingMode="filled">
-                        <dxi-button name="today" location="after"
-                            [options]="{ icon: 'card', stylingMode: 'text' }"></dxi-button>
-                    </dx-text-box>
-                </div>
+                        @if (selectedMethodId() === 'card') {
+                            <div class="card-details-form slide-down">
+                                <h3 class="group-title">Card Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-field full">
+                                        <label>CARDHOLDER NAME</label>
+                                        <dx-text-box placeholder="e.g. ALEX STERLING" stylingMode="filled"></dx-text-box>
+                                    </div>
+                                    <div class="form-field full">
+                                        <label>CARD NUMBER</label>
+                                        <dx-text-box placeholder="0000 0000 0000 0000" stylingMode="filled">
+                                            <dxi-button name="card" location="after" [options]="{ icon: 'card', stylingMode: 'text', disabled: true }"></dxi-button>
+                                        </dx-text-box>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>EXPIRY DATE</label>
+                                        <dx-text-box placeholder="MM / YY" stylingMode="filled"></dx-text-box>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>CVV / CVC</label>
+                                        <dx-text-box placeholder="***" mode="password" stylingMode="filled"></dx-text-box>
+                                    </div>
+                                </div>
+                                <div class="form-actions-inline">
+                                    <dx-switch [value]="true"></dx-switch>
+                                    <span>Securely save this card for future billing</span>
+                                </div>
+                            </div>
+                        }
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>EXPIRY DATE</label>
-                        <dx-text-box placeholder="MM/YY" stylingMode="filled"></dx-text-box>
-                    </div>
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <dx-text-box placeholder="***" mode="password" stylingMode="filled"></dx-text-box>
-                    </div>
-                </div>
-
-                <div class="toggle-row">
-                    <dx-switch [value]="true"></dx-switch>
-                    <span>Save card for future purchases</span>
-                </div>
-            </form>
-            }
-
-            <div class="security-info">
-                <i class="dx-icon-lock"></i>
-                <p>Your payment information is encrypted and processed securely.</p>
-            </div>
-        }
-
-        <!-- STEP 3: REVIEW & RECEIPT -->
-        @if (currentStepId() === 3) {
-            <section class="section-header">
-                <h2 class="title">Review Your Order</h2>
-                <p class="subtitle">Please confirm your selection and payment details before completing the purchase.</p>
-            </section>
-
-            <div class="review-details-container">
-                <div class="review-section">
-                    <h3>Payment Method</h3>
-                    <div class="method-preview-mini">
-                        <i [class]="'dx-icon-' + selectedMethod()?.icon"></i>
-                        <div>
-                            <p class="m-title">{{selectedMethod()?.name}}</p>
-                            <p class="m-desc">Ending in **** 9012</p>
+                        <div class="secure-badge">
+                            <i class="dx-icon-lock"></i>
+                            <span>SSL Encrypted & AES-256 Bit Secure Transaction</span>
                         </div>
                     </div>
-                </div>
+                }
 
-                <div class="review-section">
-                    <h3>Billing Address</h3>
-                    <div class="address-preview">
-                        <p>123 Cinema Street, Hollywood Hills</p>
-                        <p>Los Angeles, CA 90028</p>
+                <!-- STEP 3: REVIEW -->
+                @if (currentStepId() === 3) {
+                    <div class="content-animate">
+                        <h3 class="group-title">Review & Confirm</h3>
+                        <div class="review-layout">
+                            <div class="review-box">
+                                <div class="review-item">
+                                    <div class="item-head">
+                                        <i class="dx-icon-card"></i>
+                                        <span>Payment Method</span>
+                                    </div>
+                                    <div class="item-body">
+                                        <strong>{{selectedMethod()?.name}}</strong>
+                                        <p>Visa card ending in •••• 9012</p>
+                                    </div>
+                                    <button class="edit-link" (click)="currentStepId.set(2)">Edit</button>
+                                </div>
+
+                                <div class="review-item">
+                                    <div class="item-head">
+                                        <i class="dx-icon-home"></i>
+                                        <span>Billing Address</span>
+                                    </div>
+                                    <div class="item-body">
+                                        <strong>Alex Sterling</strong>
+                                        <p>123 Premiere Avenue, Hollywood, CA 90028</p>
+                                    </div>
+                                    <button class="edit-link">Edit</button>
+                                </div>
+                            </div>
+                            
+                            <div class="legal-disclaimer">
+                                <p>By confirming this purchase, you authorize AURA to charge your selected payment method immediately and on a recurring basis as per your plan details. You can cancel at any time within your account settings.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
+                }
 
-        <!-- STEP 4: SUCCESS -->
-        @if (currentStepId() === 4) {
-            <div class="success-container animate-fade-in">
-                <div class="success-icon-wrapper">
-                    <div class="success-ring"></div>
-                    <i class="dx-icon-check"></i>
-                </div>
-                <h2 class="success-title">Payment Successful!</h2>
-                <p class="success-message">Welcome to Aura Premium. Your cinematic journey begins now. A confirmation email has been sent to your inbox.</p>
-                
-                <div class="order-id-box">
-                    <span>ORDER ID</span>
-                    <strong>#AURA-99283-XP</strong>
-                </div>
+                <!-- STEP 4: SUCCESS -->
+                @if (currentStepId() === 4) {
+                    <div class="success-screen animate-reveal">
+                        <div class="celebration-ring"></div>
+                        <div class="success-icon-globe">
+                            <i class="dx-icon-check"></i>
+                        </div>
+                        <h2 class="success-hero-text">Welcome to Aura Premium</h2>
+                        <p class="success-sub-text">Your transaction was successful. You now have unlimited access to our entire 4K cinematic library.</p>
+                        
+                        <div class="receipt-snippet">
+                            <div class="receipt-row">
+                                <span>Order Number</span>
+                                <strong>#AURA-{{range(10000, 99999)}}-TX</strong>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Status</span>
+                                <span class="status-active">ACTIVE</span>
+                            </div>
+                        </div>
 
-                <dx-button 
-                    text="Go to Home" 
-                    stylingMode="contained" 
-                    class="home-btn" 
-                    (onClick)="goToHome()">
-                </dx-button>
-            </div>
-        }
-    </main>
+                        <dx-button 
+                            text="START WATCHING" 
+                            stylingMode="contained" 
+                            class="cta-home-btn" 
+                            (onClick)="goToHome()">
+                        </dx-button>
+                    </div>
+                }
+            </main>
 
-    <!-- Right Panel: Order Summary -->
-    @if (orderSummary(); as summary) {
-    <aside class="order-summary-panel">
-        <h2 class="summary-title">Order Summary</h2>
+            <!-- Right Column: Summary Table -->
+            @if (orderSummary(); as summary) {
+                <aside class="checkout-summary" [class.hidden-on-success]="currentStepId() === 4">
+                    <div class="summary-card sticky-summary">
+                        <h4 class="summary-label">ORDER SUMMARY</h4>
+                        
+                        <div class="plan-details-box">
+                            <span class="highlight-tag">CURRENT PLAN</span>
+                            <h2 class="plan-name">{{summary.planName}}</h2>
+                            <p class="plan-subtitle">{{summary.planDescription}}</p>
+                            <div class="plan-rate">
+                                <span class="price-val">${{summary.price}}</span>
+                                <span class="cycle">/ {{summary.billingCycle}}</span>
+                            </div>
+                        </div>
 
-        <div class="selected-plan-card">
-            <span class="badge">SELECTED PLAN</span>
-            <div class="plan-info">
-                <h3>{{summary.planName}}</h3>
-                <p>{{summary.planDescription}}</p>
-            </div>
-            <div class="plan-price">
-                <span class="price">${{summary.price}}</span>
-                <span class="cycle">/{{summary.billingCycle}}</span>
-            </div>
-        </div>
+                        <div class="breakdown-lines">
+                            <div class="b-line">
+                                <span>Subtotal</span>
+                                <span>${{summary.subtotal}}</span>
+                            </div>
+                            <div class="b-line">
+                                <span>Tax (0.00%)</span>
+                                <span>${{summary.taxes}}</span>
+                            </div>
+                            
+                            @if (discount() > 0) {
+                                <div class="b-line discount">
+                                    <span>Promo Discount</span>
+                                    <span>-${{summary.total * discount() / 100}}</span>
+                                </div>
+                            }
+                        </div>
 
-        @if (currentStepId() < 4) {
-            <div class="promo-section">
-                <label>PROMO CODE</label>
-                <div class="promo-input">
-                    <dx-text-box 
-                        [value]="promoCode()" 
-                        (onValueChanged)="promoCode.set($event.value)"
-                        placeholder="Enter code" stylingMode="filled">
-                    </dx-text-box>
-                    <dx-button text="Apply" (onClick)="applyPromo()" stylingMode="contained" class="apply-btn"></dx-button>
-                </div>
-            </div>
-        }
+                        <div class="promo-box">
+                            <dx-text-box 
+                                [value]="promoCode()" 
+                                (onValueChanged)="promoCode.set($event.value)"
+                                placeholder="PROMO CODE" 
+                                stylingMode="filled">
+                            </dx-text-box>
+                            <dx-button text="APPLY" (onClick)="applyPromo()" class="apply-promo-btn"></dx-button>
+                        </div>
 
-        <div class="cost-breakdown">
-            <div class="line">
-                <span>Subtotal</span>
-                <span>${{summary.subtotal}}</span>
-            </div>
-            <div class="line">
-                <span>Taxes</span>
-                <span>${{summary.taxes}}</span>
-            </div>
-            
-            @if (discount() > 0) {
-            <div class="line total">
-                <span>Discount ({{discount()}}%)</span>
-                <span>-${{summary.total * discount() / 100}}</span>
-            </div>
-            }
-            
-            <hr>
-            <div class="line grand-total">
-                <span>Total Amount</span>
-                <span class="amount">${{finalTotal()}}</span>
-            </div>
-        </div>
+                        <div class="total-bar">
+                            <span class="total-label">Grand Total</span>
+                            <span class="total-amount">${{finalTotal()}}</span>
+                        </div>
 
-        <div class="checkout-actions">
-            @if (currentStepId() < 4) {
-                <dx-button 
-                    [text]="currentStepId() === 2 ? 'Continue to Review' : 'Complete Purchase'" 
-                    icon="chevronright" 
-                    [rtlEnabled]="true" 
-                    stylingMode="contained"
-                    class="pay-btn"
-                    (onClick)="nextStep()">
-                </dx-button>
-                <p class="legal-text">BY CLICKING, YOU AGREE TO AURA'S TERMS OF SERVICE AND PRIVACY POLICY.</p>
-            } @else {
-                <p class="completion-hint text-center text-[#555] text-xs">Transaction completed successfully.</p>
+                        <div class="checkout-footer-actions">
+                            @if (currentStepId() < 4) {
+                                <dx-button 
+                                    [text]="currentStepId() === 2 ? 'CONTINUE TO REVIEW' : 'CONFIRM & PAY'" 
+                                    stylingMode="contained"
+                                    class="primary-action-btn"
+                                    (onClick)="nextStep()">
+                                </dx-button>
+                                <p class="terms-text">TERMS & CONDITIONS APPLY</p>
+                            }
+                        </div>
+                    </div>
+                </aside>
             }
         </div>
-    </aside>
-    }
+    </div>
 </div>
 }
 @placeholder {
-<div class="p-8 text-slate-500 font-medium animate-pulse text-center">
-    Loading secure checkout...
-</div>
+    <div class="checkout-loader">
+        <div class="loader-spinner"></div>
+        <span>Preparing Secure Workspace...</span>
+    </div>
 }
