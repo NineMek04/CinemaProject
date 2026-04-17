@@ -1,26 +1,58 @@
 @defer {
-<dx-drawer [opened]="isDrawerOpen()" openedStateMode="shrink" position="left" revealMode="expand" template="menuTemplate">
+<dx-drawer [opened]="true" openedStateMode="shrink" position="left" revealMode="expand" template="menuTemplate" class="account-drawer">
 
-    <div *dxTemplate="let data of 'menuTemplate'" class="drawer-menu-container">
-        <!-- Profile Section -->
-        <div class="profile-header">
-            <h1 class="text-2xl font-bold mb-1">Account Settings</h1>
+    <div *dxTemplate="let data of 'menuTemplate'" class="h-full flex flex-col">
+        
+        <div class="hidden md:block p-6 border-b border-slate-800/50">
+            <h1 class="text-xl font-bold text-white mb-1">Account Settings</h1>
         </div>
 
-        <!-- Navigation Menu -->
-        <dx-list [dataSource]="navigationItems" [hoverStateEnabled]="true" [activeStateEnabled]="true"
-            [focusStateEnabled]="false" class="panel-list" [selectedItemKeys]="[selectedItemId()]" keyExpr="id"
+        <div class="md:hidden flex justify-center py-5">
+            <div class="w-12 h-12 bg-slate-700/60 rounded-full flex items-center justify-center text-white font-black text-2xl">a</div>
+        </div>
+
+        <dx-list [dataSource]="navigationItems" [hoverStateEnabled]="false" [activeStateEnabled]="false"
+            [focusStateEnabled]="false" class="custom-panel-list flex-1 overflow-y-auto mt-2" [selectedItemKeys]="[selectedItemId()]" keyExpr="id"
             selectionMode="single" (onItemClick)="onItemClick($event)">
+            
             <div *dxTemplate="let item of 'item'">
-                <div class="menu-item" [class.active]="item.id === selectedItemId()">
-                    <i [class]="'dx-icon-' + item.icon"></i>
-                    <span>{{ item.text }}</span>
+                <div class="flex items-center md:px-4 py-2 justify-center md:justify-start cursor-pointer group">
+                    
+                    <div class="w-12 h-12 md:w-9 md:h-9 rounded-full flex items-center justify-center transition-all duration-300 relative"
+                         ngClass="{
+                            'bg-[#ff2e43] text-white': item.id === 1 && selectedItemId() === 1,
+                            'bg-[#00ba61] text-white': item.id === 2 && selectedItemId() === 2,
+                            'bg-[#1890ff] text-white': item.id === 3 && selectedItemId() === 3,
+                            'bg-slate-700 text-white': item.id > 3 && selectedItemId() === item.id,
+                            'bg-transparent text-slate-400 group-hover:bg-slate-800 group-hover:text-white': selectedItemId() !== item.id
+                         }">
+                         <i [class]="'dx-icon-' + item.icon + ' text-[22px] md:text-lg'"></i>
+
+                         @if(item.id === 4) {
+                            <span class="absolute top-0 right-0 w-3 h-3 bg-[#ff2e43] border-2 border-[#0f1115] rounded-full"></span>
+                         }
+                    </div>
+
+                    <span class="hidden md:block ml-4 text-sm font-medium transition-colors"
+                          ngClass="selectedItemId() === item.id ? 'text-white font-bold' : 'text-slate-400 group-hover:text-slate-200'">
+                        {{ item.text }}
+                    </span>
                 </div>
             </div>
         </dx-list>
+
+        <div class="mt-auto py-5 border-t border-slate-800 flex justify-center md:justify-start items-center cursor-pointer hover:bg-slate-800/50 transition-colors md:px-6">
+            <div class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-[#363a45] flex items-center justify-center text-white font-black text-sm md:text-xs shrink-0">
+                JR
+            </div>
+            <div class="hidden md:block ml-3 overflow-hidden">
+                <p class="text-sm font-bold text-white truncate">{{currentUser().name || 'John Roe'}}</p>
+                <p class="text-[10px] text-slate-500 truncate uppercase tracking-widest">Premium</p>
+            </div>
+        </div>
     </div>
 
-    <div id="content" class="main-content">
+    <div id="content" class="main-content h-full overflow-y-auto bg-[#0a0a0c]">
         <app-users [currentUser]="currentUser()"></app-users>
     </div>
 
