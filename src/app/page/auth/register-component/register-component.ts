@@ -1,4 +1,4 @@
-import { Component, OnInit ,EventEmitter, Output, inject } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../shared/services/toast.service';
@@ -16,12 +16,13 @@ export class RegisterComponent implements OnInit {
   private toast = inject(ToastService);
 
   registerForm!: FormGroup;
-  
+
   @Output() switchToLogin = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      fullName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
