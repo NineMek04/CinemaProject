@@ -9,14 +9,14 @@
             class="search-input pl-10 pr-4 py-2.5 rounded-lg bg-[#141519] border border-slate-700 text-white focus:outline-none focus:border-[#ff8a75] w-full transition-all duration-300 text-sm">
           <i class="dx-icon-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
         </div>
-        <button (click)="toggleMobileSearch()" class="text-sm font-bold text-[#ff8a75] whitespace-nowrap">
+        <button (click)="toggleMobileSearch()" class="text-sm font-bold text-[#e02a2a]] whitespace-nowrap">
           Cancel
         </button>
       </div>
     } 
 
     @else {
-      <button (click)="toggleMobileMenu()" class="md:hidden text-[#ff8a75] hover:text-white transition-colors">
+      <button (click)="toggleMobileMenu()" class="md:hidden text-[#e02a2a] hover:text-white transition-colors">
         @if (isMobileMenuOpen) {
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         } @else {
@@ -25,7 +25,7 @@
       </button>
 
       <div class="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center md:space-x-8">
-        <h1 class="text-3xl font-bold text-[#ff8a75] tracking-widest cursor-pointer" routerLink="/">{{appConfig.brand.name}}</h1>
+        <h1 class="text-3xl font-bold text-[#e02a2a] tracking-widest cursor-pointer" routerLink="/">{{appConfig.brand.name}}</h1>
 
         <ul class="hidden md:flex space-x-6 text-slate-400 font-medium">
           @for (item of appConfig.navItems; track item.route) {
@@ -38,7 +38,7 @@
         </ul>
       </div>
 
-      <button (click)="toggleMobileSearch()" class="md:hidden text-[#ff8a75] hover:text-white transition-colors">
+      <button (click)="toggleMobileSearch()" class="md:hidden text-[#e02a2a] hover:text-white transition-colors">
         <i class="dx-icon-search text-2xl"></i>
       </button>
 
@@ -50,12 +50,12 @@
         </div>
 
         <div (click)="openPopup('login')"
-          class="bg-gradient-to-tr from-red-600 to-[#ff8a75] px-4 py-2 rounded-md cursor-pointer hover:from-red-500 hover:to-red-300 transition-all duration-300 shadow-lg shadow-red-900/20 active:scale-95 whitespace-nowrap">
+          class="bg-gradient-to-tr from-red-500 to-[#e02a2a] px-4 py-2 rounded-md cursor-pointer hover:from-red-300 hover:to-red-800 transition-all duration-300 shadow-lg shadow-red-900/20 active:scale-95 whitespace-nowrap">
           <h3 class="text-white font-bold text-sm">SignIn</h3>
         </div>
         
         <div routerLink="/account"
-          class="profile-avatar-container bg-slate-950 rounded-full w-12 h-12 flex-shrink-0 overflow-hidden cursor-pointer border-2 border-slate-800 hover:border-[#ff8a75] transition-all duration-300">
+          class="profile-avatar-container bg-slate-950 rounded-full w-12 h-12 flex-shrink-0 overflow-hidden cursor-pointer border-2 border-slate-800 hover:border-[#e02a2a] transition-all duration-300">
           <img [src]="appConfig.currentUser.avatarPath" alt="Profile"
             class="profile-avatar w-full h-full object-cover">
         </div>
@@ -71,7 +71,7 @@
         <li>
           <a [routerLink]="item.route" 
              (click)="isMobileMenuOpen = false"
-             routerLinkActive="text-[#ff8a75] font-bold"
+             routerLinkActive="text-[#e02a2a] font-bold"
              class="block text-lg hover:text-white transition-colors">{{item.label}}</a>
         </li>
         }
@@ -86,7 +86,7 @@
             <span class="text-sm text-slate-400">My Account</span>
           </div>
           
-          <button (click)="openPopup('login'); isMobileMenuOpen = false" class="text-[#ff8a75] text-sm font-bold border border-[#ff8a75]/30 px-4 py-1.5 rounded-full hover:bg-[#ff8a75]/10">
+          <button (click)="openPopup('login'); isMobileMenuOpen = false" class="text-[#e02a2a] text-sm font-bold border border-[#e02a2a]/30 px-4 py-1.5 rounded-full hover:bg-[#e02a2a]/10">
             Sign In
           </button>
         </div>
