@@ -49,7 +49,7 @@
             }
         }
 
-        ::ng_deep .export-pdf-btn {
+        ::ng-deep .export-pdf-btn {
             background: rgba(111, 11, 0, 0.937) !important;
             color: #f28c82 !important;
             border-radius: 12px !important;
@@ -103,7 +103,7 @@
                 }
 
                 &.negative {
-                    color: #555;
+                    color: #fd0000;
                 }
 
                 i {

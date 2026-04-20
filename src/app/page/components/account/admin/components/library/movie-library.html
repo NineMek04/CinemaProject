@@ -58,6 +58,12 @@
             [hoverStateEnabled]="true" class="custom-library-grid">
 
             <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
+            <dxo-editing 
+                mode="row" 
+                [allowUpdating]="true" 
+                [allowAdding]="true" 
+                [allowDeleting]="true">
+            </dxo-editing>
             <dxo-paging [pageSize]="10"></dxo-paging>
 
             <dxi-column dataField="posterPath" caption="MOVIE & TITLE" cellTemplate="movieTemplate"

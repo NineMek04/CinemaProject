@@ -31,9 +31,9 @@ interface AnalyticsKPI {
 export class PerformanceAnalytics implements OnInit {
   
   kpis = signal<AnalyticsKPI[]>([
-    { label: 'RETENTION RATE', value: '84.2%', trend: '+2.4% vs last period', trendType: 'positive', icon: '../../../assets/svg/dashboar.admin.icon/RetentionRate.Icon.svg' },
-    { label: 'AVG WATCH TIME', value: '42.5m', trend: '+8.1% vs last period', trendType: 'positive', icon: '../../../assets/svg/dashboar.admin.icon/AvgWatchTime.Icon.svg' },
-    { label: 'PEAK CONCURRENT USERS', value: '1.2M', trend: '-1.2% vs last period', trendType: 'negative', icon: '../../../assets/svg/dashboar.admin.icon/PeakConcurrentUser.Icon.svg' }
+    { label: 'RETENTION RATE', value: '84.2%', trend: '+2.4% vs last period', trendType: 'positive', icon: '/assets/svg/dashboar.admin.icon/RetentionRate.Icon.svg' },
+    { label: 'AVG WATCH TIME', value: '42.5m', trend: '+8.1% vs last period', trendType: 'positive', icon: '/assets/svg/dashboar.admin.icon/AvgWatchTime.Icon.svg' },
+    { label: 'PEAK CONCURRENT USERS', value: '1.2M', trend: '-1.2% vs last period', trendType: 'negative', icon: '/assets/svg/dashboar.admin.icon/PeakConcurrentUser.Icon.svg' }
   ]);
 
   viewershipTrends = [
