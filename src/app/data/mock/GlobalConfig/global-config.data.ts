@@ -10,7 +10,7 @@ export const GLOBAL_APP_CONFIG: GlobalConfig = {
         name: 'Aura',
         role: 'Systems Chief',
         avatarPath: '/assets/svg/navbar/avatar-default.svg',
-        email: '[EMAIL_ADDRESS]'
+        email: 'saasw@efdfs.dsfvs'
     },
     navItems: [
         { label: 'Home', icon: 'home', route: '/home' },
