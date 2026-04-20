@@ -105,12 +105,12 @@ dx-drawer {
                 
                 .menu-item {
                     background-color: rgba(61, 30, 30, 0.8) !important;
-                    color: #FF8A80 !important;
+                    color: #e02a2a !important;
                     border-top-right-radius: 40px;
                     border-bottom-right-radius: 40px;
 
                     i {
-                      color: #FF8A80 !important;
+                      color: #e02a2a !important;
                     }
                 }
             }
@@ -150,12 +150,12 @@ dx-drawer {
     &.active {
         /* ย้ายสีพื้นหลังและสีตัวอักษรมาจัดการตรงนี้เลย จะได้ไม่ตีกับ DevExtreme */
         background-color: rgba(61, 30, 30, 0.8);
-        color: #FF8A80;
+        color: #e02a2a;
         border-top-right-radius: 40px;
         border-bottom-right-radius: 40px;
 
         i {
-            color: #FF8A80;
+            color: #e02a2a;
         }
 
         /* 🌟 3. สร้างแถบไฮไลต์ (Indicator) ด้านซ้ายมือ */
@@ -167,7 +167,7 @@ dx-drawer {
             transform: translateY(-50%); /* จัดให้อยู่ตรงกลางเป๊ะๆ */
             width: 10px;                /* ความหนาของแถบชี้ตำแหน่ง */
             height: 60%;               /* ความสูง (ปรับให้สั้นกว่าปุ่มเล็กน้อยจะดูสวย) */
-            background-color: #FF8A80; /* สีเดียวกับตัวอักษร (สีส้มแซลมอน) */
+            background-color: #e02a2a; /* สีเดียวกับตัวอักษร (สีส้มแซลมอน) */
             
             border-top-right-radius: 6px;    /* ลบมุมให้ดูละมุนขึ้น */
             border-bottom-right-radius: 6px;
