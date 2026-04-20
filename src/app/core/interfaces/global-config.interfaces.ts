@@ -11,6 +11,7 @@ export interface AppBrand {
 }
 
 export interface UserSession {
+    email: string;
     name: string;
     role: string;
     avatarPath: string;

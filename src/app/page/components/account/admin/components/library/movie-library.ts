@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { 
   DxDataGridModule, 
   DxButtonModule, 
@@ -23,7 +23,7 @@ import { Movie } from '../../../../../../core/interfaces/movie.interfaces';
 export class MovieLibrary implements OnInit {
   private movieService = inject(MovieService);
 
-  movies = signal<Movie[]>([]);
+  movies = this.movieService.movies;
   
   genres = [
     'All Categories',
@@ -43,12 +43,27 @@ export class MovieLibrary implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.movieService.getMovies().subscribe((data: Movie[]) => {
-      this.movies.set(data);
-    });
+    this.movieService.getMovies().subscribe();
+  }
+
+  onRowUpdating(e: any) {
+    const id = e.key.id;
+    const updates = e.newData;
+    this.movieService.updateMovie(id, updates).subscribe();
+  }
+
+  onRowInserting(e: any) {
+    const newMovie = e.data as Movie;
+    this.movieService.addMovie(newMovie).subscribe();
+  }
+
+  onRowRemoving(e: any) {
+    const id = e.key.id;
+    this.movieService.deleteMovie(id).subscribe();
   }
 
   onActionClick(movie: Movie) {
     console.log('Action for movie:', movie.title);
+    // Could open a custom popup here if needed
   }
 }

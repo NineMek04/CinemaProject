@@ -85,8 +85,8 @@
         letter-spacing: 1px;
     }
 
-    ::ng_deep .dx-selectbox.custom-select,
-    ::ng_deep .dx-textbox {
+    ::ng-deep .dx-selectbox.custom-select,
+    ::ng-deep .dx-textbox {
         .dx-texteditor-container {
             background-color: #080808 !important;
             border: 1px solid #1a1a1a !important;
@@ -100,6 +100,7 @@
             }
         }
     }
+
 }
 
 .cdn-provider-box {
@@ -129,7 +130,7 @@
         }
     }
 
-    ::ng_deep .switch-btn {
+    ::ng-deep .switch-btn {
         background: #D82D1B20 !important;
         color: #D82D1B !important;
         font-size: 10px !important;
@@ -333,13 +334,13 @@
     border-top: 1px solid #1a1a1a;
     box-shadow: #888 0 0 10px;
 
-    ::ng_deep .reset-btn {
+    ::ng-deep .reset-btn {
         color: #555 !important;
         font-weight: 800 !important;
         font-size: 14px !important;
     }
 
-    ::ng_deep .commit-btn {
+    ::ng-deep .commit-btn {
         background: #f28c82 !important; // Pixel-perfect color from image
         color: #0d0d0d !important;
         font-weight: 800 !important;

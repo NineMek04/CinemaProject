@@ -42,7 +42,19 @@
             <span class="count-text">Showing 1-10 of 128,402 cinematic profiles</span>
         </div>
 
-        <dx-data-grid [dataSource]="users()" [showBorders]="false" [rowAlternationEnabled]="false" class="users-grid">
+        <dx-data-grid [dataSource]="users()" [showBorders]="false" [rowAlternationEnabled]="false"
+            [hoverStateEnabled]="true" class="users-grid"
+            (onRowUpdating)="onRowUpdating($event)"
+            (onRowInserting)="onRowInserting($event)"
+            (onRowRemoving)="onRowRemoving($event)">
+
+            <dxo-editing 
+                mode="row" 
+                [allowUpdating]="true" 
+                [allowAdding]="true" 
+                [allowDeleting]="true">
+            </dxo-editing>
+            <dxo-paging [pageSize]="10"></dxo-paging>
 
             <dxi-column dataField="name" caption="USER & IDENTITY" cellTemplate="userTemplate"
                 [width]="300"></dxi-column>

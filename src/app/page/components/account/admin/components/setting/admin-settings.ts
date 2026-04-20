@@ -1,10 +1,11 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, effect } from '@angular/core';
 import {
   DxTextBoxModule,
   DxButtonModule,
   DxSwitchModule,
   DxTemplateModule
 } from 'devextreme-angular';
+import { GlobalConfigService } from '../../../../../../core/services/global-config.service';
 
 @Component({
   selector: 'app-admin-settings',
@@ -19,16 +20,32 @@ import {
   styleUrl: './admin-settings.scss'
 })
 export class AdminSettings implements OnInit {
+  private configService = inject(GlobalConfigService);
 
-  platformName = signal('Cinematic Editorial Pro');
-  platformTimezone = signal('UTC (Coordinated Universal Time)');
-  supportEmail = signal('ops@cinematic-editorial.com');
-
+  platformName = signal('');
+  supportEmail = signal('');
   isTranscodingActive = signal(true);
+
+  constructor() {
+    effect(() => {
+      const config = this.configService.config();
+      if (config) {
+        this.platformName.set(config.brand?.name || '');
+        this.supportEmail.set(config.currentUser?.email || ''); // Assuming email is in config
+      }
+    }, { allowSignalWrites: true });
+  }
 
   ngOnInit(): void { }
 
   onCommit() {
-    console.log('Committing configuration...');
+    this.configService.updateConfig({
+      brand: {
+        ...this.configService.config().brand,
+        name: this.platformName()
+      }
+    }).subscribe(() => {
+      console.log('Configuration committed successfully');
+    });
   }
 }
