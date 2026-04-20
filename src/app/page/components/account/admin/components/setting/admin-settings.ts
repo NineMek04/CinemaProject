@@ -24,6 +24,7 @@ export class AdminSettings implements OnInit {
 
   platformName = signal('');
   supportEmail = signal('');
+  platformTimezone = signal('');
   isTranscodingActive = signal(true);
 
   constructor() {
