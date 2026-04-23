@@ -1,16 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of, map, catchError } from 'rxjs';
 import { AdminDashboardData, MovieUpload } from '../interfaces/admin-dashboard.interfaces';
 import { ADMIN_DASHBOARD_MOCK_DATA } from '../../data/mock/AdminData/admin-dashboard.data';
 import { MovieService } from './movie.service';
 import { environment } from '../../../environments/environment';
+import { req } from '../http/test-project-team';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminDashboardService {
-  private http = inject(HttpClient);
   private movieService = inject(MovieService);
   private apiUrl = `${environment.apiUrl}/admin/dashboard`;
 
@@ -23,7 +22,7 @@ export class AdminDashboardService {
       return this.getConsolidatedMockData();
     }
 
-    return this.http.get<AdminDashboardData>(this.apiUrl).pipe(
+    return req<AdminDashboardData>(this.apiUrl).get().pipe(
       catchError(error => {
         console.warn('AdminDashboardService: API failed, falling back to mock data.', error);
         return this.getConsolidatedMockData();
@@ -35,7 +34,7 @@ export class AdminDashboardService {
     if (environment.useMockData) {
       return of(ADMIN_DASHBOARD_MOCK_DATA.stats);
     }
-    return this.http.get<any>(`${this.apiUrl}/stats`).pipe(
+    return req<any>(`${this.apiUrl}/stats`).get().pipe(
       catchError(() => of(ADMIN_DASHBOARD_MOCK_DATA.stats))
     );
   }
@@ -44,7 +43,7 @@ export class AdminDashboardService {
     if (environment.useMockData) {
       return of(ADMIN_DASHBOARD_MOCK_DATA.engagementData);
     }
-    return this.http.get<any>(`${this.apiUrl}/engagement`).pipe(
+    return req<any>(`${this.apiUrl}/engagement`).get().pipe(
       catchError(() => of(ADMIN_DASHBOARD_MOCK_DATA.engagementData))
     );
   }
@@ -53,7 +52,7 @@ export class AdminDashboardService {
     if (environment.useMockData) {
       return of(ADMIN_DASHBOARD_MOCK_DATA.systemHealth);
     }
-    return this.http.get<any>(`${this.apiUrl}/health`).pipe(
+    return req<any>(`${this.apiUrl}/health`).get().pipe(
       catchError(() => of(ADMIN_DASHBOARD_MOCK_DATA.systemHealth))
     );
   }

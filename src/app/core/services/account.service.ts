@@ -1,15 +1,14 @@
 import { Injectable, signal, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { dataSource } from '../interfaces/dataSourceInfo.interfaces';
 import { accountData } from '../../data/mock/AccountData/account.data';
 import { environment } from '../../../environments/environment';
 import { catchError, of, tap } from 'rxjs';
+import { req } from '../http/test-project-team';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/account`;
 
   // Shared signal for the current logged-in user
@@ -23,7 +22,7 @@ export class AccountService {
       return; // Initialized with accountData[0]
     }
 
-    this.http.get<dataSource>(`${this.apiUrl}/profile`).pipe(
+    req<dataSource>(`${this.apiUrl}/profile`).get().pipe(
       tap(user => this.currentUser.set(user)),
       catchError(error => {
         console.warn('AccountService: Failed to fetch profile, using mock.', error);
@@ -41,7 +40,7 @@ export class AccountService {
     }));
 
     if (!environment.useMockData) {
-      this.http.patch(`${this.apiUrl}/profile`, updatedData).pipe(
+      req(`${this.apiUrl}/profile`).body(updatedData).put().pipe(
         catchError(error => {
           console.error('AccountService: Update failed', error);
           return of(null);

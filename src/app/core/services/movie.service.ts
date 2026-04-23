@@ -1,15 +1,14 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of, catchError, tap } from 'rxjs';
 import { Movie } from '../interfaces/movie.interfaces';
 import { MOCK_MOVIES } from '../../data/mock/MovieData/movie.data';
 import { environment } from '../../../environments/environment';
+import { req } from '../http/test-project-team';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/movies`;
 
   // Internal state for mock data persistence during session
@@ -25,7 +24,7 @@ export class MovieService {
       return of(this._movies());
     }
 
-    return this.http.get<Movie[]>(this.apiUrl).pipe(
+    return req<Movie[]>(this.apiUrl).get().pipe(
       tap(data => this._movies.set(data)),
       catchError(error => {
         console.warn('MovieService: API failed, falling back to mock data.', error);
@@ -42,7 +41,7 @@ export class MovieService {
       return of(movieWithId);
     }
 
-    return this.http.post<Movie>(this.apiUrl, movie).pipe(
+    return req<Movie>(this.apiUrl).body(movie).post().pipe(
       tap(newMovie => this._movies.update(list => [newMovie, ...list])),
       catchError(error => {
         console.error('MovieService: Create failed', error);
@@ -58,7 +57,7 @@ export class MovieService {
       return of(updated);
     }
 
-    return this.http.patch<Movie>(`${this.apiUrl}/${id}`, updates).pipe(
+    return req<Movie>(`${this.apiUrl}/${id}`).body(updates).put().pipe(
       tap(updatedMovie => this._movies.update(list => list.map(m => m.id === id ? updatedMovie : m))),
       catchError(error => {
         console.error('MovieService: Update failed', error);
@@ -73,7 +72,7 @@ export class MovieService {
       return of(undefined);
     }
 
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+    return req<void>(`${this.apiUrl}/${id}`).delete().pipe(
       tap(() => this._movies.update(list => list.filter(m => m.id !== id))),
       catchError(error => {
         console.error('MovieService: Delete failed', error);
@@ -87,7 +86,7 @@ export class MovieService {
       return of(this._movies().find(m => m.isFeatured));
     }
 
-    return this.http.get<Movie>(`${this.apiUrl}/featured`).pipe(
+    return req<Movie>(`${this.apiUrl}/featured`).get().pipe(
       catchError(() => of(this._movies().find(m => m.isFeatured)))
     );
   }
@@ -97,7 +96,7 @@ export class MovieService {
       return of(this._movies().slice(0, 5));
     }
 
-    return this.http.get<Movie[]>(`${this.apiUrl}/recent`).pipe(
+    return req<Movie[]>(`${this.apiUrl}/recent`).get().pipe(
       catchError(() => of(this._movies().slice(0, 5)))
     );
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit, Output , EventEmitter, inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../shared/services/toast.service';
+import { BaseControl } from '../../../core/base/base-control';
 
 @Component({
   selector: 'app-login-component',
@@ -10,7 +11,7 @@ import { ToastService } from '../../../shared/services/toast.service';
   templateUrl: './login-component.html',
   styleUrls: ['./login-component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseControl implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toast = inject(ToastService);

@@ -1,24 +1,23 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of, catchError, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { req } from '../http/test-project-team';
+import { Injectable, signal } from '@angular/core';
 
 export interface AdminUser {
-    id: number;
-    name: string;
-    email: string;
-    avatar: string;
-    joinDate: string;
-    lastActive: string;
-    membership: string;
-    status: string;
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+  joinDate: string;
+  lastActive: string;
+  membership: string;
+  status: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/admin/users`;
 
   // Internal mock data
@@ -38,7 +37,7 @@ export class UserService {
       return of(this._users());
     }
 
-    return this.http.get<AdminUser[]>(this.apiUrl).pipe(
+    return req<AdminUser[]>(this.apiUrl).get().pipe(
       tap(data => this._users.set(data)),
       catchError(error => {
         console.warn('UserService: API failed, falling back to mock.', error);
@@ -59,7 +58,7 @@ export class UserService {
       return of(newUser);
     }
 
-    return this.http.post<AdminUser>(this.apiUrl, user).pipe(
+    return req<AdminUser>(this.apiUrl).body(user).post().pipe(
       tap(created => this._users.update(list => [created, ...list])),
       catchError(error => { throw error; })
     );
@@ -71,7 +70,7 @@ export class UserService {
       return of(this._users().find(u => u.id === id)!);
     }
 
-    return this.http.patch<AdminUser>(`${this.apiUrl}/${id}`, updates).pipe(
+    return req<AdminUser>(`${this.apiUrl}/${id}`).body(updates).put().pipe(
       tap(updated => this._users.update(list => list.map(u => u.id === id ? updated : u))),
       catchError(error => { throw error; })
     );
@@ -83,7 +82,7 @@ export class UserService {
       return of(undefined);
     }
 
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+    return req<void>(`${this.apiUrl}/${id}`).delete().pipe(
       tap(() => this._users.update(list => list.filter(u => u.id !== id))),
       catchError(error => { throw error; })
     );
